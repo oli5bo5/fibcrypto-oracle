@@ -1,0 +1,384 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-10-01",
+  "crypto": [
+    {
+      "symbol": "BTCUSDT",
+      "display": "BTC/USDT",
+      "name": "Bitcoin",
+      "rank": 1,
+      "class": "crypto",
+      "base": "BTC",
+      "quote": "USDT",
+      "providers": {
+        "okx": "BTC-USDT",
+        "kraken": "XBTUSDT",
+        "binance": "BTCUSDT",
+        "coingecko": "bitcoin"
+      }
+    },
+    {
+      "symbol": "ETHUSDT",
+      "display": "ETH/USDT",
+      "name": "Ethereum",
+      "rank": 2,
+      "class": "crypto",
+      "base": "ETH",
+      "quote": "USDT",
+      "providers": {
+        "okx": "ETH-USDT",
+        "kraken": "ETHUSDT",
+        "binance": "ETHUSDT",
+        "coingecko": "ethereum"
+      }
+    },
+    {
+      "symbol": "SOLUSDT",
+      "display": "SOL/USDT",
+      "name": "Solana",
+      "rank": 3,
+      "class": "crypto",
+      "base": "SOL",
+      "quote": "USDT",
+      "providers": {
+        "okx": "SOL-USDT",
+        "kraken": "SOLUSDT",
+        "binance": "SOLUSDT",
+        "coingecko": "solana"
+      }
+    },
+    {
+      "symbol": "BNBUSDT",
+      "display": "BNB/USDT",
+      "name": "Binance Coin",
+      "rank": 4,
+      "class": "crypto",
+      "base": "BNB",
+      "quote": "USDT",
+      "providers": {
+        "okx": "BNB-USDT",
+        "kraken": "BNBUSDT",
+        "binance": "BNBUSDT",
+        "coingecko": "binancecoin"
+      }
+    },
+    {
+      "symbol": "XRPUSDT",
+      "display": "XRP/USDT",
+      "name": "Ripple",
+      "rank": 5,
+      "class": "crypto",
+      "base": "XRP",
+      "quote": "USDT",
+      "providers": {
+        "okx": "XRP-USDT",
+        "kraken": "XRPUSDT",
+        "binance": "XRPUSDT",
+        "coingecko": "ripple"
+      }
+    },
+    {
+      "symbol": "ADAUSDT",
+      "display": "ADA/USDT",
+      "name": "Cardano",
+      "rank": 6,
+      "class": "crypto",
+      "base": "ADA",
+      "quote": "USDT",
+      "providers": {
+        "okx": "ADA-USDT",
+        "kraken": "ADAUSDT",
+        "binance": "ADAUSDT",
+        "coingecko": "cardano"
+      }
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "display": "DOGE/USDT",
+      "name": "Dogecoin",
+      "rank": 7,
+      "class": "crypto",
+      "base": "DOGE",
+      "quote": "USDT",
+      "providers": {
+        "okx": "DOGE-USDT",
+        "kraken": "DOGEUSDT",
+        "binance": "DOGEUSDT",
+        "coingecko": "dogecoin"
+      }
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "display": "AVAX/USDT",
+      "name": "Avalanche",
+      "rank": 8,
+      "class": "crypto",
+      "base": "AVAX",
+      "quote": "USDT",
+      "providers": {
+        "okx": "AVAX-USDT",
+        "kraken": "AVAXUSDT",
+        "binance": "AVAXUSDT",
+        "coingecko": "avalanche-2"
+      }
+    },
+    {
+      "symbol": "LINKUSDT",
+      "display": "LINK/USDT",
+      "name": "Chainlink",
+      "rank": 9,
+      "class": "crypto",
+      "base": "LINK",
+      "quote": "USDT",
+      "providers": {
+        "okx": "LINK-USDT",
+        "kraken": "LINKUSDT",
+        "binance": "LINKUSDT",
+        "coingecko": "chainlink"
+      }
+    },
+    {
+      "symbol": "DOTUSDT",
+      "display": "DOT/USDT",
+      "name": "Polkadot",
+      "rank": 10,
+      "class": "crypto",
+      "base": "DOT",
+      "quote": "USDT",
+      "providers": {
+        "okx": "DOT-USDT",
+        "kraken": "DOTUSDT",
+        "binance": "DOTUSDT",
+        "coingecko": "polkadot"
+      }
+    },
+    {
+      "symbol": "SUIUSDT",
+      "display": "SUI/USDT",
+      "name": "Sui",
+      "rank": 11,
+      "class": "crypto",
+      "base": "SUI",
+      "quote": "USDT",
+      "providers": {
+        "okx": "SUI-USDT",
+        "kraken": "SUIUSDT",
+        "binance": "SUIUSDT",
+        "coingecko": "sui"
+      }
+    },
+    {
+      "symbol": "NEARUSDT",
+      "display": "NEAR/USDT",
+      "name": "NEAR Protocol",
+      "rank": 12,
+      "class": "crypto",
+      "base": "NEAR",
+      "quote": "USDT",
+      "providers": {
+        "okx": "NEAR-USDT",
+        "kraken": "NEARUSDT",
+        "binance": "NEARUSDT",
+        "coingecko": "near"
+      }
+    },
+    {
+      "symbol": "LTCUSDT",
+      "display": "LTC/USDT",
+      "name": "Litecoin",
+      "rank": 13,
+      "class": "crypto",
+      "base": "LTC",
+      "quote": "USDT",
+      "providers": {
+        "okx": "LTC-USDT",
+        "kraken": "LTCUSDT",
+        "binance": "LTCUSDT",
+        "coingecko": "litecoin"
+      }
+    },
+    {
+      "symbol": "POLUSDT",
+      "display": "POL/USDT",
+      "name": "Polygon Ecosystem",
+      "alias": "MATICUSDT",
+      "rank": 14,
+      "class": "crypto",
+      "base": "POL",
+      "quote": "USDT",
+      "providers": {
+        "okx": "POL-USDT",
+        "kraken": "POLUSDT",
+        "binance": "POLUSDT",
+        "coingecko": "polygon-ecosystem-token"
+      }
+    },
+    {
+      "symbol": "SHIBUSDT",
+      "display": "SHIB/USDT",
+      "name": "Shiba Inu",
+      "rank": 15,
+      "class": "crypto",
+      "base": "SHIB",
+      "quote": "USDT",
+      "providers": {
+        "okx": "SHIB-USDT",
+        "kraken": "SHIBUSDT",
+        "binance": "SHIBUSDT",
+        "coingecko": "shiba-inu"
+      }
+    },
+    {
+      "symbol": "INJUSDT",
+      "display": "INJ/USDT",
+      "name": "Injective",
+      "rank": 16,
+      "class": "crypto",
+      "base": "INJ",
+      "quote": "USDT",
+      "providers": {
+        "okx": "INJ-USDT",
+        "kraken": "INJUSDT",
+        "binance": "INJUSDT",
+        "coingecko": "injective-protocol"
+      }
+    }
+  ],
+  "stocks": [
+    {
+      "symbol": "SAP.DE",
+      "display": "SAP (XETRA)",
+      "name": "SAP SE",
+      "class": "stock",
+      "exchange": "XETRA",
+      "country": "DE",
+      "currency": "EUR",
+      "sector": "Technologie / Software",
+      "providers": {
+        "yahoo": "SAP.DE",
+        "finnhub": "SAP.DE",
+        "twelvedata": "SAP"
+      }
+    },
+    {
+      "symbol": "SIE.DE",
+      "display": "Siemens (XETRA)",
+      "name": "Siemens AG",
+      "class": "stock",
+      "exchange": "XETRA",
+      "country": "DE",
+      "currency": "EUR",
+      "sector": "Industrie / Technologie",
+      "providers": {
+        "yahoo": "SIE.DE",
+        "finnhub": "SIE.DE",
+        "twelvedata": "SIE"
+      }
+    },
+    {
+      "symbol": "AIR.DE",
+      "display": "Airbus (XETRA)",
+      "name": "Airbus SE",
+      "class": "stock",
+      "exchange": "XETRA",
+      "country": "DE",
+      "currency": "EUR",
+      "sector": "Luft- & Raumfahrt",
+      "providers": {
+        "yahoo": "AIR.DE",
+        "finnhub": "AIR.DE",
+        "twelvedata": "AIR"
+      }
+    },
+    {
+      "symbol": "ALV.DE",
+      "display": "Allianz (XETRA)",
+      "name": "Allianz SE",
+      "class": "stock",
+      "exchange": "XETRA",
+      "country": "DE",
+      "currency": "EUR",
+      "sector": "Finanzen / Versicherung",
+      "providers": {
+        "yahoo": "ALV.DE",
+        "finnhub": "ALV.DE",
+        "twelvedata": "ALV"
+      }
+    },
+    {
+      "symbol": "DTE.DE",
+      "display": "Telekom (XETRA)",
+      "name": "Deutsche Telekom AG",
+      "class": "stock",
+      "exchange": "XETRA",
+      "country": "DE",
+      "currency": "EUR",
+      "sector": "Telekommunikation",
+      "providers": {
+        "yahoo": "DTE.DE",
+        "finnhub": "DTE.DE",
+        "twelvedata": "DTE"
+      }
+    },
+    {
+      "symbol": "AAPL",
+      "display": "Apple (NASDAQ)",
+      "name": "Apple Inc.",
+      "class": "stock",
+      "exchange": "NASDAQ",
+      "country": "US",
+      "currency": "USD",
+      "sector": "Consumer Electronics / Tech",
+      "providers": {
+        "yahoo": "AAPL",
+        "finnhub": "AAPL",
+        "twelvedata": "AAPL"
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "display": "Microsoft (NASDAQ)",
+      "name": "Microsoft Corp.",
+      "class": "stock",
+      "exchange": "NASDAQ",
+      "country": "US",
+      "currency": "USD",
+      "sector": "Cloud / Software / KI",
+      "providers": {
+        "yahoo": "MSFT",
+        "finnhub": "MSFT",
+        "twelvedata": "MSFT"
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "display": "NVIDIA (NASDAQ)",
+      "name": "NVIDIA Corporation",
+      "class": "stock",
+      "exchange": "NASDAQ",
+      "country": "US",
+      "currency": "USD",
+      "sector": "Halbleiter / KI Hardware",
+      "providers": {
+        "yahoo": "NVDA",
+        "finnhub": "NVDA",
+        "twelvedata": "NVDA"
+      }
+    },
+    {
+      "symbol": "TSLA",
+      "display": "Tesla (NASDAQ)",
+      "name": "Tesla Inc.",
+      "class": "stock",
+      "exchange": "NASDAQ",
+      "country": "US",
+      "currency": "USD",
+      "sector": "Automobil / Clean Energy",
+      "providers": {
+        "yahoo": "TSLA",
+        "finnhub": "TSLA",
+        "twelvedata": "TSLA"
+      }
+    }
+  ]
+}

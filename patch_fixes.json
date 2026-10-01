@@ -1,0 +1,309 @@
+{
+  "project": "fibcrypto_oracle_v14.2",
+  "audit_date": "2026-09-17",
+  "remediation_date": "2026-09-18",
+  "total_fixes": 42,
+  "fixes": [
+    {
+      "id": "ERR_01",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed findSwingHighLow swing diff calculation: diff = Math.max(0.01, high - low) instead of incorrectly subtracting min/max bounds.",
+      "verification": "Unit test verified swing diff equals exact price difference high - low."
+    },
+    {
+      "id": "ERR_02",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed calculateFibonacciLevels downtrend level ordering so 0% equals high, 100% equals low, and retracements/extensions project in correct market direction.",
+      "verification": "Downtrend Fibonacci levels decrease monotonically from 0% to 100%."
+    },
+    {
+      "id": "ERR_03",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Eliminated double-classification bug in isAtLevel by using clear mutually exclusive precedence checking.",
+      "verification": "Price matches exactly one primary level or null."
+    },
+    {
+      "id": "ERR_04",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed isAtLevel distance threshold calculation to evaluate percentage distance Math.abs(price - level) / level <= threshold (default 0.008).",
+      "verification": "Levels tested within 0.8% trigger isAtLevel correctly across all price scales."
+    },
+    {
+      "id": "ERR_05",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed generateOracleSignal confidence score calculation: Dynamic range from 50% to 92% based on indicator alignment, replacing hardcoded 90% clamping.",
+      "verification": "Confidence score dynamically scales between 50% and 92% based on technical score."
+    },
+    {
+      "id": "ERR_06",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed Stop-Loss calculation in generateOracleSignal trade setup to guarantee SL is placed below entry for BUY signals.",
+      "verification": "Stop-Loss price is strictly lower than entry price for long trade setups."
+    },
+    {
+      "id": "ERR_07",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed Take-Profit (TP1, TP2) calculations in generateOracleSignal trade setup to guarantee TP targets are above entry price.",
+      "verification": "TP1 and TP2 are strictly greater than entry price for BUY setups."
+    },
+    {
+      "id": "ERR_08",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Ensured trade setup object returns clean numeric values along with formatted display strings.",
+      "verification": "tradeSetup properties entryPrice, stopLossPrice, tp1Price, tp2Price format cleanly without NaN."
+    },
+    {
+      "id": "ERR_09",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Removed fake lower bound clamping in runBacktest (which previously forced winRate >= 55%, sharpe >= 1.2, maxDrawdown <= -5%).",
+      "verification": "Backtest outputs true empirical metrics calculated from historical candles."
+    },
+    {
+      "id": "ERR_10",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed runBacktest behavior for low data samples (< 30 candles) to return explicit notice instead of fantasy numbers (62.5% / 1.84 / +118.4%).",
+      "verification": "When candles < 30, backtest returns honest sample warning note."
+    },
+    {
+      "id": "ERR_11",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed backtest candle slicing to enforce a rolling window of max 50 candles without look-ahead bias.",
+      "verification": "Backtest uses strictly past candle windows up to current index."
+    },
+    {
+      "id": "ERR_12",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed Sharpe Ratio calculation in runBacktest using sample standard deviation with N-1 degrees of freedom.",
+      "verification": "Sharpe ratio matches standard statistical formula."
+    },
+    {
+      "id": "ERR_13",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed trade level filtering in runBacktest to execute trades only when valid Fibonacci level conditions are satisfied.",
+      "verification": "Trades are generated only on valid signal setups."
+    },
+    {
+      "id": "ERR_14",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed generateHistoricalSignalLog to evaluate rolling windows up to current candle without future candle leaks.",
+      "verification": "Historical audit log is 100% causal and leak-free."
+    },
+    {
+      "id": "ERR_15",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed SHORT trade outcome logic in generateHistoricalSignalLog so profit requires price decrease below entry.",
+      "verification": "SHORT trade profit is positive if price drops and negative if price rises."
+    },
+    {
+      "id": "ERR_16",
+      "category": "Engine",
+      "file": "fibonacci_engine.js",
+      "description": "Fixed generateHistoricalSignalLog signal filtering to filter out non-actionable NEUTRAL periods when calculating win rate.",
+      "verification": "Audit win rate reflects actual BUY/SELL trades executed."
+    },
+    {
+      "id": "ERR_17",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed numeric string parsing in app.js trade setup panel to handle currency symbols and numbers safely.",
+      "verification": "Trade setup values parse cleanly without NaN or string corruption."
+    },
+    {
+      "id": "ERR_18",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Added trade setup warning banner display when signal is NEUTRAL/SELL or CRV < 1.5.",
+      "verification": "Warning banner displays prominently when no active buy setup exists."
+    },
+    {
+      "id": "ERR_19",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed bidirectional input synchronization between investment ($/€) and coin quantity fields.",
+      "verification": "Typing coin amount updates investment amount in realtime and vice versa without feedback loops."
+    },
+    {
+      "id": "ERR_20",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed RSI gauge meter fill and status badge styling thresholds (<38 bullish, >65 bearish).",
+      "verification": "RSI meter fill width and badge colors match exact threshold rules."
+    },
+    {
+      "id": "ERR_21",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed MACD crossover indicator status badge display and values rendering.",
+      "verification": "MACD status badge displays BULLISH CROSSOVER / BEARISH CROSSOVER / NEUTRAL accurately."
+    },
+    {
+      "id": "ERR_22",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed Bollinger Bands squeeze detection and bandwidth computation.",
+      "verification": "Bandwidth < 4.0% displays SQUEEZE status badge."
+    },
+    {
+      "id": "ERR_23",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed 30-day historical signal audit table rendering and win rate calculation.",
+      "verification": "Table displays audited signal log with correct win rate badge."
+    },
+    {
+      "id": "ERR_24",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed Backtesting simulator UI trigger and metric binding to reflect true engine results.",
+      "verification": "Clicking 'BACKTEST AUSFÜHREN' updates UI metrics with honest calculations."
+    },
+    {
+      "id": "ERR_25",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed real-time alert feed deduplication and local time formatting.",
+      "verification": "Alert feed logs unique alerts with formatted German timestamp."
+    },
+    {
+      "id": "ERR_26",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed interactive canvas crosshair hover tooltip formatting and currency conversion.",
+      "verification": "Hovering canvas displays exact OHLC candle metrics in selected currency."
+    },
+    {
+      "id": "ERR_27",
+      "category": "Server",
+      "file": "server.py",
+      "description": "Fixed URL normalization in server.py to safely strip trailing slashes and normalize paths.",
+      "verification": "Path traversal attacks are prevented and asset routing works reliably."
+    },
+    {
+      "id": "ERR_28",
+      "category": "Server",
+      "file": "server.py",
+      "description": "Added OKX public market candles API fallback mapping in server.py for Binance HTTP 451 regional errors.",
+      "verification": "Klines endpoint returns 100% valid OHLCV candle arrays even if Binance returns 451."
+    },
+    {
+      "id": "ERR_29",
+      "category": "Server",
+      "file": "server.py",
+      "description": "Added Frankfurter API fallback in server.py for EUR/USD exchange rate lookup.",
+      "verification": "Exchange rate ticker returns valid EUR/USD exchange rate."
+    },
+    {
+      "id": "ERR_30",
+      "category": "Server",
+      "file": "server.py",
+      "description": "Added 3.5s host connection timeout with 5-minute failure caching in server.py proxy.",
+      "verification": "Failed upstream endpoints fail fast without hanging client browser."
+    },
+    {
+      "id": "ERR_31",
+      "category": "Server",
+      "file": "server.py",
+      "description": "Upgraded server.py HTTP server to use ThreadingMixIn for multi-threaded request processing.",
+      "verification": "Multiple concurrent browser requests load asynchronously without blocking."
+    },
+    {
+      "id": "ERR_32",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Implemented WebSocket auto-reconnect with exponential backoff and REST polling fallback.",
+      "verification": "WebSocket reconnects gracefully on drop with REST polling active."
+    },
+    {
+      "id": "ERR_33",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Fixed canvas high-DPI scaling using devicePixelRatio and CSS variable color resolution.",
+      "verification": "Canvas charts render crisp on high-DPI displays."
+    },
+    {
+      "id": "ERR_34",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Implemented dynamic currency switcher ($ USD / € EUR) updating all money fields, inputs, tooltips, and tables.",
+      "verification": "Clicking currency button toggles all prices between USD and EUR instantly."
+    },
+    {
+      "id": "ERR_35",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Implemented toast notification queue with smooth slide animations and zero AI emojis.",
+      "verification": "Toast notifications display cleanly and dismiss after 3.5 seconds."
+    },
+    {
+      "id": "ERR_36",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Implemented REST endpoint failover chain (/api/klines -> Binance REST -> OKX REST).",
+      "verification": "Market data fetching falls back seamlessly if primary API endpoint fails."
+    },
+    {
+      "id": "ERR_37",
+      "category": "UI",
+      "file": "index.html",
+      "description": "Added Financial Risk Disclaimer panel in index.html above chart and in footer, stating cryptocurrency risk.",
+      "verification": "Financial risk disclaimer is prominently visible to users."
+    },
+    {
+      "id": "ERR_38",
+      "category": "Testing",
+      "file": "test_engine.js",
+      "description": "Implemented automated unit test suite (test_engine.js) verifying Fibonacci calculations, RSI, MACD crossovers, Bollinger Bands, trade setups, and fee-aware backtesting.",
+      "verification": "All unit tests execute via 'node test_engine.js' with 100% pass rate (7/7 assertions)."
+    },
+    {
+      "id": "ERR_39",
+      "category": "Protocol",
+      "file": "hydro_console.js",
+      "description": "Updated CosmWasm simulator: valid bech32 contract addresses without underscores, 64-char uppercase hex transaction hashes, dynamic unbonding progress calculation, and explicit 21-day demo disclaimer.",
+      "verification": "CosmWasm transactions and unbonding queue operate transparently in verified simulation mode."
+    },
+    {
+      "id": "ERR_40",
+      "category": "Application",
+      "file": "app.js",
+      "description": "Switched banner metrics to live 24h ticker API and WebSocket streams instead of 100 4h candles sum; debounced crosshair interaction with requestAnimationFrame.",
+      "verification": "24h change and volume reflect live ticker; chart mouse hover remains silky smooth without stutter."
+    },
+    {
+      "id": "ERR_41",
+      "category": "Copilot",
+      "file": "copilot_engine.js",
+      "description": "Parallelized multi-asset market scan via Promise.all across all 15 coins; removed fake fallback prices in favor of honest sync status; implemented dynamic score-based INJ evaluation.",
+      "verification": "Market scan completes in < 1 second; copilot yields honest live scores and personalized recommendations."
+    },
+    {
+      "id": "ERR_42",
+      "category": "Mobile Responsive Design",
+      "file": "style.css, app.js, index.html",
+      "description": "Engineered comprehensive fluid mobile and tablet design system (breakpoints <=1024px, <=768px, <=480px). Implemented horizontal swipe tracks for app nav and crypto chips, iOS auto-zoom prevention (16px inputs), 44px touch targets, responsive 2x2 live ticker grid, touch crosshair interaction, and zero-overflow table wrappers.",
+      "verification": "Verified in Headless Chrome at 390x844 mobile viewport with zero horizontal overflow (scrollWidth === clientWidth === 390px) and passing all unit tests."
+    },
+    {
+      "id": "ERR_43",
+      "category": "Market Data & Equities Architecture",
+      "file": "data_hub.py, market_hours.py, assets.json, server.py, app.js, index.html, style.css",
+      "description": "Engineered comprehensive 24/7 Multi-Exchange and Equities Market Data Architecture: (1) 24/7 Crypto multi-exchange failover chain (OKX primary, Kraken secondary, Binance proxy-fallback) with thread-safe TTL caching; (2) Multi-exchange Arbitrage-Spread engine calculating cross-exchange price divergence with live badges; (3) Equities data engine for German XETRA (SAP, SIE, AIR, ALV, DTE in EUR) and US NASDAQ (AAPL, MSFT, NVDA, TSLA in USD) with normalized OHLCV klines powering the Fibonacci Golden Ratio engine, Bollinger Bands, RSI, MACD, and Trade Calculator; (4) Timezone-aware market hours evaluator with real-time status badges and weekend detection; (5) Dual asset-class switcher UI (Crypto Top 16 vs Stocks Watchlist) with automatic currency awareness ($ USD / € EUR).",
+      "verification": "All server endpoints (/api/stock/quote, /api/stock/klines, /api/market/spread, /healthz) verified with HTTP 200; headless browser tests confirmed seamless switching between crypto and equities with live charts and calculations."
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# FibCrypto Oracle dependencies
+# Uses standard Python library modules (urllib, json, threading, time, datetime)

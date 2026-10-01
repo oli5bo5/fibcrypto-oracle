@@ -1,0 +1,11 @@
+.vercel/
+__pycache__/
+*.pyc
+.env
+.env.local
+node_modules/
+.system_generated/
+*.log
+*.zip
+test_print.html
+patch.json
