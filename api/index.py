@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 import json
 import urllib.parse
+import urllib.request
 import os
 import sys
 import mimetypes
@@ -19,6 +20,27 @@ try:
 except ImportError:
     from api import data_hub
 
+def get_eur_rate():
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) FibCrypto/14.2'}
+    try:
+        url = "https://api.frankfurter.app/latest?from=USD&to=EUR"
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=3.0) as resp:
+            raw = json.loads(resp.read().decode('utf-8'))
+            eur_rate = raw['rates']['EUR']
+            usd_per_eur = 1.0 / eur_rate if eur_rate > 0 else 1.085
+            return {
+                "symbol": "EURUSDT",
+                "lastPrice": str(round(usd_per_eur, 4)),
+                "priceChangePercent": "+0.00"
+            }
+    except Exception:
+        return {
+            "symbol": "EURUSDT",
+            "lastPrice": "1.0850",
+            "priceChangePercent": "+0.00"
+        }
+
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
@@ -32,7 +54,6 @@ class handler(BaseHTTPRequestHandler):
         path = parsed.path.rstrip('/')
         qs = urllib.parse.parse_qs(parsed.query)
 
-        # Helpers
         def send_json(data, status=200, cache_control='public, max-age=5, s-maxage=5'):
             resp_bytes = json.dumps(data).encode('utf-8')
             self.send_response(status)
@@ -64,11 +85,9 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(content)
 
         try:
-            # 1. Check rewrite parameters
             route = qs.get('__route__', [''])[0]
             requested_file = qs.get('__file__', [''])[0]
 
-            # Route detection from path if route param not used
             if not route:
                 if '/api/ticker' in path: route = 'ticker'
                 elif '/api/klines' in path: route = 'klines'
@@ -86,7 +105,16 @@ class handler(BaseHTTPRequestHandler):
 
             if route == 'ticker':
                 symbol = qs.get('symbol', ['BTCUSDT'])[0]
-                data = data_hub.get_ticker(symbol)
+                if symbol == 'EURUSDT':
+                    send_json(get_eur_rate(), 200, 'public, max-age=60, s-maxage=60')
+                    return
+                if symbol.endswith('.DE') or symbol in ['AAPL', 'MSFT', 'NVDA', 'TSLA']:
+                    quote = data_hub.get_stock_quote(symbol)
+                    if quote:
+                        send_json(quote, 200, 'public, max-age=30, s-maxage=30')
+                        return
+
+                data = data_hub.get_crypto_ticker(symbol)
                 if data:
                     send_json(data, 200, 'public, max-age=5, s-maxage=5')
                 else:
@@ -97,7 +125,11 @@ class handler(BaseHTTPRequestHandler):
                 symbol = qs.get('symbol', ['BTCUSDT'])[0]
                 interval = qs.get('interval', ['4h'])[0]
                 limit = int(qs.get('limit', ['100'])[0])
-                data = data_hub.get_klines(symbol, interval, limit)
+                if symbol.endswith('.DE') or symbol in ['AAPL', 'MSFT', 'NVDA', 'TSLA']:
+                    data = data_hub.get_stock_klines(symbol, interval, limit)
+                else:
+                    data = data_hub.get_crypto_klines(symbol, interval, limit)
+
                 if data:
                     send_json(data, 200, 'public, max-age=15, s-maxage=15')
                 else:
@@ -134,14 +166,13 @@ class handler(BaseHTTPRequestHandler):
                 return
 
             # -------------------------------------------------------------
-            # Static File Serving (Root, CSS, JS, JSON, PDF)
+            # Static File Serving
             # -------------------------------------------------------------
             target = requested_file or path.lstrip('/')
             if not target or target == '/' or target == 'index.html':
                 send_file(os.path.join(BASE_DIR, 'index.html'), 'text/html; charset=utf-8', 'no-cache')
                 return
 
-            # Security: Prevent directory traversal
             clean_target = os.path.normpath(target).lstrip(r'\/')
             if clean_target.startswith('..'):
                 send_json({'error': 'Forbidden'}, 403)
@@ -152,7 +183,6 @@ class handler(BaseHTTPRequestHandler):
                 send_file(safe_path)
                 return
 
-            # Default 404
             send_json({'error': 'Endpoint or resource not found', 'path': self.path, 'route': route, 'target': target}, 404)
 
         except Exception as e:

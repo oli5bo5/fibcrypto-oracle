@@ -8,10 +8,6 @@
     {
       "source": "/healthz",
       "destination": "/api/index.py?__route__=healthz"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/api/index.py?__file__=$1"
     }
   ]
 }
