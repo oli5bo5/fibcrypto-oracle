@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.py"
+      "destination": "/api/index.py?__route__=$1"
     },
     {
       "source": "/healthz",
-      "destination": "/api/index.py"
+      "destination": "/api/index.py?__route__=healthz"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.py?__file__=$1"
     }
   ]
 }
