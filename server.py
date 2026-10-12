@@ -62,6 +62,62 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_json_response(json.dumps(spread_data).encode('utf-8'))
             return
 
+        # 3b. Blockworks × FibCrypto Intelligence Endpoints
+        if clean_path == '/api/market/top-assets':
+            limit = int(params.get('limit', ['16'])[0])
+            self.send_json_response(json.dumps(data_hub.get_top_assets(limit)).encode('utf-8'))
+            return
+
+        if clean_path == '/api/news':
+            asset = params.get('asset', ['BTCUSDT'])[0]
+            limit = int(params.get('limit', ['15'])[0])
+            self.send_json_response(json.dumps(data_hub.get_asset_news(asset, limit)).encode('utf-8'))
+            return
+
+        if clean_path.startswith('/api/social/'):
+            asset = params.get('asset', ['BTCUSDT'])[0]
+            timespan = params.get('timespan', ['7d'])[0]
+            self.send_json_response(json.dumps(data_hub.get_social_mindshare(asset, timespan)).encode('utf-8'))
+            return
+
+        if clean_path.startswith('/api/unlocks/'):
+            asset = params.get('asset', ['BTCUSDT'])[0]
+            days = int(params.get('days', ['90'])[0])
+            self.send_json_response(json.dumps(data_hub.get_token_unlocks(asset, days)).encode('utf-8'))
+            return
+
+        if clean_path.startswith('/api/onchain/'):
+            asset = params.get('asset', ['BTCUSDT'])[0]
+            self.send_json_response(json.dumps(data_hub.get_onchain_metrics(asset)).encode('utf-8'))
+            return
+
+        if clean_path.startswith('/api/ai/'):
+            asset = params.get('asset', ['BTCUSDT'])[0]
+            signal_info = {
+                'action': params.get('action', ['KAUFSIGNAL'])[0],
+                'confidence': params.get('confidence', ['82'])[0],
+                'entry': params.get('entry', [''])[0],
+                'tp1': params.get('tp1', [''])[0],
+                'sl': params.get('sl', [''])[0],
+                'fibLevel': params.get('fibLevel', ['61.8%'])[0]
+            }
+            self.send_json_response(json.dumps(data_hub.explain_signal_ai(asset, signal_info)).encode('utf-8'))
+            return
+
+        if clean_path == '/api/mcp':
+            tool = params.get('tool', ['catalog'])[0]
+            asset = params.get('asset', ['BTC'])[0]
+            assets_param = params.get('assets', ['BTC,ETH,SOL,INJ'])[0]
+            query = params.get('query', ['BTC'])[0]
+            res = data_hub.handle_mcp_request(tool, {
+                'asset': asset,
+                'assets': assets_param,
+                'query': query,
+                'timeframe': params.get('timeframe', ['4h'])[0]
+            })
+            self.send_json_response(json.dumps(res).encode('utf-8'))
+            return
+
         # 4. Stock Endpoints (Quote & Klines)
         if clean_path == '/api/stock/quote':
             symbol = params.get('symbol', ['SAP.DE'])[0]
@@ -126,6 +182,31 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         # Default static file handling
         super().do_GET()
+
+    def do_POST(self):
+        parsed_url = urllib.parse.urlparse(self.path)
+        clean_path = parsed_url.path
+        content_len = int(self.headers.get('Content-Length', 0))
+        body_raw = self.rfile.read(content_len).decode('utf-8') if content_len > 0 else '{}'
+        try:
+            body = json.loads(body_raw)
+        except Exception:
+            body = {}
+
+        if clean_path.startswith('/api/ai/'):
+            asset = body.get('asset', 'BTCUSDT')
+            signal_info = body.get('signal', {})
+            self.send_json_response(json.dumps(data_hub.explain_signal_ai(asset, signal_info)).encode('utf-8'))
+            return
+
+        if clean_path == '/api/mcp':
+            tool = body.get('tool', 'fib_analyze_asset')
+            args = body.get('args', body)
+            self.send_json_response(json.dumps(data_hub.handle_mcp_request(tool, args)).encode('utf-8'))
+            return
+
+        self.send_json_response(json.dumps({'status': 'saved', 'received': body}).encode('utf-8'))
+
 
     def handle_eur_fx(self):
         # 1. Try Frankfurter Central Bank API

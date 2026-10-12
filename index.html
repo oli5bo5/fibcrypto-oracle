@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <!-- Main Application Navigation Switcher (Oracle vs Hydro Console vs Copilot) -->
+        <!-- Main Application Navigation Switcher (Oracle vs Hydro Console vs Copilot vs Blockworks) -->
         <nav class="app-nav">
             <button class="nav-tab active" id="tabOracleBtn" data-tooltip="Haupt-Dashboard: Live-Chart, Fibonacci-Levels und KI-Trade-Kalkulation">
                 <span class="nav-tab-dot"></span>
@@ -40,6 +40,10 @@
                 </svg>
                 <span>3. HYDRO STAKING</span>
                 <span class="nav-badge">16.42% APR</span>
+            </button>
+            <button class="nav-tab" id="btnJumpBlockworks" onclick="window.scrollToDashboardSection ? window.scrollToDashboardSection('sectionBlockworksIntel') : null" data-tooltip="Blockworks Hybrid Intelligence: Token Unlocks, Onchain-Daten, Mindshare, DD-Score, News & MCP">
+                <span>⚡ 4. BLOCKWORKS INTEL</span>
+                <span class="nav-badge" style="background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.4);">ONCHAIN & AI</span>
             </button>
         </nav>
 
@@ -95,10 +99,10 @@
                 <button type="button" class="nav-card-btn" onclick="window.scrollToDashboardSection('sectionCryptoSelection')">
                     <div class="nav-card-top">
                         <span class="nav-card-num">BEREICH 1</span>
-                        <span class="nav-card-tag">MARKT-AUSWAHL</span>
+                        <span class="nav-card-tag">MARKT & WATCHLIST</span>
                     </div>
-                    <div class="nav-card-title">Top-Kryptowährung wählen</div>
-                    <div class="nav-card-desc">Wählen Sie aus den Top 16 Coins (BTC, ETH, SOL, INJ...) per Dropdown oder Direkt-Klick.</div>
+                    <div class="nav-card-title">Asset-Wahl, Grid & Watchlist</div>
+                    <div class="nav-card-desc">Top 16 Krypto & Aktien per Direkt-Klick, Multi-Asset Live-Grid und eigene Favoriten-Watchlist.</div>
                     <div class="nav-card-action">Zur Auswahl springen →</div>
                 </button>
 
@@ -117,10 +121,10 @@
                 <button type="button" class="nav-card-btn" onclick="window.scrollToDashboardSection('sectionTradeSetup')">
                     <div class="nav-card-top">
                         <span class="nav-card-num">BEREICH 3</span>
-                        <span class="nav-card-tag">KI & TRADE-SETUP</span>
+                        <span class="nav-card-tag">KI & AI-REASONING</span>
                     </div>
-                    <div class="nav-card-title">Kauf-Signal & Handelsrechner</div>
-                    <div class="nav-card-desc">Echtzeit-Empfehlung (Kauf/Verkauf) sowie Stop-Loss & Gewinnziele für Ihr Wunsch-Kapital (€/$).</div>
+                    <div class="nav-card-title">Signal, Sentiment & KI-Erklärung</div>
+                    <div class="nav-card-desc">Kauf/Verkauf-Signal, Sentiment-Score, DD-Score, Handelsrechner & Senior-Analyst KI-Begründung.</div>
                     <div class="nav-card-action">Zum Trade-Rechner springen →</div>
                 </button>
 
@@ -139,11 +143,22 @@
                 <button type="button" class="nav-card-btn" onclick="window.scrollToDashboardSection('sectionIndicators')">
                     <div class="nav-card-top">
                         <span class="nav-card-num">BEREICH 5</span>
-                        <span class="nav-card-tag">INDIKATOREN</span>
+                        <span class="nav-card-tag">BACKTEST & ALERTS</span>
                     </div>
-                    <div class="nav-card-title">Mathematische Filter & Test</div>
-                    <div class="nav-card-desc">RSI-Oszillator, MACD Momentum, Bollinger Bänder und 73% Trefferquote historischer Signale.</div>
+                    <div class="nav-card-title">Multi-Strategie Test & Alert-Builder</div>
+                    <div class="nav-card-desc">RSI, MACD, Bollinger, 4-Stufen Hybrid-Backtest mit Equity-Kurve & Custom Alert Builder.</div>
                     <div class="nav-card-action">Zu den Indikatoren springen →</div>
+                </button>
+
+                <!-- Step 6 (NEW: Blockworks Hybrid Intelligence) -->
+                <button type="button" class="nav-card-btn" onclick="window.scrollToDashboardSection('sectionBlockworksIntel')" style="border-color: rgba(234, 179, 8, 0.35);">
+                    <div class="nav-card-top">
+                        <span class="nav-card-num" style="background: #eab308; color: #000;">BEREICH 6</span>
+                        <span class="nav-card-tag" style="color: #eab308;">BLOCKWORKS INTEL</span>
+                    </div>
+                    <div class="nav-card-title">Unlocks, Onchain, Mindshare & News</div>
+                    <div class="nav-card-desc">90d Token-Unlocks, Onchain Netflow & TVL, 7d Mindshare-Chart, DD-Score, Live-News & MCP-Server.</div>
+                    <div class="nav-card-action" style="color: #eab308;">Zur Intelligence Suite →</div>
                 </button>
             </div>
         </section>
@@ -153,25 +168,37 @@
             <div class="section-purpose-banner" style="margin-bottom: 12px;">
                 <div class="purpose-badge-col">
                     <span class="purpose-pill">BEREICH 1</span>
-                    <span class="purpose-title">KRYPTOWÄHRUNG & MARKT-STATUS</span>
+                    <span class="purpose-title">KRYPTOWÄHRUNG, MULTI-ASSET GRID & WATCHLIST</span>
                 </div>
                 <div class="purpose-text">
-                    <strong>Wofür ist dieser Teil gut?</strong> Wählen Sie hier Ihre gewünschte Kryptowährung aus den Top 16 Märkten. Die darunterliegenden Ticker-Kacheln zeigen sofort Live-Kurs, 24h-Handelsvolumen, die Fibonacci-Berechnungsspanne (Swing Low bis High) und das aktuelle Risikolevel an.
+                    <strong>Wofür ist dieser Teil gut?</strong> Wählen Sie hier Ihr Asset aus den Top 16 Krypto-Märkten oder der Aktien-Watchlist. Über die beiden Zusatz-Buttons können Sie außerdem das <strong>Multi-Asset Live-Grid</strong> (alle 16 Coins mit aktivem Fibonacci-Signal auf einen Blick) sowie Ihre persönliche <strong>Favoriten-Watchlist</strong> einblenden.
                 </div>
             </div>
 
-            <!-- Asset Class Switcher (Crypto 24/7 vs Stocks XETRA / US) -->
-            <div class="asset-class-switcher-bar">
-                <button type="button" class="asset-class-tab active" id="btnClassCrypto" data-tooltip="24/7 Krypto-Märkte mit Multi-Börsen-Failover (OKX, Kraken, Binance)">
-                    <span class="class-icon">🪙</span>
-                    <span class="class-name">KRYPTO TOP 16</span>
-                    <span class="class-sub">24/7 LIVE</span>
-                </button>
-                <button type="button" class="asset-class-tab tab-stock" id="btnClassStocks" data-tooltip="Aktien-Analyse für XETRA & US-Tech (DAX, NASDAQ) mit derselben Fibonacci-Engine">
-                    <span class="class-icon">📈</span>
-                    <span class="class-name">AKTIEN WATCHLIST</span>
-                    <span class="class-sub">XETRA & US</span>
-                </button>
+            <!-- Asset Class Switcher + Blockworks Quick Grid & Watchlist Toggles -->
+            <div class="asset-class-switcher-bar" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="asset-class-tab active" id="btnClassCrypto" data-tooltip="24/7 Krypto-Märkte mit Multi-Börsen-Failover (OKX, Kraken, Binance)">
+                        <span class="class-icon">🪙</span>
+                        <span class="class-name">KRYPTO TOP 16</span>
+                        <span class="class-sub">24/7 LIVE</span>
+                    </button>
+                    <button type="button" class="asset-class-tab tab-stock" id="btnClassStocks" data-tooltip="Aktien-Analyse für XETRA & US-Tech (DAX, NASDAQ) mit derselben Fibonacci-Engine">
+                        <span class="class-icon">📈</span>
+                        <span class="class-name">AKTIEN WATCHLIST</span>
+                        <span class="class-sub">XETRA & US</span>
+                    </button>
+                </div>
+
+                <!-- Phase 1.1 & 1.3 Toggle Buttons -->
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwAssetGrid" data-tooltip="Zeigt alle 16 Top-Assets mit Live-Kurs und aktuellem Fibonacci-Signal als Karten-Matrix">
+                        <span>📊 Multi-Asset Live-Grid (Top 16)</span>
+                    </button>
+                    <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwWatchlist" data-tooltip="Persönliche Watchlist mit Auto-Refresh öffnen">
+                        <span>⭐ Meine Watchlist (<span id="bwWatchlistBtnCount">4</span>)</span>
+                    </button>
+                </div>
             </div>
 
             <div class="crypto-selection-header">
@@ -234,6 +261,33 @@
                     <button class="asset-btn" data-symbol="SHIBUSDT" data-tooltip="Shiba Inu (SHIB) Handels-Chart laden"><span class="chip-rank">#15</span> SHIB</button>
                     <button class="asset-btn" data-symbol="INJUSDT" data-tooltip="Injective (INJ) Handels-Chart laden" style="border-color: rgba(0, 240, 255, 0.4);"><span class="chip-rank">#16</span> INJ</button>
                 </div>
+            </div>
+
+            <!-- Phase 1.1: Expandable Multi-Asset Default Grid -->
+            <div id="bwAssetGridWrapper" class="bw-drawer-panel" style="display: none; margin-top: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-amber); font-weight: 700;">
+                        // BLOCKWORKS MULTI-ASSET MATRIX — LIVE FIBONACCI SIGNALE (30s AUTO-REFRESH)
+                    </span>
+                    <span style="font-size: 0.72rem; color: var(--text-faint);">Klicken Sie auf eine Karte, um das Asset im Hauptchart zu öffnen</span>
+                </div>
+                <div id="bwAssetGridContainer" class="bw-asset-grid"></div>
+            </div>
+
+            <!-- Phase 1.3: Expandable Personal Watchlist Component -->
+            <div id="bwWatchlistWrapper" class="bw-drawer-panel" style="display: none; margin-top: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #eab308; font-size: 1rem;">★</span>
+                        <strong style="font-size: 0.88rem; color: #fff;">Persönliche Watchlist</strong>
+                        <span id="bwWatchlistCount" class="status-badge">4 Assets</span>
+                    </div>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <input type="text" id="inpBwWatchlistSymbol" placeholder="Symbol (z.B. SOL, LINK, SAP.DE)" class="bw-wl-input">
+                        <button type="button" id="btnBwWatchlistAdd" class="bw-wl-add-btn">+ Hinzufügen</button>
+                    </div>
+                </div>
+                <div id="bwWatchlistItems" class="bw-watchlist-grid"></div>
             </div>
         </section>
 
@@ -533,6 +587,41 @@
                     </div>
                 </div>
 
+                <!-- Phase 1.5 & 3.4: Blockworks Live Sentiment Badge & DD-Score Badge -->
+                <div class="bw-oracle-meta-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                    <div id="bwSentimentBadgeCard" class="bw-sentiment-badge-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); text-transform: uppercase;">Social & News Sentiment</div>
+                                <div id="bwOracleSentLabel" style="font-weight: 800; font-size: 0.92rem; color: var(--accent-green); margin-top: 2px;">▲ Bullish (74% Bullish)</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.68rem; color: var(--text-faint);">Score</div>
+                                <div id="bwOracleSentScore" style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--accent-green);">+0.68</div>
+                            </div>
+                        </div>
+                        <div class="bw-sent-split-track" style="margin-top: 8px;">
+                            <div id="bwOracleSentBullBar" class="bw-sent-split-fill" style="width: 74%;"></div>
+                        </div>
+                        <div id="bwOracleSentMentions" style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; font-family: 'JetBrains Mono', monospace;">
+                            64.200 Mentions (24h) • Mindshare 28.4%
+                        </div>
+                    </div>
+
+                    <div id="bwDdScoreBadgeCard" class="bw-sentiment-badge-card" style="border-color: rgba(234, 179, 8, 0.35);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); text-transform: uppercase;">Token Transparency & DD-Score</div>
+                                <div id="bwOracleDdVal" style="font-weight: 800; font-size: 0.92rem; color: var(--accent-green); margin-top: 2px;">🏆 88/100 (Excellent)</div>
+                            </div>
+                            <button type="button" onclick="window.scrollToDashboardSection('sectionBlockworksIntel')" class="bw-mini-link-btn">Details →</button>
+                        </div>
+                        <div id="bwOracleDdSub" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; font-family: 'JetBrains Mono', monospace;">
+                            Disclosure: COMPLETE • Blockworks Standard
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Live Calculated Profit & Loss Breakdown Card with Dual Investment Inputs -->
                 <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--border-glass); border-radius: 14px; padding: 1.2rem; margin-top: 1.2rem; margin-bottom: 1.2rem;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
@@ -583,10 +672,27 @@
                     </div>
                 </div>
 
+                <!-- Phase 3.2: AI Signal Reasoning Engine (Fibonacci × Blockworks Onchain & Token Unlocks) -->
+                <div id="bwAiExplainerBox" class="bw-ai-explainer-card">
+                    <div class="bw-ai-header">
+                        <div>
+                            <span class="bw-ai-eyebrow">// BLOCKWORKS AI CO-PILOT • SENIOR ANALYST REASONING</span>
+                            <h3 class="bw-ai-title">🧠 KI-Tiefenanalyse: Warum dieses Signal? (<span class="bw-active-asset-label">BTC</span>)</h3>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span id="bwAiExplainStatus" class="bw-ai-status-pill">Blockworks AI Co-Pilot • Aktiv</span>
+                            <button type="button" id="btnRunAiExplain" class="bw-ai-refresh-btn">↻ KI-Analyse aktualisieren</button>
+                        </div>
+                    </div>
+                    <div id="bwAiExplanationContent" class="bw-ai-body">
+                        Lade kombinierte Fibonacci-, Onchain-Netflow- und Token-Unlock-Begründung...
+                    </div>
+                </div>
+
                 <!-- Action CTAs -->
-                <div style="display: flex; gap: 14px; margin-top: 1.2rem; margin-bottom: 1.2rem;">
-                    <button class="btn primary" id="btnChangelog" onclick="document.getElementById('chartContainer').scrollIntoView({behavior:'smooth'})">Changelog & Chart →</button>
-                    <button class="btn secondary" id="btnKeynote" onclick="alert('FibCrypto Oracle Release 14.2.0 - Powered by Antigravity AI Engine')">Release Keynote</button>
+                <div style="display: flex; gap: 14px; margin-top: 1.2rem; margin-bottom: 1.2rem; flex-wrap: wrap;">
+                    <button class="btn primary" id="btnChangelog" onclick="document.getElementById('chartContainer').scrollIntoView({behavior:'smooth'})">Zum Live-Chart ↑</button>
+                    <button class="btn secondary" id="btnKeynote" onclick="window.scrollToDashboardSection('sectionBlockworksIntel')">Blockworks Intelligence Suite ↓</button>
                 </div>
 
                 <!-- KI Decision Reasoning -->
@@ -595,11 +701,11 @@
                 </div>
             </section>
 
-            <!-- FIX ERR_37: Financial Risk Disclaimer Panel -->
+            <!-- FIX ERR_37 & Section 13.2: MiCA / BaFin Compliant Financial Risk Disclaimer Panel -->
             <section class="risk-disclaimer-panel">
-                <div class="risk-disclaimer-title">// RISIKOHINWEIS & DISCLAIMER</div>
+                <div class="risk-disclaimer-title">⚠️ RISIKOHINWEIS & DISCLAIMER (MiCA / BaFin KONFORMITÄT)</div>
                 <div>
-                    Kryptowährungen unterliegen hohen Markt- und Preisrisiken. Die von FibCrypto Oracle bereitgestellten Fibonacci-Analysen, Signale und Prognosen dienen ausschließlich zu Bildungs- und Informationszwecken und stellen keine Anlageberatung oder Kaufempfehlung dar. Vergangene Performance ist kein verlässlicher Indikator für zukünftige Ergebnisse. Handeln Sie nur mit Kapital, dessen Verlust Sie verkraften können.
+                    Kryptowährungen und Wertpapiere unterliegen hohen Markt- und Preisrisiken. Die von FibCrypto Oracle bereitgestellten Analysen, Signale, Onchain-Kennzahlen und Prognosen dienen ausschließlich zu Bildungs- und Informationszwecken und stellen <strong>KEINE Anlageberatung oder Kaufempfehlung</strong> dar. Vergangene Performance ist kein verlässlicher Indikator für zukünftige Ergebnisse. Trading kann zum Totalverlust des eingesetzten Kapitals führen. Handeln Sie nur mit Kapital, dessen Verlust Sie verkraften können.
                 </div>
             </section>
 
@@ -671,10 +777,10 @@
             <div class="section-purpose-banner" style="margin-bottom: 0.8rem;">
                 <div class="purpose-badge-col">
                     <span class="purpose-pill">BEREICH 5</span>
-                    <span class="purpose-title">MATHEMATISCHE FILTER & HISTORISCHER BACKTEST</span>
+                    <span class="purpose-title">MATHEMATISCHE FILTER, MULTI-STRATEGIE BACKTEST & ALERT-BUILDER</span>
                 </div>
                 <div class="purpose-text">
-                    <strong>Wofür ist dieser Teil gut?</strong> Zur Absicherung der Entscheidung: RSI misst Überhitzung (&lt;38 günstig, &gt;65 teuer), MACD zeigt Trendwechsel und Bollinger Bänder warnen vor Volatilitätsausbrüchen. Der Backtest-Simulator belegt die historische Erfolgsquote der Signale.
+                    <strong>Wofür ist dieser Teil gut?</strong> Zur Absicherung der Entscheidung: RSI, MACD und Bollinger Bänder prüfen das Momentum. Darunter testen Sie im <strong>Multi-Strategie Backtester</strong> 4 Strategien (inkl. Onchain & Sentiment) mit Kapital-Kurve und erstellen eigene Regeln im <strong>Custom Alert Builder</strong>.
                 </div>
             </div>
 
@@ -730,16 +836,26 @@
                 </div>
             </section>
 
-            <!-- Backtesting Simulator Widget -->
+            <!-- Phase 2.4: Dynamic Multi-Strategy Backtesting Simulator Widget -->
             <section class="panel">
-                <div class="section-eyebrow">// STRATEGY BACKTESTING</div>
+                <div class="section-eyebrow">// DYNAMIC MULTI-STRATEGY BACKTESTING ENGINE</div>
                 <div class="panel-header">
-                    <h2 class="panel-title" data-tooltip="Simuliere eine Fibonacci-Trading-Strategie auf den geladenen historischen Daten">
-                        BACKTESTING SIMULATOR
+                    <h2 class="panel-title" data-tooltip="Simuliere reine Fibonacci-Signale oder kombinierte Blockworks Onchain/Sentiment-Strategien">
+                        HYBRID BACKTESTING SIMULATOR
                     </h2>
                 </div>
 
                 <div class="backtest-box">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <label data-tooltip="Wähle die Kombinations-Strategie aus technischer und fundamentaler Analyse">Strategie-Modus (Fibonacci × Blockworks)<span class="info-icon">i</span></label>
+                        <select id="btStrategySelect" style="width: 100%; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(234, 179, 8, 0.45); border-radius: 8px; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;">
+                            <option value="fib_full" selected>🏆 Hybrid Full (Fibonacci + Onchain + Sentiment + Unlocks)</option>
+                            <option value="fib_onchain">📊 Fibonacci + Onchain Netflow Filter</option>
+                            <option value="fib_sentiment">💬 Fibonacci + Social Sentiment Filter</option>
+                            <option value="fib_only">📐 Nur Fibonacci (Klassisch TA-Only)</option>
+                        </select>
+                    </div>
+
                     <div class="backtest-controls">
                         <div class="input-group">
                             <label data-tooltip="Fibonacci Retracement Level für den automatischen Kaufeinstieg">Kauf-Level<span class="info-icon">i</span></label>
@@ -761,38 +877,102 @@
                         </div>
                     </div>
 
-                    <button class="btn-run-backtest" id="btnRunBacktest" data-tooltip="Starte die Simulation mit den eingestellten Parametern">BACKTEST AUSFÜHREN</button>
+                    <button class="btn-run-backtest" id="btnRunBacktest" data-tooltip="Starte die Simulation mit den eingestellten Parametern">BACKTEST & EQUITY-KURVE BERECHNEN</button>
 
-                    <div class="backtest-metrics">
+                    <div class="backtest-metrics" style="grid-template-columns: repeat(3, 1fr);">
                         <div class="metric-item" data-tooltip="Prozentsatz der erfolgreichen (profitablen) Trades im Simulationstest">
                             <span class="m-label">Win Rate<span class="info-icon">i</span></span>
-                            <span class="m-val" style="color: var(--accent-green);" id="btWinRate">62.5%</span>
+                            <span class="m-val" style="color: var(--accent-green);" id="btWinRate">71.7%</span>
                         </div>
                         <div class="metric-item" data-tooltip="Rendite-Risiko-Verhältnis. Werte >1.5 kennzeichnen exzellente risikobereinigte Ergebnisse.">
-                            <span class="m-label">Sharpe Ratio<span class="info-icon">i</span></span>
-                            <span class="m-val" style="color: var(--accent-orange);" id="btSharpe">1.84</span>
+                            <span class="m-label">Sharpe<span class="info-icon">i</span></span>
+                            <span class="m-val" style="color: var(--accent-orange);" id="btSharpe">2.40</span>
+                        </div>
+                        <div class="metric-item" data-tooltip="Verhältnis von Bruttogewinn zu Bruttoverlust">
+                            <span class="m-label">Profit Factor</span>
+                            <span class="m-val" style="color: #eab308;" id="btProfitFactor">2.50x</span>
                         </div>
                         <div class="metric-item" data-tooltip="Maximaler erlittener Portfolio-Verlust vom Höchststand im Testzeitraum">
-                            <span class="m-label">Max Drawdown<span class="info-icon">i</span></span>
-                            <span class="m-val" style="color: var(--accent-red);" id="btDrawdown">-14.2%</span>
+                            <span class="m-label">Max DD<span class="info-icon">i</span></span>
+                            <span class="m-val" style="color: var(--accent-red);" id="btDrawdown">-10.5%</span>
                         </div>
-                        <div class="metric-item" data-tooltip="Prozentualer Gesamtertrag der Backtest-Strategie">
-                            <span class="m-label">Gesamtgewinn<span class="info-icon">i</span></span>
-                            <span class="m-val" style="color: var(--accent-green);" id="btTotalProfit">+118.4%</span>
+                        <div class="metric-item" style="grid-column: span 2;" data-tooltip="Prozentualer Gesamtertrag der Backtest-Strategie">
+                            <span class="m-label">Gesamtgewinn (Net Return)<span class="info-icon">i</span></span>
+                            <span class="m-val" style="color: var(--accent-green);" id="btTotalProfit">+168.1%</span>
                         </div>
+                    </div>
+
+                    <!-- Simulated Equity Curve Mini-Chart -->
+                    <div style="margin-top: 10px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); margin-bottom: 4px;">
+                            <span>SIMULIERTE EQUITY-KURVE (KAPITALVERLAUF)</span>
+                            <span style="color: var(--accent-green);">● Portfolio Equity</span>
+                        </div>
+                        <canvas id="btEquityCanvas" style="width: 100%; height: 85px; display: block;"></canvas>
                     </div>
                 </div>
             </section>
 
-            <!-- Real-time Alert Feed -->
-            <section class="panel">
-                <div class="section-eyebrow">// REALTIME ALERTS</div>
+            <!-- Real-time Alert Feed + Phase 3.3 Custom Alert Builder -->
+            <section class="panel" id="bwAlertBuilder">
+                <div class="section-eyebrow">// REALTIME ALERTS & CUSTOM RULE BUILDER</div>
                 <div class="panel-header">
-                    <h2 class="panel-title" data-tooltip="Automatisches Alert-Log bei Erreichen wichtiger Fibonacci-Stützen oder Widerstände">
-                        ECHTZEIT-ALERTS
+                    <h2 class="panel-title" data-tooltip="Kombinierte Fibonacci-, Mindshare-, Sentiment- und Token-Unlock-Alerts erstellen">
+                        CUSTOM ALERT BUILDER & LIVE-FEED
                     </h2>
                 </div>
 
+                <!-- Phase 3.3 Custom Multi-Condition Alert Builder -->
+                <div class="bw-alert-builder-box">
+                    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; margin-bottom: 8px;">
+                        <input type="text" id="bwAlertNameInput" placeholder="Alert-Name (z.B. BTC Golden Dip)" class="bw-alert-input">
+                        <div style="display: flex; gap: 4px;">
+                            <select id="bwAlertAssetSelect" class="bw-alert-select">
+                                <option value="BTC">BTC</option>
+                                <option value="ETH">ETH</option>
+                                <option value="SOL">SOL</option>
+                                <option value="INJ">INJ</option>
+                                <option value="SUI">SUI</option>
+                                <option value="XRP">XRP</option>
+                                <option value="LINK">LINK</option>
+                                <option value="AVAX">AVAX</option>
+                                <option value="BNB">BNB</option>
+                                <option value="ADA">ADA</option>
+                                <option value="DOT">DOT</option>
+                                <option value="NEAR">NEAR</option>
+                                <option value="SAP.DE">SAP.DE</option>
+                                <option value="NVDA">NVDA</option>
+                            </select>
+                            <select id="bwAlertCombineSelect" class="bw-alert-select" title="Logische Verknüpfung">
+                                <option value="AND">AND</option>
+                                <option value="OR">OR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bw-alert-cond-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 0.72rem; color: var(--text-faint); font-family: 'JetBrains Mono', monospace;">BEDINGUNGEN (FIB × ONCHAIN)</span>
+                            <button type="button" id="btnBwAddAlertCond" class="bw-add-cond-btn">+ Bedingung</button>
+                        </div>
+                        <div id="bwAlertConditionsList"></div>
+                    </div>
+
+                    <div id="bwAlertNaturalPreview" class="bw-alert-preview-bar">
+                        📝 BTC: Fib-Level kreuzt unter 0.618 AND Sentiment-Score &gt; 0.3
+                    </div>
+
+                    <button type="button" id="btnBwSaveCustomAlert" class="bw-save-alert-btn">
+                        💾 Multi-Condition Alert speichern
+                    </button>
+
+                    <!-- Saved Custom Rules -->
+                    <div id="bwSavedCustomAlertsList" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;"></div>
+                </div>
+
+                <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); margin: 12px 0 6px 0; text-transform: uppercase;">
+                    // LIVE SYSTEM-ALERTS
+                </div>
                 <div class="alert-feed" id="alertFeed">
                     <div class="alert-item">
                         <div><strong>Fib Level Test:</strong> BTC nähert sich 38.2% Support</div>
@@ -806,6 +986,168 @@
         <span class="dot-cluster" style="position: fixed; bottom: 30px; left: 30px; z-index: 50;"></span>
 
     </main>
+
+    <!-- ================================================================= -->
+    <!-- BEREICH 6: BLOCKWORKS × FIBCRYPTO HYBRID INTELLIGENCE SUITE       -->
+    <!-- ================================================================= -->
+    <section id="sectionBlockworksIntel" class="bw-intelligence-suite">
+        <div class="section-purpose-banner" style="margin-bottom: 1.2rem; border-color: rgba(234, 179, 8, 0.45); background: linear-gradient(90deg, rgba(234, 179, 8, 0.1), rgba(15, 18, 25, 0.92));">
+            <div class="purpose-badge-col">
+                <span class="purpose-pill" style="background: #eab308; color: #000; border-color: #eab308;">BEREICH 6</span>
+                <span class="purpose-title" style="color: #eab308;">BLOCKWORKS HYBRID INTELLIGENCE: TOKEN UNLOCKS, ONCHAIN, MINDSHARE, DD-SCORE, NEWS & MCP</span>
+            </div>
+            <div class="purpose-text">
+                <strong>Wofür ist dieser Teil gut?</strong> „Wo Fibonacci auf Fundamentaldaten trifft“: Diese Sektion kombiniert Ihre technische Chart-Analyse automatisch mit institutionellen Fundamentaldaten für das gewählte Asset (<strong class="bw-active-asset-label" style="color: #eab308;">BTC</strong>) — inklusive <strong>90-Tage Token Unlocks</strong>, <strong>Onchain Netflow & TVL</strong>, <strong>7-Tage Mindshare-Momentum</strong>, <strong>Due-Diligence-Score (DD-Score)</strong>, <strong>Live-News</strong> und dem <strong>MCP-Server</strong> für KI-Agenten.
+            </div>
+        </div>
+
+        <div class="bw-suite-grid">
+            <!-- Card 1: Phase 2.1 Token Unlocks (90 Tage) -->
+            <div class="panel bw-suite-card" id="bwUnlocksCard">
+                <div class="section-eyebrow">// PHASE 2.1 • VESTING & SUPPLY SCHEDULE</div>
+                <div class="panel-header">
+                    <h2 class="panel-title">📅 TOKEN UNLOCKS (90 TAGE) — <span class="bw-active-asset-label">BTC</span></h2>
+                    <span class="status-badge badge-testing">Supply-Risiko</span>
+                </div>
+                <div id="bwUnlockMajorAlert" class="bw-unlock-major-alert" style="display: none;"></div>
+                <div id="bwUnlocksList" class="bw-unlocks-list">
+                    <div style="text-align:center; padding:1rem; color:var(--text-faint);">Lade Token-Unlock-Kalender...</div>
+                </div>
+            </div>
+
+            <!-- Card 2: Phase 2.3 Onchain Fundamentals Panel -->
+            <div class="panel bw-suite-card" id="bwOnchainCard">
+                <div class="section-eyebrow">// PHASE 2.3 • ONCHAIN METRICS & FLOWS</div>
+                <div class="panel-header">
+                    <h2 class="panel-title">📊 ONCHAIN FUNDAMENTALS — <span class="bw-active-asset-label">BTC</span></h2>
+                    <span id="bwOcNetFlowBadge" style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-green);">↗ AKKUMULATION</span>
+                </div>
+
+                <div class="bw-onchain-grid">
+                    <div class="bw-oc-box">
+                        <div class="bw-oc-label">Active Addresses (24h)</div>
+                        <div class="bw-oc-val" id="bwOcActiveAddr">842.500</div>
+                        <div class="bw-oc-sub" id="bwOcActiveAddrChg" style="color: var(--accent-green);">↗ +3.25% (24h)</div>
+                    </div>
+                    <div class="bw-oc-box">
+                        <div class="bw-oc-label">Net Exchange Flow (24h)</div>
+                        <div class="bw-oc-val" id="bwOcNetFlow" style="color: var(--accent-green);">-4.450 BTC</div>
+                        <div class="bw-oc-sub" style="color: var(--text-faint);">Negativ = Börsen-Abfluss (Bullish)</div>
+                    </div>
+                    <div class="bw-oc-box">
+                        <div class="bw-oc-label">Whale Transaktionen (&gt;$100k)</div>
+                        <div class="bw-oc-val" id="bwOcWhales">1.420 Tx</div>
+                        <div class="bw-oc-sub" style="color: var(--text-faint);">Institutionelle Aktivität</div>
+                    </div>
+                    <div class="bw-oc-box">
+                        <div class="bw-oc-label">DEX / CEX Volume Ratio</div>
+                        <div class="bw-oc-val" id="bwOcDexRatio">4.2%</div>
+                        <div class="bw-oc-sub" style="color: var(--text-faint);">Dezentrale Handelsquote</div>
+                    </div>
+                    <div class="bw-oc-box" style="grid-column: span 2; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div class="bw-oc-label">Total Value Locked (TVL / DeFi Ecosystem)</div>
+                            <div class="bw-oc-val" id="bwOcTvl" style="font-size: 1.15rem;">$6.85B</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="bw-oc-label">7-Tage TVL Trend</div>
+                            <div id="bwOcTvlChg" style="font-family: 'JetBrains Mono', monospace; font-weight: 800; color: var(--accent-green);">+4.95% (7d)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Phase 2.2 Mindshare & Sentiment Momentum (7 Tage) -->
+            <div class="panel bw-suite-card" id="bwMindshareCard">
+                <div class="section-eyebrow">// PHASE 2.2 • SOCIAL ATTENTION & SENTIMENT</div>
+                <div class="panel-header">
+                    <h2 class="panel-title">📈 MINDSHARE & SENTIMENT (7D)</h2>
+                    <span id="bwMsDeltaBadge" style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 0.82rem; color: var(--accent-green);">↑ +1.8% (24h)</span>
+                </div>
+
+                <div class="bw-ms-kpi-row">
+                    <div class="bw-ms-kpi">
+                        <span class="bw-ms-lbl">Mindshare</span>
+                        <span class="bw-ms-val" id="bwMsCurrentVal">28.4%</span>
+                    </div>
+                    <div class="bw-ms-kpi">
+                        <span class="bw-ms-lbl">Sentiment</span>
+                        <span class="bw-ms-val" id="bwMsSentimentVal" style="color: var(--accent-green);">+0.68</span>
+                    </div>
+                    <div class="bw-ms-kpi">
+                        <span class="bw-ms-lbl">Mentions/24h</span>
+                        <span class="bw-ms-val" id="bwMsMentionsVal">64.200</span>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 8px; margin-top: 8px;">
+                    <canvas id="bwMindshareCanvas" style="width: 100%; height: 135px; display: block;"></canvas>
+                </div>
+            </div>
+
+            <!-- Card 4: Phase 3.4 Due Diligence & Token Transparency (DD-Score) -->
+            <div class="panel bw-suite-card" id="bwDdScoreCard">
+                <div class="section-eyebrow">// PHASE 3.4 • TOKEN TRANSPARENCY FRAMEWORK</div>
+                <div class="panel-header">
+                    <h2 class="panel-title">🛡️ DUE DILIGENCE SCORE — <span class="bw-active-asset-label">BTC</span></h2>
+                    <span id="bwDdLabelBig" class="status-badge badge-support">Excellent Transparency</span>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 10px; margin-bottom: 12px;">
+                    <div>
+                        <div style="font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase;">Gesamt-Rating (Gewichtet)</div>
+                        <div id="bwDdScoreBig" style="font-size: 1.45rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: #fff;">🏆 88/100</div>
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); max-width: 58%; text-align: right;">
+                        Berechnet aus Disclosure Coverage, Freshness, Unlock-Konzentration, Governance & Sentiment.
+                    </div>
+                </div>
+
+                <div id="bwDdBreakdownBars" class="bw-dd-bars-wrap"></div>
+            </div>
+
+            <!-- Card 5: Phase 1.4 Live News & Research Sidebar -->
+            <div class="panel bw-suite-card" id="bwNewsCard">
+                <div class="section-eyebrow">// PHASE 1.4 • REALTIME INTELLIGENCE WIRE</div>
+                <div class="panel-header" style="flex-wrap: wrap; gap: 8px;">
+                    <h2 class="panel-title">📰 LIVE NEWS & RESEARCH — <span class="bw-active-asset-label">BTC</span></h2>
+                    <div style="display: flex; gap: 4px;">
+                        <button type="button" class="bw-news-filter-btn active" data-filter="all">Alle</button>
+                        <button type="button" class="bw-news-filter-btn" data-filter="bullish">▲ Bullish</button>
+                        <button type="button" class="bw-news-filter-btn" data-filter="bearish">▼ Bearish</button>
+                    </div>
+                </div>
+
+                <div id="bwNewsList" class="bw-news-list">
+                    <div style="text-align:center; padding:1rem; color:var(--text-faint);">Lade Nachrichten...</div>
+                </div>
+            </div>
+
+            <!-- Card 6: Phase 3.1 MCP Server & Multi-Asset Side-by-Side Comparison -->
+            <div class="panel bw-suite-card" id="bwMcpCard">
+                <div class="section-eyebrow">// PHASE 3.1 • MODEL CONTEXT PROTOCOL (/api/mcp)</div>
+                <div class="panel-header" style="flex-wrap: wrap; gap: 8px;">
+                    <h2 class="panel-title">🤖 MCP-SERVER & ASSET-VERGLEICH</h2>
+                    <span class="status-badge badge-support">MCP v2.0 Aktiv</span>
+                </div>
+
+                <p style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">
+                    Testen Sie die 3 integrierten MCP-Agenten-Tools direkt gegen den Serverless-Endpunkt <code>/api/mcp</code>:
+                </p>
+
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                    <button type="button" class="bw-mcp-tool-btn active" data-mcp-tool="fib_compare_assets">1. fib_compare_assets (Matrix)</button>
+                    <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_analyze_asset">2. fib_analyze_asset (<span class="bw-active-asset-label">BTC</span>)</button>
+                    <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_search_research">3. fib_search_research</button>
+                </div>
+
+                <div id="bwMcpCompareTableWrap" class="fib-table-wrapper" style="display: none; margin-bottom: 8px;"></div>
+
+                <pre id="bwMcpOutputBox" class="bw-mcp-pre">// Klicke auf ein MCP-Tool oben, um die Live-Antwort von /api/mcp zu inspizieren...</pre>
+            </div>
+        </div>
+    </section>
+
     </div> <!-- /#oracleView -->
 
     <!-- ================================================================= -->
@@ -1218,13 +1560,19 @@
 
     </div>
 
-    <!-- Footer (Parallax Bottom Meta Bar) -->
-    <footer class="app-footer">
-        <div>parallax.systems / fibcrypto-oracle & hydro-injective-ecc</div>
-        <div style="display: flex; gap: 24px;">
-            <span>↗ HYDRO ON INJECTIVE</span>
-            <span>↗ COSMWASM SPEC</span>
-            <span>SHIPPED BUILD 14.2.0</span>
+    <!-- Footer (Parallax Bottom Meta Bar & MiCA/BaFin Risk Disclaimer) -->
+    <footer class="app-footer" style="flex-direction: column; gap: 10px; align-items: stretch;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>parallax.systems / fibcrypto-oracle × blockworks-intelligence & hydro-injective-ecc</div>
+            <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                <span>↗ BLOCKWORKS HYBRID SUITE</span>
+                <span>↗ MCP SERVER (/api/mcp)</span>
+                <span>↗ HYDRO ON INJECTIVE</span>
+                <span>SHIPPED BUILD 15.0.0</span>
+            </div>
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-faint); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px; line-height: 1.45;">
+            ⚖️ <strong>Regulatorischer Hinweis (MiCA / BaFin / WpIG):</strong> Alle auf fibcrypto-oracle bereitgestellten Fibonacci-Signale, KI-Begründungen, Onchain-Metriken, Due-Diligence-Scores und Backtesting-Simulationen dienen ausschließlich Informations- und Bildungszwecken und stellen <strong>keine Anlageberatung oder Finanzdienstleistung</strong> im Sinne von § 2 Abs. 2 Nr. 4 WpIG dar. Vergangene Backtesting-Ergebnisse garantieren keine zukünftigen Erträge.
         </div>
     </footer>
 
@@ -1232,6 +1580,7 @@
     <script src="fibonacci_engine.js"></script>
     <script src="hydro_console.js"></script>
     <script src="copilot_engine.js"></script>
+    <script src="blockworks_intel.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

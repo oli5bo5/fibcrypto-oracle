@@ -4090,3 +4090,788 @@ footer.app-footer span {
 }
 
 
+
+/* ==========================================================================
+   Blockworks × FibCrypto Hybrid Intelligence Suite (Phases 1–3)
+   ========================================================================== */
+
+/* Header Navigation Tab */
+.nav-tab-blockworks:hover,
+.nav-tab-blockworks.active {
+    background: rgba(234, 179, 8, 0.16) !important;
+    color: #eab308 !important;
+    border-color: #eab308 !important;
+    box-shadow: 0 0 14px rgba(234, 179, 8, 0.28) !important;
+}
+
+/* Bereich 1: Multi-Asset Grid & Watchlist Drawers */
+.bw-drawer-panel {
+    margin-top: 14px;
+    background: rgba(8, 10, 16, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+    animation: fade-in 0.25s ease;
+}
+
+.bw-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bw-search-input {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    min-width: 240px;
+    outline: none;
+}
+
+.bw-search-input:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.bw-asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 10px;
+}
+
+.bw-asset-card {
+    background: rgba(18, 22, 32, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bw-asset-card:hover {
+    border-color: rgba(234, 179, 8, 0.5);
+    transform: translateY(-2px);
+    background: rgba(24, 30, 44, 0.92);
+}
+
+.bw-asset-card.active {
+    border-color: var(--accent-orange);
+    background: rgba(255, 110, 58, 0.09);
+    box-shadow: 0 0 14px rgba(255, 110, 58, 0.2);
+}
+
+.bw-asset-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.bw-asset-sym {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 0.88rem;
+    color: #ffffff;
+    margin-right: 4px;
+}
+
+.bw-asset-cat {
+    font-size: 0.62rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-faint);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+.bw-star-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 2px;
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.bw-star-btn:hover {
+    transform: scale(1.2);
+    color: #eab308;
+}
+
+.bw-star-btn.starred {
+    color: #eab308;
+    text-shadow: 0 0 8px rgba(234, 179, 8, 0.5);
+}
+
+.bw-asset-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.bw-asset-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.bw-asset-chg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+}
+
+.bw-asset-chg.pos { color: var(--accent-green); }
+.bw-asset-chg.neg { color: var(--accent-red); }
+
+.bw-asset-fib-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bw-fib-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.bw-sig-buy {
+    background: rgba(122, 240, 158, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(122, 240, 158, 0.35);
+}
+
+.bw-sig-sell {
+    background: rgba(255, 77, 77, 0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(255, 77, 77, 0.35);
+}
+
+.bw-sig-hold {
+    background: rgba(234, 179, 8, 0.14);
+    color: #eab308;
+    border: 1px solid rgba(234, 179, 8, 0.35);
+}
+
+.bw-fib-lvl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--text-muted);
+}
+
+/* Watchlist Grid */
+.bw-watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+}
+
+.bw-watch-card {
+    background: rgba(18, 22, 32, 0.9);
+    border: 1px solid rgba(234, 179, 8, 0.28);
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bw-watch-card:hover {
+    border-color: #eab308;
+    background: rgba(28, 34, 48, 0.95);
+}
+
+.bw-watch-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.bw-watch-remove {
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+.bw-watch-remove:hover {
+    color: var(--accent-red);
+}
+
+.bw-watch-mid {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.bw-watch-bot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.68rem;
+}
+
+/* Bereich 3: Sentiment & DD-Score Badges + AI Senior Analyst Card */
+.bw-oracle-badges-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.bw-sentiment-badge-card {
+    background: rgba(0, 0, 0, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+
+.bw-sb-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+}
+
+.bw-sb-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.bw-ai-explainer-card {
+    background: linear-gradient(145deg, rgba(234, 179, 8, 0.07), rgba(0, 240, 255, 0.04));
+    border: 1px solid rgba(234, 179, 8, 0.32);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+}
+
+.bw-ai-exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #eab308;
+}
+
+.bw-ai-refresh-btn {
+    background: rgba(234, 179, 8, 0.15);
+    border: 1px solid rgba(234, 179, 8, 0.4);
+    color: #eab308;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bw-ai-refresh-btn:hover {
+    background: #eab308;
+    color: #000000;
+}
+
+.bw-ai-exp-body {
+    font-size: 0.79rem;
+    line-height: 1.48;
+    color: var(--text-subtle);
+}
+
+/* Bereich 5: Custom Multi-Condition Alert Builder */
+.bw-alert-builder-box {
+    background: rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(234, 179, 8, 0.25);
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.bw-alert-input,
+.bw-alert-select {
+    background: rgba(14, 17, 26, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    outline: none;
+}
+
+.bw-alert-cond-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.bw-add-cond-btn {
+    background: rgba(0, 240, 255, 0.12);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    color: var(--accent-cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bw-alert-cond-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.7fr auto;
+    gap: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.bw-cond-del-btn {
+    background: rgba(255, 77, 77, 0.15);
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    color: var(--accent-red);
+    border-radius: 5px;
+    padding: 4px 7px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.bw-alert-preview-bar {
+    background: rgba(234, 179, 8, 0.08);
+    border: 1px dashed rgba(234, 179, 8, 0.35);
+    color: #eab308;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.71rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.bw-save-alert-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #eab308, #f59e0b);
+    color: #070b14;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bw-save-alert-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.bw-saved-alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 7px;
+    padding: 6px 10px;
+}
+
+.bw-del-saved-alert {
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+.bw-del-saved-alert:hover {
+    color: var(--accent-red);
+}
+
+/* ==========================================================================
+   Bereich 6: Blockworks Hybrid Intelligence Suite (6-Card Matrix)
+   ========================================================================== */
+.bw-intelligence-suite {
+    margin: 1.4rem 4% 2rem 4%;
+}
+
+.bw-suite-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.bw-suite-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 310px;
+}
+
+/* Card 1: Token Unlocks */
+.bw-unlock-major-alert {
+    background: rgba(255, 77, 77, 0.14);
+    border: 1px solid rgba(255, 77, 77, 0.45);
+    color: #ff8080;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.73rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.bw-unlocks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bw-unlock-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9px;
+    padding: 9px 12px;
+}
+
+.bw-unlock-row.sev-high {
+    border-left: 3px solid var(--accent-red);
+}
+
+.bw-unlock-row.sev-medium {
+    border-left: 3px solid #eab308;
+}
+
+.bw-unlock-row.sev-low {
+    border-left: 3px solid var(--accent-green);
+}
+
+.bw-unlock-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.bw-unlock-days {
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+.bw-unlock-meta {
+    font-size: 0.71rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.bw-unlock-right {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.bw-unlock-usd {
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.bw-unlock-pct {
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Card 2: Onchain Fundamentals */
+.bw-onchain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.bw-oc-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9px;
+    padding: 10px 12px;
+}
+
+.bw-oc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.bw-oc-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.02rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.bw-oc-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+}
+
+/* Card 3: Mindshare KPI Row */
+.bw-ms-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.bw-ms-kpi {
+    background: rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 7px 10px;
+    text-align: center;
+}
+
+.bw-ms-lbl {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.bw-ms-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* Card 4: Due Diligence Breakdown Bars */
+.bw-dd-bars-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bw-dd-bar-row {
+    background: rgba(0, 0, 0, 0.32);
+    border-radius: 7px;
+    padding: 6px 10px;
+}
+
+.bw-dd-bar-top {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.71rem;
+    color: var(--text-subtle);
+    margin-bottom: 4px;
+}
+
+.bw-dd-bar-track {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bw-dd-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.35s ease;
+}
+
+/* Card 5: News & Research Feed */
+.bw-news-filter-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bw-news-filter-btn.active,
+.bw-news-filter-btn:hover {
+    background: rgba(234, 179, 8, 0.18);
+    color: #eab308;
+    border-color: #eab308;
+}
+
+.bw-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 270px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.bw-news-item {
+    display: block;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 9px;
+    padding: 9px 11px;
+    transition: all 0.2s;
+}
+
+.bw-news-item:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+    background: rgba(16, 22, 34, 0.9);
+}
+
+.bw-news-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+}
+
+.bw-news-sent {
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.bw-news-sent.sent-bull {
+    background: rgba(122, 240, 158, 0.15);
+    color: var(--accent-green);
+}
+
+.bw-news-sent.sent-bear {
+    background: rgba(255, 77, 77, 0.15);
+    color: var(--accent-red);
+}
+
+.bw-news-sent.sent-neut {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.bw-news-src {
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.bw-news-time {
+    color: var(--text-faint);
+    margin-left: auto;
+}
+
+.bw-news-title {
+    font-size: 0.79rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.38;
+}
+
+/* Card 6: MCP Server & Asset Compare */
+.bw-mcp-tool-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--text-subtle);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bw-mcp-tool-btn.active,
+.bw-mcp-tool-btn:hover {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+
+.bw-mcp-pre {
+    background: #06080d;
+    border: 1px solid rgba(0, 240, 255, 0.22);
+    border-radius: 8px;
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.69rem;
+    color: var(--accent-cyan);
+    max-height: 195px;
+    overflow-y: auto;
+    line-height: 1.42;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Responsive Breakpoints for Blockworks Intelligence Suite */
+@media (max-width: 1280px) {
+    .bw-suite-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .bw-intelligence-suite {
+        margin: 1rem 12px 1.5rem 12px !important;
+    }
+
+    .bw-suite-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .bw-oracle-badges-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .bw-alert-cond-row {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .bw-asset-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .bw-asset-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
