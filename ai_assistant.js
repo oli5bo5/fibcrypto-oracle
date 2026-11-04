@@ -118,7 +118,14 @@
         dom.sendBtn = document.getElementById('btnAiSendMessage');
         dom.quickChipsBar = document.getElementById('aiQuickChips');
 
+        // Embedded studio elements
+        dom.embeddedMessagesContainer = document.getElementById('aiEmbeddedMessageStream');
+        dom.embeddedInputField = document.getElementById('aiEmbeddedChatInput');
+        dom.embeddedSendBtn = document.getElementById('btnAiEmbeddedSend');
+        dom.embeddedQuickChipsBar = document.getElementById('aiEmbeddedQuickChips');
+
         renderMessages();
+        syncHeroStatCard();
     }
 
     function bindEvents() {
@@ -149,9 +156,33 @@
             });
         }
 
-        // Quick chip clicks
+        // Quick chip clicks in modal
         if (dom.quickChipsBar) {
             dom.quickChipsBar.addEventListener('click', (e) => {
+                const chip = e.target.closest('.ai-chip');
+                if (chip) {
+                    const q = chip.getAttribute('data-q');
+                    if (q) submitQuery(q);
+                }
+            });
+        }
+
+        // Embedded studio event bindings
+        if (dom.embeddedSendBtn) {
+            dom.embeddedSendBtn.addEventListener('click', handleEmbeddedSend);
+        }
+
+        if (dom.embeddedInputField) {
+            dom.embeddedInputField.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleEmbeddedSend();
+                }
+            });
+        }
+
+        if (dom.embeddedQuickChipsBar) {
+            dom.embeddedQuickChipsBar.addEventListener('click', (e) => {
                 const chip = e.target.closest('.ai-chip');
                 if (chip) {
                     const q = chip.getAttribute('data-q');
@@ -166,6 +197,34 @@
                 setModalOpen(false);
             }
         });
+
+        // Periodic sync of hero stat card
+        setInterval(syncHeroStatCard, 2000);
+    }
+
+    function handleEmbeddedSend() {
+        if (!dom.embeddedInputField) return;
+        const text = dom.embeddedInputField.value.trim();
+        if (!text) return;
+        dom.embeddedInputField.value = '';
+        submitQuery(text);
+    }
+
+    function syncHeroStatCard() {
+        const elAction = document.getElementById('heroTopPickAction');
+        const elSub = document.getElementById('heroTopPickSub');
+        const elRisk = document.getElementById('heroTopPickRisk');
+        if (!elAction) return;
+
+        const activeBadge = document.getElementById('oracleSignalText') || document.getElementById('oracleSignalBadge');
+        const activeSignal = activeBadge ? activeBadge.textContent.trim().toUpperCase() : 'KAUFEN';
+        const crvBadge = document.getElementById('crvBadge');
+        const crvText = crvBadge ? crvBadge.textContent.replace('CRV:', '').trim() : '1:3.40';
+        const activeSym = (window.currentSymbol || 'BTCUSDT').replace('USDT', '');
+
+        elAction.textContent = activeSignal.includes('KAUF') ? 'KAUFEN' : (activeSignal.includes('VERKAUF') ? 'VERKAUFEN' : 'WARTEN');
+        if (elSub) elSub.textContent = `${activeSym}USDT • CRV ${crvText} • GOLDEN POCKET 61.8%`;
+        if (elRisk) elRisk.textContent = '12 %';
     }
 
     function toggleModal() {
@@ -273,13 +332,13 @@
         state.isTyping = isTyping;
         const ind = document.getElementById('aiTypingIndicator');
         if (ind) ind.style.display = isTyping ? 'flex' : 'none';
+        const embInd = document.getElementById('aiEmbeddedTypingIndicator');
+        if (embInd) embInd.style.display = isTyping ? 'flex' : 'none';
         if (isTyping) scrollToBottom();
     }
 
     function renderMessages() {
-        if (!dom.messagesContainer) return;
-        
-        dom.messagesContainer.innerHTML = state.messages.map((m, idx) => {
+        const html = state.messages.map((m, idx) => {
             const isUser = m.sender === 'user';
             const formattedText = formatMarkdown(m.text);
 
@@ -306,12 +365,24 @@
                 </div>
             `;
         }).join('');
+
+        if (dom.messagesContainer) {
+            dom.messagesContainer.innerHTML = html;
+        }
+        if (dom.embeddedMessagesContainer) {
+            dom.embeddedMessagesContainer.innerHTML = html;
+        }
     }
 
     function scrollToBottom() {
         if (dom.messagesContainer) {
             setTimeout(() => {
                 dom.messagesContainer.scrollTop = dom.messagesContainer.scrollHeight;
+            }, 50);
+        }
+        if (dom.embeddedMessagesContainer) {
+            setTimeout(() => {
+                dom.embeddedMessagesContainer.scrollTop = dom.embeddedMessagesContainer.scrollHeight;
             }, 50);
         }
     }

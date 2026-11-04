@@ -8,7 +8,7 @@
     <!-- Fonts & Meta -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -95,6 +95,59 @@
     <!-- MARKT-ORAKEL & CHART DASHBOARD VIEW                               -->
     <!-- ================================================================= -->
     <div id="oracleView">
+
+        <!-- ============================================================= -->
+        <!-- EDITORIAL HERO SECTION (LORA MINIMALIST DESIGN)               -->
+        <!-- ============================================================= -->
+        <section class="editorial-hero-grid" id="sectionHero">
+            
+            <!-- Left Hero White Card -->
+            <div class="editorial-hero-card">
+                <nav class="editorial-hero-nav">
+                    <a href="#sectionHero" class="editorial-nav-link active">START</a>
+                    <a href="#step1KaufRadar" class="editorial-nav-link">KAUF-RADAR</a>
+                    <a href="#step2Entscheidung" class="editorial-nav-link">ENTSCHEIDUNG</a>
+                    <a href="#step3Chart" class="editorial-nav-link">CHART</a>
+                    <a href="javascript:void(0)" onclick="window.AiAssistant ? window.AiAssistant.open() : null" class="editorial-nav-link">KI-ASSISTENT</a>
+                </nav>
+
+                <div>
+                    <div class="editorial-hero-eyebrow">// MULTI-ASSET BLOCKCHAIN INTELLIGENCE</div>
+                    <h1 class="editorial-hero-title">
+                        FIBCRYPTO<br>ORACLE
+                    </h1>
+                    <p class="editorial-hero-desc">
+                        Autonomes Krypto-Marktorakel & Multi-Faktor-Scan für 16 führende Blockchains. Finden Sie in Sekunden heraus, <strong>welche Kryptowährung Sie heute kaufen sollten</strong>, wo der <strong>Stop-Loss Ihr Kapital absichert</strong> und welcher Reingewinn realistisch ist.
+                    </p>
+                </div>
+
+                <div class="editorial-hero-actions">
+                    <button type="button" class="editorial-btn-emerald" onclick="window.scrollToDashboardSection('step1KaufRadar')">
+                        JETZT TOP-PICKS ANSEHEN →
+                    </button>
+                    <button type="button" class="editorial-btn-outline" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
+                        💬 KI-BERATER FRAGEN
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Asymmetric 2-Tone Stat Card (Exact Reference Image Style) -->
+            <div class="editorial-stat-card-wrap">
+                <!-- Top Emerald Green Half (rounded top-right corner) -->
+                <div class="editorial-stat-card-top" onclick="window.scrollToDashboardSection('step2Entscheidung')" style="cursor: pointer;">
+                    <div class="stat-card-label">TOP-EMPFEHLUNG HEUTE</div>
+                    <div class="stat-card-huge-val" id="heroTopPickAction">KAUFEN</div>
+                    <div class="stat-card-sub" id="heroTopPickSub">BTCUSDT • CRV 1:3.40 • ZIEL: +14.8 %</div>
+                </div>
+                <!-- Bottom Pure White Half (rounded bottom-left corner) -->
+                <div class="editorial-stat-card-bottom">
+                    <div class="stat-card-huge-val-dark" id="heroTopPickRisk">12 %</div>
+                    <div class="stat-card-label-dark">MAXIMALER KAPITALSCHUTZ (STOP-LOSS)</div>
+                    <div class="stat-card-sub-dark">Automatischer Stop-Loss sichert vor Crashs & Volatilität</div>
+                </div>
+            </div>
+
+        </section>
 
         <!-- ============================================================= -->
         <!-- SCHRITT 1: 🎯 KAUF-RADAR // WELCHE KRYPTO JETZT KAUFEN?        -->
@@ -263,26 +316,34 @@
                         </div>
                     </div>
 
-                    <!-- Ranking Table (Collapse/Details) -->
-                    <div class="fib-table-wrapper" style="margin-top: 1rem; max-height: 280px; overflow-y: auto;">
-                        <table class="fib-table">
-                            <thead>
-                                <tr>
-                                    <th>Rang</th>
-                                    <th>Kryptowährung</th>
-                                    <th>Score</th>
-                                    <th>Kurs</th>
-                                    <th>24h Dynamik</th>
-                                    <th>RSI (14)</th>
-                                    <th>Urteil & Aktion</th>
-                                    <th>Auswahl</th>
-                                </tr>
-                            </thead>
-                            <tbody id="copilotRankingBody">
-                                <!-- Populated dynamically by copilot_engine.js -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- Ranking Table (Wrapped in Clean Editorial Accordion) -->
+                    <details class="editorial-accordion" id="detailsRankingTable">
+                        <summary>
+                            <span>📊 Vollständiges 16-Asset-Ranking & Multi-Faktor-Scores anzeigen</span>
+                            <span class="accordion-chevron">▾</span>
+                        </summary>
+                        <div class="editorial-accordion-content">
+                            <div class="fib-table-wrapper" style="max-height: 320px; overflow-y: auto;">
+                                <table class="fib-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rang</th>
+                                            <th>Kryptowährung</th>
+                                            <th>Score</th>
+                                            <th>Kurs</th>
+                                            <th>24h Dynamik</th>
+                                            <th>RSI (14)</th>
+                                            <th>Urteil & Aktion</th>
+                                            <th>Auswahl</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="copilotRankingBody">
+                                        <!-- Populated dynamically by copilot_engine.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
             </div> <!-- /#copilotPanel -->
@@ -539,6 +600,57 @@
                 <!-- Dynamic Assessment Result Output -->
                 <div id="checkerResultBox" class="copilot-checker-result">
                     <!-- Populated dynamically by copilot_engine.js -->
+                </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- 💬 DEDICATED PROMINENT KI-ASSISTENT STUDIO (LIVE BERATER)  -->
+            <!-- ========================================================= -->
+            <div class="ai-embedded-studio-card" id="aiEmbeddedStudio">
+                <div class="ai-studio-header">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <div class="ai-studio-avatar">🤖</div>
+                        <div>
+                            <div class="ai-studio-title">KI-MARKT-ASSISTENT & GUIDE (LIVE BERATUNG)</div>
+                            <div class="ai-studio-subtitle">Fragen Sie nach Kaufempfehlungen, Signalbegründungen oder Stop-Loss-Erklärungen</div>
+                        </div>
+                    </div>
+                    <div class="ai-studio-status-pill">
+                        <span class="ai-studio-status-dot"></span>
+                        <span>BERATUNG ONLINE</span>
+                    </div>
+                </div>
+
+                <!-- Quick Prompt Chips -->
+                <div class="ai-quick-chips-wrapper" id="aiEmbeddedQuickChips">
+                    <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">🎯 Welchen Coin heute kaufen?</button>
+                    <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">📖 Wie nutze ich diese Seite?</button>
+                    <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">🛡️ Wie schützt der Stop-Loss?</button>
+                    <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">💶 1.000 € investieren</button>
+                    <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">📐 Golden Pocket (61.8%)</button>
+                    <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">🔍 Sicherheits-Check</button>
+                </div>
+
+                <!-- Embedded Message Stream -->
+                <div class="ai-embedded-stream" id="aiEmbeddedMessageStream"></div>
+
+                <!-- Typing indicator -->
+                <div id="aiEmbeddedTypingIndicator" class="ai-typing-box" style="display: none;">
+                    <span class="ai-typing-dot"></span>
+                    <span class="ai-typing-dot"></span>
+                    <span class="ai-typing-dot"></span>
+                    <span style="font-size: 0.78rem; color: #57534e; margin-left: 6px;">KI analysiert Marktdaten...</span>
+                </div>
+
+                <!-- Input bar -->
+                <div class="ai-embedded-footer">
+                    <input type="text" id="aiEmbeddedChatInput" class="ai-chat-input" placeholder="Frage an den KI-Assistenten stellen (z.B. Welchen Coin jetzt kaufen?)...">
+                    <button type="button" id="btnAiEmbeddedSend" class="ai-send-btn">
+                        <span>Fragen</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -946,95 +1058,101 @@
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step6ProTools" style="margin-bottom: 2rem;">
             
-            <div class="flow-step-header" style="border-left-color: var(--text-faint);">
-                <div class="flow-step-badge-wrap">
-                    <span class="flow-step-pill" style="background: rgba(255,255,255,0.08); color: var(--text-muted);">PROFI-TOOLS</span>
-                    <h2 class="flow-step-title">⚙️ CUSTOM ALERTS & MODEL CONTEXT PROTOCOL (MCP)</h2>
-                </div>
-                <div class="flow-step-desc">
-                    Erstellen Sie eigene Multi-Bedingungs-Alarme (z.B. "Fibonacci 61.8% AND Sentiment > 0.3") oder nutzen Sie die standardisierte MCP-Agenten-Schnittstelle (<code>/api/mcp</code>).
-                </div>
-            </div>
+            <details class="editorial-accordion" id="detailsProTools">
+                <summary>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="flow-step-pill" style="background: rgba(0, 109, 91, 0.10); color: #006d5b;">OPTIONAL</span>
+                        <strong style="color: #121820; font-size: 0.95rem;">⚙️ Erweiterte Profi-Tools & Blockworks MCP-Server (Entwickler & API)</strong>
+                    </div>
+                    <span class="accordion-chevron">▾ Klick zum Ausklappen</span>
+                </summary>
 
-            <div class="decision-grid-2col">
-                <!-- Custom Alert Builder -->
-                <div class="panel" id="bwAlertBuilder">
-                    <div class="section-eyebrow">// REALTIME RULE BUILDER</div>
-                    <div class="panel-header">
-                        <h3 class="panel-title">CUSTOM MULTI-CONDITION ALERT BUILDER</h3>
+                <div class="editorial-accordion-content">
+                    <div class="flow-step-desc" style="margin-bottom: 20px;">
+                        Erstellen Sie eigene Multi-Bedingungs-Alarme (z.B. "Fibonacci 61.8% AND Sentiment > 0.3") oder nutzen Sie die standardisierte MCP-Agenten-Schnittstelle (<code>/api/mcp</code>).
                     </div>
 
-                    <div class="bw-alert-builder-box">
-                        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; margin-bottom: 8px;">
-                            <input type="text" id="bwAlertNameInput" placeholder="Alert-Name (z.B. BTC Golden Dip)" class="bw-alert-input">
-                            <div style="display: flex; gap: 4px;">
-                                <select id="bwAlertAssetSelect" class="bw-alert-select">
-                                    <option value="BTC">BTC</option>
-                                    <option value="ETH">ETH</option>
-                                    <option value="SOL">SOL</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="SUI">SUI</option>
-                                    <option value="XRP">XRP</option>
-                                    <option value="LINK">LINK</option>
-                                    <option value="AVAX">AVAX</option>
-                                    <option value="BNB">BNB</option>
-                                </select>
-                                <select id="bwAlertCombineSelect" class="bw-alert-select" title="Logische Verknüpfung">
-                                    <option value="AND">AND</option>
-                                    <option value="OR">OR</option>
-                                </select>
+                    <div class="decision-grid-2col">
+                        <!-- Custom Alert Builder -->
+                        <div class="panel" id="bwAlertBuilder">
+                            <div class="section-eyebrow">// REALTIME RULE BUILDER</div>
+                            <div class="panel-header">
+                                <h3 class="panel-title">CUSTOM MULTI-CONDITION ALERT BUILDER</h3>
+                            </div>
+
+                            <div class="bw-alert-builder-box">
+                                <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                    <input type="text" id="bwAlertNameInput" placeholder="Alert-Name (z.B. BTC Golden Dip)" class="bw-alert-input">
+                                    <div style="display: flex; gap: 4px;">
+                                        <select id="bwAlertAssetSelect" class="bw-alert-select">
+                                            <option value="BTC">BTC</option>
+                                            <option value="ETH">ETH</option>
+                                            <option value="SOL">SOL</option>
+                                            <option value="INJ">INJ</option>
+                                            <option value="SUI">SUI</option>
+                                            <option value="XRP">XRP</option>
+                                            <option value="LINK">LINK</option>
+                                            <option value="AVAX">AVAX</option>
+                                            <option value="BNB">BNB</option>
+                                        </select>
+                                        <select id="bwAlertCombineSelect" class="bw-alert-select" title="Logische Verknüpfung">
+                                            <option value="AND">AND</option>
+                                            <option value="OR">OR</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="bw-alert-cond-box">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                        <span style="font-size: 0.72rem; color: var(--text-faint); font-family: 'JetBrains Mono', monospace;">BEDINGUNGEN:</span>
+                                        <button type="button" id="btnBwAddAlertCond" class="bw-add-cond-btn">+ Bedingung</button>
+                                    </div>
+                                    <div id="bwAlertConditionsList"></div>
+                                </div>
+
+                                <div id="bwAlertNaturalPreview" class="bw-alert-preview-bar">
+                                    📝 BTC: Fib-Level kreuzt unter 0.618 AND Sentiment-Score &gt; 0.3
+                                </div>
+
+                                <button type="button" id="btnBwSaveCustomAlert" class="bw-save-alert-btn">
+                                    💾 Multi-Condition Alert speichern
+                                </button>
+
+                                <div id="bwSavedCustomAlertsList" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;"></div>
+                            </div>
+
+                            <div class="alert-feed" id="alertFeed" style="margin-top: 10px; max-height: 120px; overflow-y: auto;">
+                                <div class="alert-item">
+                                    <div><strong>System Alert:</strong> BTC nähert sich 61.8% Golden Pocket Support</div>
+                                    <div class="alert-time">Gerade eben</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="bw-alert-cond-box">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-size: 0.72rem; color: var(--text-faint); font-family: 'JetBrains Mono', monospace;">BEDINGUNGEN:</span>
-                                <button type="button" id="btnBwAddAlertCond" class="bw-add-cond-btn">+ Bedingung</button>
+                        <!-- MCP Server Client -->
+                        <div class="panel" id="bwMcpCard">
+                            <div class="section-eyebrow">// MODEL CONTEXT PROTOCOL (/api/mcp)</div>
+                            <div class="panel-header">
+                                <h3 class="panel-title">🤖 MCP-SERVER & AGENTEN-SCHNITTSTELLE</h3>
+                                <span class="status-badge badge-support">MCP v2.0 Aktiv</span>
                             </div>
-                            <div id="bwAlertConditionsList"></div>
-                        </div>
 
-                        <div id="bwAlertNaturalPreview" class="bw-alert-preview-bar">
-                            📝 BTC: Fib-Level kreuzt unter 0.618 AND Sentiment-Score &gt; 0.3
-                        </div>
+                            <p style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 10px;">
+                                Testen Sie die 3 integrierten MCP-Tools für autonome KI-Agenten:
+                            </p>
 
-                        <button type="button" id="btnBwSaveCustomAlert" class="bw-save-alert-btn">
-                            💾 Multi-Condition Alert speichern
-                        </button>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                                <button type="button" class="bw-mcp-tool-btn active" data-mcp-tool="fib_compare_assets">1. fib_compare_assets (Matrix)</button>
+                                <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_analyze_asset">2. fib_analyze_asset (<span class="bw-active-asset-label">BTC</span>)</button>
+                                <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_search_research">3. fib_search_research</button>
+                            </div>
 
-                        <div id="bwSavedCustomAlertsList" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;"></div>
-                    </div>
-
-                    <div class="alert-feed" id="alertFeed" style="margin-top: 10px; max-height: 120px; overflow-y: auto;">
-                        <div class="alert-item">
-                            <div><strong>System Alert:</strong> BTC nähert sich 61.8% Golden Pocket Support</div>
-                            <div class="alert-time">Gerade eben</div>
+                            <div id="bwMcpCompareTableWrap" class="fib-table-wrapper" style="display: none; margin-bottom: 8px;"></div>
+                            <pre id="bwMcpOutputBox" class="bw-mcp-pre">// Klicken Sie auf ein MCP-Tool oben, um die Live-Antwort von /api/mcp zu laden...</pre>
                         </div>
                     </div>
                 </div>
-
-                <!-- MCP Server Client -->
-                <div class="panel" id="bwMcpCard">
-                    <div class="section-eyebrow">// MODEL CONTEXT PROTOCOL (/api/mcp)</div>
-                    <div class="panel-header">
-                        <h3 class="panel-title">🤖 MCP-SERVER & AGENTEN-SCHNITTSTELLE</h3>
-                        <span class="status-badge badge-support">MCP v2.0 Aktiv</span>
-                    </div>
-
-                    <p style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 10px;">
-                        Testen Sie die 3 integrierten MCP-Tools für autonome KI-Agenten:
-                    </p>
-
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
-                        <button type="button" class="bw-mcp-tool-btn active" data-mcp-tool="fib_compare_assets">1. fib_compare_assets (Matrix)</button>
-                        <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_analyze_asset">2. fib_analyze_asset (<span class="bw-active-asset-label">BTC</span>)</button>
-                        <button type="button" class="bw-mcp-tool-btn" data-mcp-tool="fib_search_research">3. fib_search_research</button>
-                    </div>
-
-                    <div id="bwMcpCompareTableWrap" class="fib-table-wrapper" style="display: none; margin-bottom: 8px;"></div>
-                    <pre id="bwMcpOutputBox" class="bw-mcp-pre">// Klicken Sie auf ein MCP-Tool oben, um die Live-Antwort von /api/mcp zu laden...</pre>
-                </div>
-            </div>
+            </details>
 
             <!-- Legacy container hooks for zero-breakage -->
             <div style="display: none;">
