@@ -187,11 +187,21 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         parsed_url = urllib.parse.urlparse(self.path)
         clean_path = parsed_url.path
         content_len = int(self.headers.get('Content-Length', 0))
-        body_raw = self.rfile.read(content_len).decode('utf-8') if content_len > 0 else '{}'
+        try:
+            body_raw = self.rfile.read(content_len).decode('utf-8', errors='replace') if content_len > 0 else '{}'
+        except Exception:
+            body_raw = '{}'
         try:
             body = json.loads(body_raw)
         except Exception:
             body = {}
+
+        if clean_path in ['/api/ai/assistant', '/api/chat']:
+            query = body.get('message', body.get('query', ''))
+            asset = body.get('asset', 'BTCUSDT')
+            curr = body.get('currency', 'EUR')
+            self.send_json_response(json.dumps(data_hub.chat_assistant_ai(query, asset, curr)).encode('utf-8'))
+            return
 
         if clean_path.startswith('/api/ai/'):
             asset = body.get('asset', 'BTCUSDT')

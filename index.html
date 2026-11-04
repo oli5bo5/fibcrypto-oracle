@@ -52,6 +52,10 @@
                 <span>HYDRO STAKING</span>
                 <span class="nav-badge">16.4% APR</span>
             </button>
+            <button type="button" class="nav-tab nav-tab-ai-chat" id="btnHeaderAiAssistant" onclick="window.AiAssistant ? window.AiAssistant.open() : null" style="border-color: rgba(234, 179, 8, 0.45); color: #eab308;">
+                <span>💬 6. KI-ASSISTENT</span>
+                <span class="nav-badge" style="background: rgba(234, 179, 8, 0.2); color: #eab308;">HILFE</span>
+            </button>
         </nav>
 
         <div class="header-controls">
@@ -105,6 +109,24 @@
                 <div class="flow-step-desc">
                     <strong>Wofür ist dieser Teil gut?</strong> Schnelle Orientierung ohne langes Suchen: Unser Algorithmus scannt die 16 führenden Blockchains in Echtzeit nach Trendstärke, Fibonacci Golden-Pocket-Einstiegen (61.8%), Wal-Akkumulation und Risiko. Hier sehen Sie die <strong>stärksten Opportunitäten des Tages</strong>.
                 </div>
+            </div>
+
+            <!-- AI Assistant Onboarding Helper Banner -->
+            <div class="ai-assistant-banner" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="ai-banner-avatar">🤖</div>
+                    <div>
+                        <div style="font-weight: 800; color: #ffffff; font-size: 0.9rem;">
+                            Neu auf der Plattform oder Fragen zum Kauf?
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--text-subtle); margin-top: 2px;">
+                            Unser interaktiver KI-Assistent erklärt Ihnen in 30 Sekunden alle Funktionen, wie der Stop-Loss Ihr Kapital schützt und welcher Coin heute das beste Setup hat.
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-ai-banner-open">
+                    💬 KI-Erklärer fragen →
+                </button>
             </div>
 
             <!-- Copilot Panel Wrapper (Kept for copilot_engine.js compatibility) -->
@@ -619,14 +641,15 @@
                         <div class="panel-header" style="margin-bottom: 8px;">
                             <h3 class="panel-title">FIBONACCI-LEVELS IM DETAIL</h3>
                         </div>
-                        <div class="fib-table-wrapper" style="max-height: 200px; overflow-y: auto;">
+                        <div class="fib-table-wrapper" style="max-height: 220px; overflow-y: auto;">
                             <table class="fib-table">
                                 <thead>
                                     <tr>
-                                        <th>Level</th>
-                                        <th>Preis</th>
-                                        <th>Abstand</th>
-                                        <th>Status</th>
+                                        <th style="min-width: 110px;">Level</th>
+                                        <th style="min-width: 100px;">Preis</th>
+                                        <th style="min-width: 85px;">Abstand</th>
+                                        <th style="min-width: 105px;">Status</th>
+                                        <th style="min-width: 115px;">Typ</th>
                                     </tr>
                                 </thead>
                                 <tbody id="fibTableBody">
@@ -889,13 +912,14 @@
                         <table class="fib-table">
                             <thead>
                                 <tr>
-                                    <th>Datum</th>
-                                    <th>Signal</th>
-                                    <th>Konfidenz</th>
-                                    <th>Einstieg</th>
-                                    <th>Ergebnis</th>
-                                    <th>Ertrag</th>
-                                    <th>Status</th>
+                                    <th style="min-width: 110px;">Datum / Kerze</th>
+                                    <th style="min-width: 110px;">Signal</th>
+                                    <th style="min-width: 90px;">KI-Konfidenz</th>
+                                    <th style="min-width: 95px;">Einstieg</th>
+                                    <th style="min-width: 105px;">Stop-Loss (Schutz)</th>
+                                    <th style="min-width: 105px;">Kursziel (TP)</th>
+                                    <th style="min-width: 85px;">Ertrag</th>
+                                    <th style="min-width: 120px;">Ergebnis / Status</th>
                                 </tr>
                             </thead>
                             <tbody id="historyTableBody">
@@ -1359,5 +1383,6 @@
     <script src="copilot_engine.js"></script>
     <script src="blockworks_intel.js"></script>
     <script src="app.js"></script>
+    <script src="ai_assistant.js"></script>
 </body>
 </html>

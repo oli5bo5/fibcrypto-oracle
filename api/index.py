@@ -256,7 +256,10 @@ class handler(BaseHTTPRequestHandler):
         route = qs.get('__route__', [''])[0]
 
         content_len = int(self.headers.get('Content-Length', 0))
-        body_raw = self.rfile.read(content_len).decode('utf-8') if content_len > 0 else '{}'
+        try:
+            body_raw = self.rfile.read(content_len).decode('utf-8', errors='replace') if content_len > 0 else '{}'
+        except Exception:
+            body_raw = '{}'
         try:
             body = json.loads(body_raw)
         except Exception:
@@ -273,6 +276,13 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(resp_bytes)
 
         try:
+            if 'ai/assistant' in route or '/api/ai/assistant' in path or '/api/chat' in path:
+                query = body.get('message', body.get('query', ''))
+                asset = body.get('asset', 'BTCUSDT')
+                curr = body.get('currency', 'EUR')
+                send_json(data_hub.chat_assistant_ai(query, asset, curr))
+                return
+
             if 'ai/explain-signal' in route or '/api/ai/' in path:
                 asset = body.get('asset', 'BTCUSDT')
                 signal_info = body.get('signal', {})
