@@ -6613,3 +6613,543 @@ footer.app-footer span {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ========================================================================= */
+/* === USER REVISION: CLEAN ARIAL TYPOGRAPHY & ZERO EMOJIS OVERHAUL      === */
+/* ========================================================================= */
+
+/* Global Arial / System Sans Typography */
+*, html, body, button, input, select, textarea, table, th, td {
+    font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif !important;
+}
+
+/* 1. TWO-TIER APP HEADER (DOPPELLEISTE - KEIN UMBRECHEN) */
+.app-header-two-tier {
+    background: #dfd8ce !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10) !important;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.header-top-tier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 32px 10px 32px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.brand-monogram {
+    background: #006d5b;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 0.95rem;
+    padding: 4px 9px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-right: 8px;
+    letter-spacing: 0.05em;
+}
+
+.header-top-tier .brand-title {
+    font-size: 1.25rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.04em !important;
+    color: #0f172a !important;
+    line-height: 1 !important;
+}
+
+.header-top-tier .brand-tag {
+    font-size: 0.70rem !important;
+    font-weight: 700 !important;
+    color: #475569 !important;
+    letter-spacing: 0.05em !important;
+    margin-top: 2px;
+}
+
+.header-nav-tier {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 32px;
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.50);
+}
+
+.header-nav-tier .nav-tab {
+    background: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 9999px !important;
+    padding: 7px 18px !important;
+    font-size: 0.80rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.03em !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-nav-tier .nav-tab:hover {
+    background: #f8fafc !important;
+    border-color: #006d5b !important;
+    color: #006d5b !important;
+}
+
+.header-nav-tier .nav-tab.active {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    border-color: #006d5b !important;
+    box-shadow: 0 4px 12px rgba(0, 109, 91, 0.25) !important;
+}
+
+.nav-tab-num {
+    background: rgba(0, 0, 0, 0.08);
+    color: #334155;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.70rem;
+    font-weight: 900;
+}
+
+.nav-tab.active .nav-tab-num {
+    background: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+}
+
+.nav-badge-live {
+    background: #006d5b;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 9999px;
+    margin-left: 4px;
+}
+
+/* 2. DESKTOP TWO-COLUMN EDITORIAL LAYOUT WITH RIGHT-SIDE STICKY AI DOCK */
+.dashboard-editorial-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 28px;
+    align-items: start;
+    width: 100%;
+}
+
+.sidebar-sticky-dock {
+    position: sticky;
+    top: 130px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.sidebar-sticky-dock .ai-embedded-studio-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+    margin: 0 !important;
+}
+
+.sidebar-sticky-dock .ai-studio-title {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    letter-spacing: 0.02em !important;
+}
+
+.sidebar-sticky-dock .ai-studio-subtitle {
+    color: #475569 !important;
+    font-size: 0.78rem !important;
+}
+
+.sidebar-sticky-dock .ai-chip {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    padding: 6px 14px !important;
+}
+
+.sidebar-sticky-dock .ai-chip:hover {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    border-color: #006d5b !important;
+}
+
+.sidebar-sticky-dock .ai-embedded-stream {
+    max-height: 280px !important;
+}
+
+/* 3. STEP 1 CONTRAST FIXES (NO WHITE TEXT ON WHITE) & FILTER REDESIGN */
+.ai-assistant-banner {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 18px !important;
+    padding: 20px 24px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.ai-banner-badge {
+    background: #006d5b;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    letter-spacing: 0.06em;
+}
+
+.ai-banner-heading {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    font-size: 0.96rem !important;
+}
+
+.ai-banner-subtext {
+    color: #475569 !important;
+    font-size: 0.84rem !important;
+    line-height: 1.5 !important;
+    margin-top: 2px;
+}
+
+.btn-ai-banner-open {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    border-radius: 9999px !important;
+    padding: 10px 20px !important;
+    font-weight: 800 !important;
+    font-size: 0.82rem !important;
+    border: none !important;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-ai-banner-open:hover {
+    background: #005446 !important;
+}
+
+/* Top 3 Picks Cards with High Contrast */
+.copilot-pick-card,
+.copilot-top-pick-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 18px !important;
+    padding: 24px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+.pick-coin-ticker {
+    color: #0f172a !important;
+    font-weight: 900 !important;
+    font-size: 1.45rem !important;
+}
+
+.pick-coin-name {
+    color: #64748b !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+}
+
+.pick-price-val {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    font-size: 1.25rem !important;
+}
+
+.pick-reasoning {
+    color: #334155 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+}
+
+.pick-metrics-row {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    margin: 12px 0 16px 0 !important;
+}
+
+.psm-label {
+    color: #64748b !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+}
+
+.psm-val {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+
+.btn-copilot-action {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    border-radius: 9999px !important;
+    padding: 11px 20px !important;
+    font-weight: 800 !important;
+    font-size: 0.82rem !important;
+    border: none !important;
+    cursor: pointer;
+    width: 100% !important;
+    text-align: center !important;
+    transition: all 0.2s ease;
+}
+
+.btn-copilot-action:hover {
+    background: #005446 !important;
+}
+
+/* Strategy Filter Buttons Overhaul */
+.copilot-filters-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.copilot-filter-btn {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+    border-radius: 9999px !important;
+    padding: 8px 18px !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copilot-filter-btn:hover {
+    border-color: #006d5b !important;
+    color: #006d5b !important;
+    background: #f8fafc !important;
+}
+
+.copilot-filter-btn.active {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    border-color: #006d5b !important;
+    box-shadow: 0 4px 12px rgba(0, 109, 91, 0.25) !important;
+}
+
+/* Direct Coin Chips Overhaul */
+.asset-chips-container .asset-btn {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    font-weight: 800 !important;
+    font-size: 0.84rem !important;
+    border-radius: 10px !important;
+    padding: 8px 16px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.asset-chips-container .asset-btn:hover {
+    border-color: #006d5b !important;
+    color: #006d5b !important;
+    background: #f8fafc !important;
+}
+
+.asset-chips-container .asset-btn.active {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    border-color: #0f172a !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25) !important;
+}
+
+/* 4. DUNKELLILA INTELLIGENCE COCKPIT (SIGNAL MATRIX & BLOCKWORKS AI ANALYST) */
+.oracle-box-dunkellila,
+.bw-ai-explainer-dunkellila {
+    background: linear-gradient(155deg, #150d26 0%, #1e1136 100%) !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+    border-radius: 24px !important;
+    padding: 32px !important;
+    box-shadow: 0 20px 48px -12px rgba(15, 8, 28, 0.45) !important;
+    color: #f1f5f9 !important;
+}
+
+.oracle-box-dunkellila .section-eyebrow,
+.bw-ai-explainer-dunkellila .bw-ai-eyebrow {
+    color: #c084fc !important;
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+}
+
+.oracle-box-dunkellila .oracle-signal-badge {
+    background: #006d5b !important;
+    color: #ffffff !important;
+    font-size: 1.55rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.05em !important;
+    padding: 10px 24px !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 16px rgba(0, 109, 91, 0.4) !important;
+}
+
+.oracle-box-dunkellila .crv-badge-highlight {
+    background: rgba(168, 85, 247, 0.20) !important;
+    border: 1px solid rgba(168, 85, 247, 0.50) !important;
+    color: #f3e8ff !important;
+    font-weight: 800 !important;
+    font-size: 0.85rem !important;
+    padding: 6px 14px !important;
+    border-radius: 9999px !important;
+}
+
+/* 4 Concrete Execution Marks in Dunkellila */
+.oracle-box-dunkellila .setup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.oracle-box-dunkellila .setup-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 14px !important;
+    padding: 16px !important;
+}
+
+.oracle-box-dunkellila .setup-card.card-entry {
+    border-left: 4px solid #f59e0b !important;
+}
+.oracle-box-dunkellila .setup-card.card-entry .val {
+    color: #fbbf24 !important;
+}
+
+.oracle-box-dunkellila .setup-card.card-stoploss {
+    background: rgba(239, 68, 68, 0.14) !important;
+    border-left: 4px solid #ef4444 !important;
+}
+.oracle-box-dunkellila .setup-card.card-stoploss .val {
+    color: #f87171 !important;
+}
+
+.oracle-box-dunkellila .setup-card.card-tp1 {
+    background: rgba(34, 197, 94, 0.10) !important;
+    border-left: 4px solid #22c55e !important;
+}
+.oracle-box-dunkellila .setup-card.card-tp1 .val {
+    color: #4ade80 !important;
+}
+
+.oracle-box-dunkellila .setup-card.card-tp2 {
+    background: rgba(56, 189, 248, 0.10) !important;
+    border-left: 4px solid #38bdf8 !important;
+}
+.oracle-box-dunkellila .setup-card.card-tp2 .val {
+    color: #38bdf8 !important;
+}
+
+.oracle-box-dunkellila .setup-card .label {
+    color: #e2e8f0 !important;
+    font-size: 0.80rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 4px;
+}
+
+.oracle-box-dunkellila .setup-card .val {
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
+}
+
+/* AI Senior Analyst in Dunkellila */
+.bw-ai-explainer-dunkellila .bw-ai-title {
+    color: #ffffff !important;
+    font-size: 1.35rem !important;
+    font-weight: 900 !important;
+    margin: 8px 0 16px 0 !important;
+}
+
+.bw-ai-point {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(168, 85, 247, 0.25) !important;
+    border-radius: 14px !important;
+    padding: 16px 20px !important;
+    margin-bottom: 12px !important;
+}
+
+.bw-ai-point-title {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 6px !important;
+}
+
+.bw-ai-point-body {
+    font-size: 0.86rem !important;
+    color: #f1f5f9 !important;
+    line-height: 1.6 !important;
+}
+
+.bw-ai-src-pill {
+    background: rgba(168, 85, 247, 0.18) !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+    color: #f3e8ff !important;
+    font-size: 0.76rem !important;
+    padding: 5px 12px !important;
+    border-radius: 9999px !important;
+}
+
+/* 5. HERO SECTION & PROPORTIONS IN ARIAL */
+.editorial-hero-title {
+    font-size: 3.8rem !important;
+    font-weight: 900 !important;
+    line-height: 1.0 !important;
+    letter-spacing: -0.02em !important;
+    color: #0f172a !important;
+}
+
+.editorial-stat-card-top .stat-card-huge-val {
+    font-size: 3.6rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.02em !important;
+}
+
+.editorial-stat-card-bottom .stat-card-huge-val-dark {
+    font-size: 3.6rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.02em !important;
+    color: #0f172a !important;
+}
+
+.editorial-btn-emerald {
+    font-size: 0.88rem !important;
+    font-weight: 900 !important;
+}
+
+/* Responsive Stacking */
+@media (max-width: 1100px) {
+    .dashboard-editorial-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-sticky-dock {
+        position: static;
+        max-height: none;
+    }
+}

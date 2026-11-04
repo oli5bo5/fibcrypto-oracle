@@ -8,79 +8,80 @@
     <!-- Fonts & Meta -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Clean Arial & System Sans Fonts -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- ================================================================= -->
-    <!-- APP HEADER & UNIFIED DECISION WORKFLOW NAVIGATION                 -->
+    <!-- APP HEADER (ZWEISTUFIGE DOPPELLEISTE - SAUBER GETRENNT)           -->
     <!-- ================================================================= -->
-    <header class="app-header">
-        <div class="brand-container">
-            <div class="logo-cluster">
-                <span class="phi-symbol">Φ</span>
+    <header class="app-header-two-tier">
+        <!-- Tier 1: Brand & Globale Markt-Werkzeuge -->
+        <div class="header-top-tier">
+            <div class="brand-container">
+                <span class="brand-monogram">FC</span>
                 <div>
                     <span class="brand-title">FIBCRYPTO / ORACLE</span>
-                    <span class="brand-tag">v15.0 • BLOCKWORKS INTELLIGENCE</span>
+                    <span class="brand-tag">v15.0 • BLOCKWORKS MULTI-ASSET INTELLIGENCE</span>
+                </div>
+            </div>
+
+            <div class="header-controls">
+                <!-- Currency Switcher Toggle ($ USD / € EUR) -->
+                <button class="currency-btn" id="currencyToggleBtn" data-tooltip="Währung wechseln: Umschalten zwischen Dollar ($) und Euro (€)">
+                    <span class="currency-label-text">WÄHRUNG:</span>
+                    <span id="currUsdLabel" class="active-curr">$ USD</span>
+                    <span class="currency-divider">|</span>
+                    <span id="currEurLabel" class="inactive-curr">€ EUR</span>
+                </button>
+
+                <!-- Timeframe Controls -->
+                <div class="timeframe-selector" id="timeframeSelector">
+                    <button class="tf-btn" data-tf="1h" data-tooltip="1-Stunden Kerzen für kurzfristige Swings">1h</button>
+                    <button class="tf-btn active" data-tf="4h" data-tooltip="4-Stunden Kerzen (Standard)">4h</button>
+                    <button class="tf-btn" data-tf="1d" data-tooltip="Tageskerzen für Trend-Analyse">1d</button>
+                </div>
+
+                <!-- Status Indicator -->
+                <div class="status-pill" data-tooltip="Live-Verbindung zum Markt-Datenstream (OKX / Binance)">
+                    <span class="pulse-dot"></span>
+                    <span id="connectionStatus">MÄRKTE LIVE</span>
                 </div>
             </div>
         </div>
 
-        <!-- 5-Step Guided Navigation Switcher -->
-        <nav class="app-nav">
+        <!-- Tier 2: Eigene Navigationsleiste (Kein Umbrechen) -->
+        <nav class="header-nav-tier app-nav">
             <button type="button" class="nav-tab active" id="tabNavRadar" onclick="window.scrollToDashboardSection('step1KaufRadar')">
-                <span class="nav-tab-dot"></span>
-                <span>1. 🎯 KAUF-RADAR</span>
+                <span class="nav-tab-num">1</span>
+                <span>KAUF-RADAR</span>
             </button>
             <button type="button" class="nav-tab" id="tabNavDecision" onclick="window.scrollToDashboardSection('step2Entscheidung')">
-                <span>2. ⚡ ENTSCHEIDUNG & AKTION</span>
+                <span class="nav-tab-num">2</span>
+                <span>ENTSCHEIDUNG &amp; AKTION</span>
             </button>
             <button type="button" class="nav-tab" id="tabNavChart" onclick="window.scrollToDashboardSection('step3Chart')">
-                <span>3. 📊 CHART & ZONEN</span>
+                <span class="nav-tab-num">3</span>
+                <span>CHART &amp; ZONEN</span>
             </button>
             <button type="button" class="nav-tab" id="tabNavSafety" onclick="window.scrollToDashboardSection('step4Fundamentals')">
-                <span>4. 🛡️ SICHERHEITS-CHECK</span>
+                <span class="nav-tab-num">4</span>
+                <span>SICHERHEITS-CHECK</span>
             </button>
             <button type="button" class="nav-tab" id="tabNavBacktest" onclick="window.scrollToDashboardSection('step5Backtest')">
-                <span>5. 💰 RECHNER & BACKTEST</span>
+                <span class="nav-tab-num">5</span>
+                <span>RECHNER &amp; BACKTEST</span>
             </button>
             <button type="button" class="nav-tab" id="tabHydroBtn" data-tooltip="Injective Liquid Staking: INJ zu hINJ staken mit 16.42% APR">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align: middle;">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-                </svg>
                 <span>HYDRO STAKING</span>
                 <span class="nav-badge">16.4% APR</span>
             </button>
-            <button type="button" class="nav-tab nav-tab-ai-chat" id="btnHeaderAiAssistant" onclick="window.AiAssistant ? window.AiAssistant.open() : null" style="border-color: rgba(234, 179, 8, 0.45); color: #eab308;">
-                <span>💬 6. KI-ASSISTENT</span>
-                <span class="nav-badge" style="background: rgba(234, 179, 8, 0.2); color: #eab308;">HILFE</span>
+            <button type="button" class="nav-tab nav-tab-ai-chat" id="btnHeaderAiAssistant" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
+                <span>6. KI-ASSISTENT</span>
+                <span class="nav-badge-live">ONLINE</span>
             </button>
         </nav>
-
-        <div class="header-controls">
-            <!-- Currency Switcher Toggle ($ USD / € EUR) -->
-            <button class="currency-btn" id="currencyToggleBtn" data-tooltip="Währung wechseln: Umschalten zwischen Dollar ($) und Euro (€)">
-                <span class="currency-pill-icon">💱</span>
-                <span class="currency-label-text">Währung:</span>
-                <span id="currUsdLabel" class="active-curr">$ USD</span>
-                <span class="currency-divider">⇄</span>
-                <span id="currEurLabel" class="inactive-curr">€ EUR</span>
-            </button>
-
-            <!-- Timeframe Controls -->
-            <div class="timeframe-selector" id="timeframeSelector">
-                <button class="tf-btn" data-tf="1h" data-tooltip="1-Stunden Kerzen für kurzfristige Swings">1h</button>
-                <button class="tf-btn active" data-tf="4h" data-tooltip="4-Stunden Kerzen (Standard für Fibonacci-Kombinationen)">4h</button>
-                <button class="tf-btn" data-tf="1d" data-tooltip="Tageskerzen für Trend-Analyse">1d</button>
-            </div>
-
-            <!-- Status Indicator -->
-            <div class="status-pill" data-tooltip="Live-Verbindung zum Markt-Datenstream (OKX / Kraken / Binance)">
-                <div class="pulse-dot"></div>
-                <span id="connectionStatus">● MÄRKTE LIVE</span>
-            </div>
-        </div>
     </header>
 
     <!-- Hidden compatibility buttons for JS references -->
@@ -95,6 +96,10 @@
     <!-- MARKT-ORAKEL & CHART DASHBOARD VIEW                               -->
     <!-- ================================================================= -->
     <div id="oracleView">
+        <div class="dashboard-editorial-layout">
+            <!-- Main Content Column -->
+            <main class="dashboard-main-column">
+
 
         <!-- ============================================================= -->
         <!-- EDITORIAL HERO SECTION (LORA MINIMALIST DESIGN)               -->
@@ -126,7 +131,7 @@
                         JETZT TOP-PICKS ANSEHEN →
                     </button>
                     <button type="button" class="editorial-btn-outline" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
-                        💬 KI-BERATER FRAGEN
+                        KI-BERATER FRAGEN
                     </button>
                 </div>
             </div>
@@ -150,14 +155,14 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 1: 🎯 KAUF-RADAR // WELCHE KRYPTO JETZT KAUFEN?        -->
+        <!-- SCHRITT 1: KAUF-RADAR // WELCHE KRYPTO JETZT KAUFEN?        -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step1KaufRadar">
             
             <div class="flow-step-header">
                 <div class="flow-step-badge-wrap">
                     <span class="flow-step-pill pill-amber">SCHRITT 1 VON 5</span>
-                    <h2 class="flow-step-title">🎯 KAUF-RADAR // WELCHE KRYPTOWÄHRUNG SOLLTE MAN JETZT KAUFEN?</h2>
+                    <h2 class="flow-step-title">KAUF-RADAR // WELCHE KRYPTOWÄHRUNG SOLLTE MAN JETZT KAUFEN?</h2>
                 </div>
                 <div class="flow-step-desc">
                     <strong>Wofür ist dieser Teil gut?</strong> Schnelle Orientierung ohne langes Suchen: Unser Algorithmus scannt die 16 führenden Blockchains in Echtzeit nach Trendstärke, Fibonacci Golden-Pocket-Einstiegen (61.8%), Wal-Akkumulation und Risiko. Hier sehen Sie die <strong>stärksten Opportunitäten des Tages</strong>.
@@ -169,7 +174,7 @@
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div class="ai-banner-avatar">🤖</div>
                     <div>
-                        <div style="font-weight: 800; color: #ffffff; font-size: 0.9rem;">
+                        <div style="font-weight: 800; color: #0f172a; font-size: 0.95rem;">
                             Neu auf der Plattform oder Fragen zum Kauf?
                         </div>
                         <div style="font-size: 0.78rem; color: var(--text-subtle); margin-top: 2px;">
@@ -178,7 +183,7 @@
                     </div>
                 </div>
                 <button type="button" class="btn-ai-banner-open">
-                    💬 KI-Erklärer fragen →
+                    KI-Erklärer fragen →
                 </button>
             </div>
 
@@ -187,7 +192,7 @@
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="copilot-live-pill" id="copilotScanStatus">● LIVE MARKT-SCAN AKTIV</span>
+                        <span class="copilot-live-pill" id="copilotScanStatus">LIVE MARKT-SCAN AKTIV</span>
                         <span id="copilotLastUpdated" class="copilot-time-label" style="font-size: 0.75rem; color: var(--text-faint);">Lädt...</span>
                     </div>
                     <button id="btnRefreshCopilotScan" class="copilot-btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">
@@ -209,19 +214,19 @@
                         <div class="copilot-filters-group">
                             <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); margin-right: 6px; text-transform: uppercase;">Filter:</span>
                             <button class="copilot-filter-btn active" data-filter="all">Alle Märkte (16)</button>
-                            <button class="copilot-filter-btn" data-filter="conservative">💎 Konservativ (BTC/ETH)</button>
-                            <button class="copilot-filter-btn" data-filter="momentum">⚡ Momentum & Trend</button>
-                            <button class="copilot-filter-btn" data-filter="yield">💧 Passives Einkommen (Staking)</button>
-                            <button class="copilot-filter-btn" data-filter="dip">🎯 Dip-Kauf / Rebound</button>
+                            <button class="copilot-filter-btn" data-filter="conservative">Konservativ (BTC/ETH)</button>
+                            <button class="copilot-filter-btn" data-filter="momentum">Momentum & Trend</button>
+                            <button class="copilot-filter-btn" data-filter="yield">Passives Einkommen (Staking)</button>
+                            <button class="copilot-filter-btn" data-filter="dip">Dip-Kauf / Rebound</button>
                         </div>
 
                         <!-- Grid & Watchlist Expanders -->
                         <div style="display: flex; gap: 8px;">
                             <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwAssetGrid">
-                                <span>📊 Multi-Asset Matrix (16)</span>
+                                <span>Multi-Asset Matrix (16)</span>
                             </button>
                             <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwWatchlist">
-                                <span>⭐ Meine Watchlist (<span id="bwWatchlistBtnCount">4</span>)</span>
+                                <span>Meine Watchlist (<span id="bwWatchlistBtnCount">4</span>)</span>
                             </button>
                         </div>
                     </div>
@@ -304,7 +309,7 @@
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <span style="color: #eab308; font-size: 1rem;">★</span>
-                                    <strong style="font-size: 0.88rem; color: #fff;">Meine Favoriten-Watchlist</strong>
+                                    <strong style="font-size: 0.88rem; color: #0f172a;">Meine Favoriten-Watchlist</strong>
                                     <span id="bwWatchlistCount" class="status-badge">4 Assets</span>
                                 </div>
                                 <div style="display: flex; gap: 6px; align-items: center;">
@@ -319,7 +324,7 @@
                     <!-- Ranking Table (Wrapped in Clean Editorial Accordion) -->
                     <details class="editorial-accordion" id="detailsRankingTable">
                         <summary>
-                            <span>📊 Vollständiges 16-Asset-Ranking & Multi-Faktor-Scores anzeigen</span>
+                            <span>Vollständiges 16-Asset-Ranking & Multi-Faktor-Scores anzeigen</span>
                             <span class="accordion-chevron">▾</span>
                         </summary>
                         <div class="editorial-accordion-content">
@@ -362,14 +367,14 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 2: ⚡ ZENTRALES ENTSCHEIDUNGS-COCKPIT                   -->
+        <!-- SCHRITT 2: ZENTRALES ENTSCHEIDUNGS-COCKPIT                   -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step2Entscheidung">
             
             <div class="flow-step-header" style="border-left-color: var(--accent-orange);">
                 <div class="flow-step-badge-wrap">
                     <span class="flow-step-pill pill-orange">SCHRITT 2 VON 5</span>
-                    <h2 class="flow-step-title">⚡ ENTSCHEIDUNGS-COCKPIT FÜR: <span class="bw-active-asset-label">BTC</span> (<span id="bannerSymbol">BTC/USDT</span>)</h2>
+                    <h2 class="flow-step-title">ENTSCHEIDUNGS-COCKPIT FÜR: <span class="bw-active-asset-label">BTC</span> (<span id="bannerSymbol">BTC/USDT</span>)</h2>
                 </div>
                 <div class="flow-step-desc">
                     <strong>Was soll ich jetzt konkret tun?</strong> Hier erhalten Sie eine verbindliche Handlungsanweisung für das gewählte Asset: Kaufen, Warten oder Gewinne sichern. Inklusive exaktem Einstiegskurs, Stop-Loss zur Absicherung gegen Marktabstürze und realistischen Gewinnzielen.
@@ -408,7 +413,7 @@
             <div class="decision-grid-2col">
                 
                 <!-- Left Column: The Actionable Trade Setup -->
-                <div class="panel oracle-box" id="sectionTradeSetup" style="margin-bottom: 0;">
+                <div class="panel oracle-box oracle-box-dunkellila" id="sectionTradeSetup" style="margin-bottom: 0;">
                     <div class="section-eyebrow">// ORACLE ACTION & SIGNAL MATRIX</div>
                     
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
@@ -447,26 +452,26 @@
 
                         <!-- Warning Banner for invalid setups -->
                         <div id="setupWarningBanner" class="setup-warning-banner" style="display: none;">
-                            <span>⚠️ KEIN AKTIVES KAUF-SETUP (SIGNAL IST NEUTRAL ODER CRV < 1.5)</span>
+                            <span>HINWEIS: KEIN AKTIVES KAUF-SETUP (SIGNAL IST NEUTRAL ODER CRV < 1.5)</span>
                         </div>
 
                         <div class="setup-grid">
-                            <div class="setup-card" style="border-left: 3px solid var(--accent-orange);">
+                            <div class="setup-card card-entry" style="border-left: 4px solid #f59e0b;">
                                 <div class="label">1. Exakter Einstieg (Support)</div>
                                 <div class="val" style="color: var(--accent-orange);" id="tradeEntryVal">$0.00</div>
                                 <div style="font-size: 0.72rem; color: var(--text-faint);" id="calcCoinsVal">0.0000 BTC</div>
                             </div>
-                            <div class="setup-card" style="border-left: 3px solid var(--accent-red);">
+                            <div class="setup-card card-stoploss" style="border-left: 4px solid #ef4444;">
                                 <div class="label">2. Stop-Loss (Kapitalschutz)</div>
                                 <div class="val" style="color: var(--accent-red);" id="tradeStopLossVal">$0.00</div>
                                 <div style="font-size: 0.72rem; color: var(--accent-red);" id="tradeRiskAmount">-$15.00 (-1.5%)</div>
                             </div>
-                            <div class="setup-card" style="border-left: 3px solid var(--accent-green);">
+                            <div class="setup-card card-tp1" style="border-left: 4px solid #22c55e;">
                                 <div class="label">3. Kursziel 1 (Teilgewinn)</div>
                                 <div class="val" style="color: var(--accent-green);" id="tradeTp1Val">$0.00</div>
                                 <div style="font-size: 0.72rem; color: var(--accent-green);" id="tradeProfit1Amount">+$52.00 (+5.2%)</div>
                             </div>
-                            <div class="setup-card" style="border-left: 3px solid var(--accent-cyan);">
+                            <div class="setup-card card-tp2" style="border-left: 4px solid #38bdf8;">
                                 <div class="label">4. Kursziel 2 (Hauptziel)</div>
                                 <div class="val" style="color: var(--accent-cyan);" id="tradeTp2Val">$0.00</div>
                                 <div style="font-size: 0.72rem; color: var(--accent-cyan);" id="tradeProfit2Amount">+$108.00 (+10.8%)</div>
@@ -488,25 +493,25 @@
                     <div class="bw-oracle-meta-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;">
                         <div id="bwSentimentBadgeCard" class="bw-sentiment-badge-card" style="padding: 8px 10px;">
                             <div style="font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase;">Social Sentiment</div>
-                            <div id="bwOracleSentLabel" style="font-weight: 700; font-size: 0.85rem; color: var(--accent-green);">▲ Bullish</div>
+                            <div id="bwOracleSentLabel" style="font-weight: 700; font-size: 0.85rem; color: var(--accent-green);">Bullish</div>
                             <div id="bwOracleSentScore" style="display: none;"></div>
                             <div class="bw-sent-split-track" style="display: none;"><div id="bwOracleSentBullBar"></div></div>
                             <div id="bwOracleSentMentions" style="font-size: 0.68rem; color: var(--text-faint);">64.200 Mentions</div>
                         </div>
                         <div id="bwDdScoreBadgeCard" class="bw-sentiment-badge-card" style="padding: 8px 10px;">
                             <div style="font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase;">Due-Diligence Score</div>
-                            <div id="bwOracleDdVal" style="font-weight: 700; font-size: 0.85rem; color: #eab308;">🏆 88/100</div>
+                            <div id="bwOracleDdVal" style="font-weight: 700; font-size: 0.85rem; color: #eab308;">88/100</div>
                             <div id="bwOracleDdSub" style="font-size: 0.68rem; color: var(--text-faint);">Vollständige Transparenz</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right Column: AI Senior Analyst Signal Reasoning -->
-                <div class="panel bw-ai-explainer-card" id="bwAiExplainerBox" style="margin-bottom: 0;">
+                <div class="panel bw-ai-explainer-card bw-ai-explainer-dunkellila" id="bwAiExplainerBox" style="margin-bottom: 0;">
                     <div class="bw-ai-header">
                         <div>
                             <span class="bw-ai-eyebrow">// BLOCKWORKS AI SENIOR ANALYST • 3-PUNKTE-BEGRÜNDUNG</span>
-                            <h3 class="bw-ai-title">🧠 Warum dieses Signal für <span class="bw-active-asset-label">BTC</span>?</h3>
+                            <h3 class="bw-ai-title">Warum dieses Signal für <span class="bw-active-asset-label">BTC</span>?</h3>
                         </div>
                         <button type="button" id="btnRunAiExplain" class="bw-ai-refresh-btn">↻ Neu analysieren</button>
                     </div>
@@ -530,13 +535,13 @@
             </div> <!-- /.decision-grid-2col -->
 
             <!-- ========================================================= -->
-            <!-- 💰 PERSÖNLICHER INVESTITIONS- & RISIKO-RECHNER            -->
+            <!-- PERSÖNLICHER INVESTITIONS- & RISIKO-RECHNER            -->
             <!-- ========================================================= -->
             <div class="copilot-checker-card" id="copilotCheckerCard" style="margin-top: 1.2rem;">
                 <div class="copilot-checker-header">
                     <div class="checker-title-row">
                         <span class="checker-badge-pill">// KAPITAL-KALKULATION & ECHTZEIT-KAUFBERATUNG</span>
-                        <h3 class="checker-title">💰 Wie viel Geld möchten Sie investieren?</h3>
+                        <h3 class="checker-title">Wie viel Geld möchten Sie investieren?</h3>
                     </div>
                     <p class="checker-subtitle">
                         Geben Sie Ihren gewünschten Betrag ein. Der Rechner berechnet auf den Cent genau Ihr <strong>maximales Verlustrisiko bei Stop-Loss</strong>, Ihren <strong>erwarteten Gewinn bei den Kurszielen</strong> und gibt eine konkrete <strong>Order-Taktik</strong> (z.B. Staffelkauf) aus.
@@ -592,7 +597,7 @@
 
                     <div class="checker-btn-col">
                         <button id="btnRunInvestmentCheck" class="btn-checker-run">
-                            ✦ Betrag berechnen
+                            Betrag berechnen
                         </button>
                     </div>
                 </div>
@@ -604,16 +609,9 @@
             </div>
 
             <!-- ========================================================= -->
-            <!-- 💬 DEDICATED PROMINENT KI-ASSISTENT STUDIO (LIVE BERATER)  -->
+            <!-- DEDICATED PROMINENT KI-ASSISTENT STUDIO (LIVE BERATER)  -->
             <!-- ========================================================= -->
-            <div class="ai-embedded-studio-card" id="aiEmbeddedStudio">
-                <div class="ai-studio-header">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <div class="ai-studio-avatar">🤖</div>
-                        <div>
-                            <div class="ai-studio-title">KI-MARKT-ASSISTENT & GUIDE (LIVE BERATUNG)</div>
-                            <div class="ai-studio-subtitle">Fragen Sie nach Kaufempfehlungen, Signalbegründungen oder Stop-Loss-Erklärungen</div>
-                        </div>
+            
                     </div>
                     <div class="ai-studio-status-pill">
                         <span class="ai-studio-status-dot"></span>
@@ -623,12 +621,12 @@
 
                 <!-- Quick Prompt Chips -->
                 <div class="ai-quick-chips-wrapper" id="aiEmbeddedQuickChips">
-                    <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">🎯 Welchen Coin heute kaufen?</button>
-                    <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">📖 Wie nutze ich diese Seite?</button>
-                    <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">🛡️ Wie schützt der Stop-Loss?</button>
-                    <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">💶 1.000 € investieren</button>
-                    <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">📐 Golden Pocket (61.8%)</button>
-                    <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">🔍 Sicherheits-Check</button>
+                    <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">Welchen Coin heute kaufen?</button>
+                    <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">Wie nutze ich diese Seite?</button>
+                    <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">Wie schützt der Stop-Loss?</button>
+                    <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">1.000 € investieren</button>
+                    <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">Golden Pocket (61.8%)</button>
+                    <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">Sicherheits-Check</button>
                 </div>
 
                 <!-- Embedded Message Stream -->
@@ -657,14 +655,14 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 3: 📊 VISUELLE CHART-BESTÄTIGUNG & TECHNISCHE AMPEL    -->
+        <!-- SCHRITT 3: VISUELLE CHART-BESTÄTIGUNG & TECHNISCHE AMPEL    -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step3Chart">
             
             <div class="flow-step-header" style="border-left-color: var(--accent-green);">
                 <div class="flow-step-badge-wrap">
                     <span class="flow-step-pill pill-green">SCHRITT 3 VON 5</span>
-                    <h2 class="flow-step-title">📊 VISUELLE CHART-BESTÄTIGUNG & TECHNISCHE INDIKATOREN-AMPEL</h2>
+                    <h2 class="flow-step-title">VISUELLE CHART-BESTÄTIGUNG & TECHNISCHE INDIKATOREN-AMPEL</h2>
                 </div>
                 <div class="flow-step-desc">
                     <strong>Sehen, wo der Kurs steht:</strong> Erkennen Sie im interaktiven Candlestick-Chart visuell, ob der Kurs das goldene 61.8% Retracement (Golden Pocket) testet. Die 3 technischen Indikatoren bestätigen das Momentum. Fahren Sie mit der Maus über die Kerzen für Fadenkreuz und Kursdetails.
@@ -778,14 +776,14 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 4: 🛡️ FUNDAMENTALER SICHERHEITS-CHECK                  -->
+        <!-- SCHRITT 4: FUNDAMENTALER SICHERHEITS-CHECK                  -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step4Fundamentals">
             
             <div class="flow-step-header" style="border-left-color: #a855f7;">
                 <div class="flow-step-badge-wrap">
                     <span class="flow-step-pill pill-purple">SCHRITT 4 VON 5</span>
-                    <h2 class="flow-step-title">🛡️ FUNDAMENTALER SICHERHEITS-CHECK // BLOCKWORKS INTELLIGENCE</h2>
+                    <h2 class="flow-step-title">FUNDAMENTALER SICHERHEITS-CHECK // BLOCKWORKS INTELLIGENCE</h2>
                 </div>
                 <div class="flow-step-desc">
                     <strong>Schutz vor Fehlinvestitionen:</strong> Schützen Sie sich vor Token-Dumps und Liquiditätsfallen. Dieser Sicherheits-Check prüft die offizielle Transparenz (Due Diligence Score), anstehende Großverkäufe von Teaminhabern (90-Tage Token Unlocks), Wal-Akkumulation auf Cold-Wallets und die Marktstimmung.
@@ -799,14 +797,14 @@
                 <div class="panel bw-suite-card" id="bwDdScoreCard">
                     <div class="section-eyebrow">// PHASE 3.4 • TRANSPARENCY FRAMEWORK</div>
                     <div class="panel-header">
-                        <h3 class="panel-title">🛡️ DUE DILIGENCE SCORE</h3>
+                        <h3 class="panel-title">DUE DILIGENCE SCORE</h3>
                         <span id="bwDdLabelBig" class="status-badge badge-support">Excellent</span>
                     </div>
 
                     <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); padding: 10px 12px; border-radius: 8px; margin-bottom: 10px;">
                         <div>
                             <div style="font-size: 0.68rem; color: var(--text-faint); text-transform: uppercase;">Gesamt-Transparenz</div>
-                            <div id="bwDdScoreBig" style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: #fff;">🏆 88/100</div>
+                            <div id="bwDdScoreBig" style="font-size: 1.35rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: #0f172a;">88/100</div>
                         </div>
                         <div style="font-size: 0.72rem; color: var(--text-muted); text-align: right; max-width: 60%;">
                             Geprüft nach Blockworks Standard (Disclosure, Governance, Unlocks).
@@ -820,7 +818,7 @@
                 <div class="panel bw-suite-card" id="bwUnlocksCard">
                     <div class="section-eyebrow">// PHASE 2.1 • SUPPLY & VESTING SCHEDULE</div>
                     <div class="panel-header">
-                        <h3 class="panel-title">📅 90-TAGE TOKEN UNLOCKS</h3>
+                        <h3 class="panel-title">90-TAGE TOKEN UNLOCKS</h3>
                         <span class="status-badge badge-testing">Supply-Risiko</span>
                     </div>
                     <div id="bwUnlockMajorAlert" class="bw-unlock-major-alert" style="display: none;"></div>
@@ -833,7 +831,7 @@
                 <div class="panel bw-suite-card" id="bwOnchainCard">
                     <div class="section-eyebrow">// PHASE 2.3 • ONCHAIN FLOWS & WAL-AKTIVITÄT</div>
                     <div class="panel-header">
-                        <h3 class="panel-title">📊 ONCHAIN NETFLOW & WALE</h3>
+                        <h3 class="panel-title">ONCHAIN NETFLOW & WALE</h3>
                         <span id="bwOcNetFlowBadge" style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent-green);">↗ AKKUMULATION</span>
                     </div>
 
@@ -906,12 +904,12 @@
                 <div class="panel-header" style="flex-wrap: wrap; gap: 8px;">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span class="section-eyebrow" style="margin: 0;">// ECHTZEIT-NACHRICHTEN</span>
-                        <h3 class="panel-title">📰 LIVE NEWS WIRE — <span class="bw-active-asset-label">BTC</span></h3>
+                        <h3 class="panel-title">LIVE NEWS WIRE — <span class="bw-active-asset-label">BTC</span></h3>
                     </div>
                     <div style="display: flex; gap: 4px;">
                         <button type="button" class="bw-news-filter-btn active" data-filter="all">Alle</button>
-                        <button type="button" class="bw-news-filter-btn" data-filter="bullish">▲ Bullish</button>
-                        <button type="button" class="bw-news-filter-btn" data-filter="bearish">▼ Bearish</button>
+                        <button type="button" class="bw-news-filter-btn" data-filter="bullish">Bullish</button>
+                        <button type="button" class="bw-news-filter-btn" data-filter="bearish">Bearish</button>
                     </div>
                 </div>
                 <div id="bwNewsList" class="bw-news-list" style="max-height: 220px;">
@@ -922,14 +920,14 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 5: 💰 STRATEGIE-BACKTEST & HISTORISCHER ERFOLG         -->
+        <!-- SCHRITT 5: STRATEGIE-BACKTEST & HISTORISCHER ERFOLG         -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step5Backtest">
             
             <div class="flow-step-header" style="border-left-color: var(--accent-cyan);">
                 <div class="flow-step-badge-wrap">
                     <span class="flow-step-pill pill-cyan">SCHRITT 5 VON 5</span>
-                    <h2 class="flow-step-title">💰 STRATEGIE-BACKTEST & HISTORISCHE SIGNAL-PRÜFUNG</h2>
+                    <h2 class="flow-step-title">STRATEGIE-BACKTEST & HISTORISCHE SIGNAL-PRÜFUNG</h2>
                 </div>
                 <div class="flow-step-desc">
                     <strong>Vertrauen durch Fakten:</strong> Funktioniert diese Strategie auch langfristig? Hier simulieren Sie die Fibonacci-Signale an historischen Kursdaten und sehen, wie viel profitabler der Filter durch Onchain- und Sentiment-Daten (Hybrid Full) im Vergleich zu reiner Charttechnik ist.
@@ -948,11 +946,11 @@
                     <div class="backtest-box">
                         <div class="input-group" style="margin-bottom: 10px;">
                             <label>Strategie-Modus (Fibonacci × Blockworks):</label>
-                            <select id="btStrategySelect" style="width: 100%; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(234, 179, 8, 0.45); border-radius: 8px; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;">
-                                <option value="fib_full" selected>🏆 Hybrid Full (Fibonacci + Onchain + Sentiment + Unlocks)</option>
-                                <option value="fib_onchain">📊 Fibonacci + Onchain Netflow Filter</option>
-                                <option value="fib_sentiment">💬 Fibonacci + Social Sentiment Filter</option>
-                                <option value="fib_only">📐 Nur Fibonacci (Klassisch TA-Only)</option>
+                            <select id="btStrategySelect" style="width: 100%; background: rgba(0,0,0,0.6); color: #0f172a; border: 1px solid rgba(234, 179, 8, 0.45); border-radius: 8px; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;">
+                                <option value="fib_full" selected>Hybrid Full (Fibonacci + Onchain + Sentiment + Unlocks)</option>
+                                <option value="fib_onchain">Fibonacci + Onchain Netflow Filter</option>
+                                <option value="fib_sentiment">Fibonacci + Social Sentiment Filter</option>
+                                <option value="fib_only">Nur Fibonacci (Klassisch TA-Only)</option>
                             </select>
                         </div>
 
@@ -1005,7 +1003,7 @@
                         <div style="margin-top: 10px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px;">
                             <div style="display: flex; justify-content: space-between; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: var(--text-faint); margin-bottom: 4px;">
                                 <span>SIMULIERTE EQUITY-KURVE (KAPITALVERLAUF)</span>
-                                <span style="color: var(--accent-green);">● Portfolio Equity</span>
+                                <span style="color: var(--accent-green);">Portfolio Equity</span>
                             </div>
                             <canvas id="btEquityCanvas" style="width: 100%; height: 85px; display: block;"></canvas>
                         </div>
@@ -1045,7 +1043,7 @@
 
             <!-- Risk Disclaimer Panel -->
             <div class="risk-disclaimer-panel" style="margin-top: 1.2rem;">
-                <div class="risk-disclaimer-title">⚠️ REGULATORISCHER RISIKOHINWEIS (MiCA / BaFin KONFORMITÄT)</div>
+                <div class="risk-disclaimer-title">HINWEIS: REGULATORISCHER RISIKOHINWEIS (MiCA / BaFin KONFORMITÄT)</div>
                 <div style="font-size: 0.76rem; color: var(--text-muted); line-height: 1.5;">
                     Kryptowährungen unterliegen hohen Kursschwankungen und Verlustrisiken. Die von FibCrypto Oracle bereitgestellten Fibonacci-Signale, Onchain-Kennzahlen, Due-Diligence-Scores und Backtesting-Simulationen dienen ausschließlich zu Bildungs- und Informationszwecken und stellen <strong>keine Anlageberatung oder Finanzdienstleistung</strong> im Sinne von § 2 Abs. 2 Nr. 4 WpIG dar. Vergangene Simulationen garantieren keine zukünftigen Gewinne.
                 </div>
@@ -1054,7 +1052,7 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- SCHRITT 6: ⚙️ PROFI-WERKZEUGE (ALERT BUILDER & MCP SERVER)     -->
+        <!-- SCHRITT 6: PROFI-WERKZEUGE (ALERT BUILDER & MCP SERVER)     -->
         <!-- ============================================================= -->
         <section class="flow-step-section" id="step6ProTools" style="margin-bottom: 2rem;">
             
@@ -1062,7 +1060,7 @@
                 <summary>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <span class="flow-step-pill" style="background: rgba(0, 109, 91, 0.10); color: #006d5b;">OPTIONAL</span>
-                        <strong style="color: #121820; font-size: 0.95rem;">⚙️ Erweiterte Profi-Tools & Blockworks MCP-Server (Entwickler & API)</strong>
+                        <strong style="color: #121820; font-size: 0.95rem;">Erweiterte Profi-Tools & Blockworks MCP-Server (Entwickler & API)</strong>
                     </div>
                     <span class="accordion-chevron">▾ Klick zum Ausklappen</span>
                 </summary>
@@ -1111,11 +1109,11 @@
                                 </div>
 
                                 <div id="bwAlertNaturalPreview" class="bw-alert-preview-bar">
-                                    📝 BTC: Fib-Level kreuzt unter 0.618 AND Sentiment-Score &gt; 0.3
+                                    BTC: Fib-Level kreuzt unter 0.618 AND Sentiment-Score &gt; 0.3
                                 </div>
 
                                 <button type="button" id="btnBwSaveCustomAlert" class="bw-save-alert-btn">
-                                    💾 Multi-Condition Alert speichern
+                                    Multi-Condition Alert speichern
                                 </button>
 
                                 <div id="bwSavedCustomAlertsList" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;"></div>
@@ -1133,7 +1131,7 @@
                         <div class="panel" id="bwMcpCard">
                             <div class="section-eyebrow">// MODEL CONTEXT PROTOCOL (/api/mcp)</div>
                             <div class="panel-header">
-                                <h3 class="panel-title">🤖 MCP-SERVER & AGENTEN-SCHNITTSTELLE</h3>
+                                <h3 class="panel-title">MCP-SERVER & AGENTEN-SCHNITTSTELLE</h3>
                                 <span class="status-badge badge-support">MCP v2.0 Aktiv</span>
                             </div>
 
@@ -1166,7 +1164,24 @@
             </div>
         </section>
 
-    </div> <!-- /#oracleView -->
+    
+            </main>
+
+            <!-- Permanent Right Sidebar Column: KI-Assistent Guide -->
+            <aside class="dashboard-sidebar-column">
+                <div class="sidebar-sticky-dock">
+<div class="ai-embedded-studio-card" id="aiEmbeddedStudio">
+                <div class="ai-studio-header">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <div class="ai-studio-avatar"></div>
+                        <div>
+                            <div class="ai-studio-title">KI-MARKT-ASSISTENT & GUIDE (LIVE BERATUNG)</div>
+                            <div class="ai-studio-subtitle">Fragen Sie nach Kaufempfehlungen, Signalbegründungen oder Stop-Loss-Erklärungen</div>
+                        </div>
+                </div>
+            </aside>
+        </div>
+</div> <!-- /#oracleView -->
 
     <!-- ================================================================= -->
     <!-- HYDRO PROTOCOL & ECC AGENT CONSOLE VIEW                           -->

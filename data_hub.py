@@ -1335,25 +1335,25 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
     # 1. How to use the website / Onboarding Guide
     if any(k in q for k in ["wie funktioniert", "anleitung", "hilfe", "was kann ich", "erklär", "start", "übersicht", "workflow", "schritte"]):
         return {
-            "title": "🧭 Schritt-für-Schritt Anleitung: So nutzen Sie diese Plattform",
+            "title": "Schritt-für-Schritt Anleitung: So nutzen Sie diese Plattform",
             "reply": (
-                "**Herzlich willkommen bei FibCrypto Oracle × Blockworks!**\n\n"
+                "**Herzlich willkommen bei FibCrypto Oracle × Blockworks.**\n\n"
                 "Diese Plattform beantwortet Ihnen in 5 einfachen Schritten die Frage, **welche Kryptowährung Sie jetzt kaufen sollten** und wie Sie Ihr Kapital absichern:\n\n"
-                "**1. 🎯 Schritt 1 — Kauf-Radar:**\n"
+                "**1. Schritt 1 — Kauf-Radar:**\n"
                 "Ganz oben sehen Sie die Top-3-Kaufempfehlungen des Tages und das 100-Punkte-Ranking aller 16 führenden Blockchains. Hier finden Sie sofort heraus, wer gerade das beste Momentum hat.\n\n"
-                "**2. ⚡ Schritt 2 — Entscheidungs-Cockpit:**\n"
-                "Wählen Sie einen Coin aus. Das Orakel gibt Ihnen ein eindeutiges Signal (z. B. **🟢 KAUFSIGNAL**), nennt den optimalen Einstiegskurs, das Kursziel und den **Stop-Loss zur Verlustbegrenzung**.\n\n"
-                "**3. 💰 Ihr persönlicher Investitions-Rechner:**\n"
+                "**2. Schritt 2 — Entscheidungs-Cockpit:**\n"
+                "Wählen Sie einen Coin aus. Das Orakel gibt Ihnen ein eindeutiges Signal (z. B. **KAUFSIGNAL**), nennt den optimalen Einstiegskurs, das Kursziel und den **Stop-Loss zur Verlustbegrenzung**.\n\n"
+                "**3. Ihr persönlicher Investitions-Rechner:**\n"
                 "Geben Sie z. B. `1.000 €` ein: Der Rechner zeigt Ihnen auf den Cent genau das maximale Verlustrisiko (z. B. nur -15 €) und den erwarteten Gewinn.\n\n"
-                "**4. 📊 Schritt 3 — Interaktiver Chart:**\n"
+                "**4. Schritt 3 — Interaktiver Chart:**\n"
                 "Prüfen Sie visuell, ob der Kurs das goldene 61.8% Fibonacci-Retracement (Golden Pocket) testet, und lesen Sie die technische RSI/MACD-Ampel ab.\n\n"
-                "**5. 🛡️ Schritt 4 & 5 — Sicherheits-Check & Backtest:**\n"
+                "**5. Schritt 4 & 5 — Sicherheits-Check & Backtest:**\n"
                 "Stellen Sie sicher, dass keine gefährlichen Insider-Verkäufe (Token Unlocks) anstehen, und prüfen Sie die historische Trefferquote (71.7% Win Rate)."
             ),
             "actions": [
-                {"label": "🎯 Zum Kauf-Radar (Schritt 1)", "action": "scroll", "target": "step1KaufRadar"},
-                {"label": "⚡ Zum Entscheidungs-Cockpit (Schritt 2)", "action": "scroll", "target": "step2Entscheidung"},
-                {"label": "💰 Zum Investitions-Rechner", "action": "scroll", "target": "copilotCheckerCard"}
+                {"label": "Zum Kauf-Radar (Schritt 1)", "action": "scroll", "target": "step1KaufRadar"},
+                {"label": "Zum Entscheidungs-Cockpit (Schritt 2)", "action": "scroll", "target": "step2Entscheidung"},
+                {"label": "Zum Investitions-Rechner", "action": "scroll", "target": "copilotCheckerCard"}
             ]
         }
 
@@ -1367,23 +1367,23 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
             pick_text += f"• **#{i+1} {p.get('shortSymbol', 'Coin')}**: {curr_symbol}{p.get('price', 0):,.2f} ({sign}{p.get('change24h', 0):.2f}% 24h) — Signal: **{p.get('signal', 'KAUFEN')}** nahe {p.get('nearestLevel', 'Support')}\n"
         
         return {
-            "title": "🎯 Aktuelle Kauf-Empfehlungen des Tages",
+            "title": "Aktuelle Kauf-Empfehlungen des Tages",
             "reply": (
                 "Basierend auf dem tagesaktuellen Multi-Faktor-Scan (Trend, Fibonacci Golden Pocket, Onchain-Akkumulation und geringes Unlock-Risiko) sind dies die stärksten Opportunitäten:\n\n"
                 + (pick_text if pick_text else "• **Bitcoin (BTC)**: Starkes Kaufsignal im 61.8% Golden Pocket bei institutioneller Wal-Akkumulation.\n• **Solana (SOL)**: Hohes relatives Momentum mit Ausbruchspotenzial.\n• **Injective (INJ)**: Attraktiver Cashflow mit 16.42% APR Staking-Rendite.\n") +
-                "\n💡 **Empfehlung:** Klicken Sie unten auf einen Coin, um sofort das verbindliche Einstiegs- und Stop-Loss-Setup im Cockpit zu laden."
+                "\n**Empfehlung:** Klicken Sie unten auf einen Coin, um sofort das verbindliche Einstiegs- und Stop-Loss-Setup im Cockpit zu laden."
             ),
             "actions": [
-                {"label": "👉 Bitcoin (BTC) Setup laden", "action": "select_asset", "target": "BTCUSDT"},
-                {"label": "👉 Solana (SOL) Setup laden", "action": "select_asset", "target": "SOLUSDT"},
-                {"label": "👉 Injective (INJ) Staking prüfen", "action": "select_asset", "target": "INJUSDT"}
+                {"label": "Bitcoin (BTC) Setup laden", "action": "select_asset", "target": "BTCUSDT"},
+                {"label": "Solana (SOL) Setup laden", "action": "select_asset", "target": "SOLUSDT"},
+                {"label": "Injective (INJ) Staking prüfen", "action": "select_asset", "target": "INJUSDT"}
             ]
         }
 
     # 3. Stop-Loss & Risk Management
     if any(k in q for k in ["stop loss", "stop-loss", "risiko", "absicherung", "kapitalschutz", "verlust"]):
         return {
-            "title": "🛡️ Wie schützt Sie der Stop-Loss vor Verlusten?",
+            "title": "Wie schützt Sie der Stop-Loss vor Verlusten?",
             "reply": (
                 "Der **Stop-Loss** ist Ihr wichtigstes Werkzeug, um an den Krypto-Märkten dauerhaft profitabel zu sein:\n\n"
                 "• **Automatischer Notausstieg:** Fällt der Kurs wider Erwarten unter das mathematische Fibonacci-Support-Level (z. B. unter 61.8%), wird die Position automatisch geschlossen.\n"
@@ -1391,32 +1391,32 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
                 "• **Asymmetrisches Chance-Risiko-Verhältnis (CRV):** Weil das Gewinnziel bei +5% bis +11% liegt, stehen 1 € Risiko mindestens **3,40 € Gewinnpotenzial** gegenüber (CRV 1 : 3.4). Selbst wenn nur jeder zweite Trade aufgeht, wächst Ihr Portfolio kontinuierlich!"
             ),
             "actions": [
-                {"label": "⚡ Stop-Loss im Cockpit ansehen", "action": "scroll", "target": "step2Entscheidung"},
-                {"label": "💰 Im Investitions-Rechner berechnen", "action": "scroll", "target": "copilotCheckerCard"}
+                {"label": "Stop-Loss im Cockpit ansehen", "action": "scroll", "target": "step2Entscheidung"},
+                {"label": "Im Investitions-Rechner berechnen", "action": "scroll", "target": "copilotCheckerCard"}
             ]
         }
 
     # 4. Investment Size & Allocation (e.g. 500, 1000 Euro)
     if any(k in q for k in ["1000", "500", "250", "2500", "5000", "wie viel investieren", "wieviel", "betrag", "summe", "tranche"]):
         return {
-            "title": "💰 Taktische Kauf-Empfehlung für Ihr Kapital",
+            "title": "Taktische Kauf-Empfehlung für Ihr Kapital",
             "reply": (
                 "Wenn Sie heute Kapital (z. B. **500 € oder 1.000 €**) anlegen möchten, empfiehlt die Trading-Mathematik die **2-Tranchen-Taktik**:\n\n"
                 "1. **Tranche 1 (50% sofort):** Steigen Sie mit der Hälfte Ihres geplanten Betrags direkt zum aktuellen Kurs ein, um einen plötzlichen Ausbruch nach oben nicht zu verpassen.\n"
                 "2. **Tranche 2 (50% als Limit-Kauf):** Platzieren Sie die zweite Hälfte als Limit-Kauforder genau an der nächsten Fibonacci-Unterstützung (38.2% oder 61.8%), um von einem Rücksetzer mit Rabatt zu profitieren.\n"
                 "3. **Absichern:** Setzen Sie den Stop-Loss für die gesamte Position direkt unter das Tief. So ist Ihr Gesamtrisiko strikt auf ca. 1.5% begrenzt.\n\n"
-                "👉 Tragen Sie Ihren Betrag im **Investitions-Rechner** ein, um die exakten Beträge für jede Tranche zu sehen!"
+                "Tragen Sie Ihren Betrag im **Investitions-Rechner** ein, um die exakten Beträge für jede Tranche zu sehen!"
             ),
             "actions": [
-                {"label": "💰 Zum Investitions-Rechner springen", "action": "scroll", "target": "copilotCheckerCard"},
-                {"label": "⚡ Aktuelles Kauf-Setup prüfen", "action": "scroll", "target": "step2Entscheidung"}
+                {"label": "Zum Investitions-Rechner springen", "action": "scroll", "target": "copilotCheckerCard"},
+                {"label": "Aktuelles Kauf-Setup prüfen", "action": "scroll", "target": "step2Entscheidung"}
             ]
         }
 
     # 5. Fibonacci & Golden Pocket (61.8%)
     if any(k in q for k in ["golden pocket", "fibonacci", "61.8", "retracement", "support", "extension"]):
         return {
-            "title": "📐 Was bedeutet das 61.8% Golden Pocket?",
+            "title": "Was bedeutet das 61.8% Golden Pocket?",
             "reply": (
                 "Die **Fibonacci-Zahlen** beschreiben fundamentale Wachstumsmuster der Natur und bilden das Rückgrat institutioneller Krypto-Trading-Algorithmen:\n\n"
                 "• **Das 61.8% Retracement (Golden Pocket):** Nach einer Aufwärtsbewegung korrigiert der Kurs häufig um exakt 61.8% der vorherigen Spanne. Institutionelle Market-Maker und Großbanken platzieren genau hier ihre Kauforders.\n"
@@ -1425,25 +1425,25 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
                 "Auf unserem Chart (Schritt 3) ist das **Golden Pocket gold leuchtend hervorgehoben**, damit Sie die optimale Kaufzone sofort erkennen."
             ),
             "actions": [
-                {"label": "📊 Zum Chart & Golden Pocket springen", "action": "scroll", "target": "step3Chart"}
+                {"label": "Zum Chart & Golden Pocket springen", "action": "scroll", "target": "step3Chart"}
             ]
         }
 
     # 6. Due Diligence Score & Token Unlocks
     if any(k in q for k in ["due diligence", "dd score", "unlock", "vesting", "transparenz", "sicherheit"]):
         return {
-            "title": "🛡️ Warum Sie vor dem Kauf immer den Sicherheits-Check prüfen sollten",
+            "title": "Warum Sie vor dem Kauf immer den Sicherheits-Check prüfen sollten",
             "reply": (
                 "Selbst das beste Chart-Signal scheitert, wenn das Projekt fundamental faul ist. Der **Blockworks Sicherheits-Check (Schritt 4)** schützt Sie vor zwei großen Gefahren:\n\n"
-                "1. **📅 90-Tage Token Unlocks:**\n"
+                "1. **90-Tage Token Unlocks:**\n"
                 "Wenn Frühinvestoren oder das Projekt-Team Millionen neuer Tokens freigeschaltet bekommen, werden diese oft auf den Markt geworfen, was zu Kursabstürzen führt. Unser Kalender warnt Sie vor solchen Ereignissen.\n\n"
-                "2. **🛡️ Due-Diligence-Score (0–100):**\n"
-                "Bewertet Offenlegungspflichten, Governance-Dezentralisierung und Datenfrische. Ein Score von **>80 (🏆 Excellent)** bedeutet institutionelle Transparenz.\n\n"
-                "3. **📊 Onchain-Netflow:**\n"
+                "2. **Due-Diligence-Score (0–100):**\n"
+                "Bewertet Offenlegungspflichten, Governance-Dezentralisierung und Datenfrische. Ein Score von **>80 (Excellent)** bedeutet institutionelle Transparenz.\n\n"
+                "3. **Onchain-Netflow:**\n"
                 "Werden mehr Coins von Börsen auf private Wallets abgezogen als eingezahlt? Negativer Netflow bedeutet **Akkumulation durch Wale** (starkes Bullish-Signal)!"
             ),
             "actions": [
-                {"label": "🛡️ Zum Sicherheits-Check (Schritt 4)", "action": "scroll", "target": "step4Fundamentals"}
+                {"label": "Zum Sicherheits-Check (Schritt 4)", "action": "scroll", "target": "step4Fundamentals"}
             ]
         }
 
@@ -1459,7 +1459,7 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
     analysis = explain_signal_ai(target_coin)
     coin_short = _clean_short_symbol(target_coin)
     return {
-        "title": f"🔍 Live-Analyse für {coin_short}",
+        "title": f"Live-Analyse für {coin_short}",
         "reply": (
             f"**Hier ist die aktuelle Auswertung für {coin_short}:**\n\n"
             f"• **Marktlage:** {analysis.get('structured', {}).get('why', 'Trend und Fibonacci-Support aktiv.')}\n"
@@ -1468,8 +1468,8 @@ def chat_assistant_ai(query="", asset="BTCUSDT", currency="EUR"):
             f"Möchten Sie das vollständige Trade-Setup mit berechneten Preismarken für {coin_short} im Cockpit öffnen?"
         ),
         "actions": [
-            {"label": f"👉 {coin_short} im Entscheidungs-Cockpit laden", "action": "select_asset", "target": target_coin},
-            {"label": "📊 Zum Chart springen", "action": "scroll", "target": "step3Chart"}
+            {"label": f"{coin_short} im Entscheidungs-Cockpit laden", "action": "select_asset", "target": target_coin},
+            {"label": "Zum Chart springen", "action": "scroll", "target": "step3Chart"}
         ]
     }
 

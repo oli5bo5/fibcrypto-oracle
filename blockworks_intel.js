@@ -731,17 +731,26 @@
         const src = data.sources || {};
         outEl.innerHTML = `
             <div class="bw-ai-grid">
-                <div class="bw-ai-point">
-                    <div class="bw-ai-point-title" style="color:var(--accent-green);">1. Warum macht dieses Signal jetzt Sinn?</div>
-                    <div class="bw-ai-point-body">${s.why}</div>
+                <div class="bw-ai-point point-why">
+                    <div class="bw-ai-point-num">01</div>
+                    <div class="bw-ai-point-content">
+                        <div class="bw-ai-point-title" style="color: #4ade80;">Warum dieses Signal Sinn macht (Fibonacci & Einstieg)</div>
+                        <div class="bw-ai-point-body">${s.why}</div>
+                    </div>
                 </div>
-                <div class="bw-ai-point">
-                    <div class="bw-ai-point-title" style="color:var(--accent-amber);">2. Größtes Risiko (Token Unlocks & Flow)</div>
-                    <div class="bw-ai-point-body">${s.risk}</div>
+                <div class="bw-ai-point point-risk">
+                    <div class="bw-ai-point-num">02</div>
+                    <div class="bw-ai-point-content">
+                        <div class="bw-ai-point-title" style="color: #fbbf24;">Größtes Risiko (Token Unlocks & Onchain-Flow)</div>
+                        <div class="bw-ai-point-body">${s.risk}</div>
+                    </div>
                 </div>
-                <div class="bw-ai-point">
-                    <div class="bw-ai-point-title" style="color:var(--accent-cyan, #00f0ff);">3. Zu beobachtende Bestätigung</div>
-                    <div class="bw-ai-point-body">${s.confirmation}</div>
+                <div class="bw-ai-point point-confirm">
+                    <div class="bw-ai-point-num">03</div>
+                    <div class="bw-ai-point-content">
+                        <div class="bw-ai-point-title" style="color: #38bdf8;">Erforderliche Bestätigung (Kursziel & Indikatoren)</div>
+                        <div class="bw-ai-point-body">${s.confirmation}</div>
+                    </div>
                 </div>
             </div>
             <div class="bw-ai-sources-bar">

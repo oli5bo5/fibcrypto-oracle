@@ -315,21 +315,18 @@
 
             const picks = [
                 {
-                    rankBadge: "EMPFEHLUNG DES TAGES // PLATZ 1",
+                    rankBadge: "#1 EMPFEHLUNG DES TAGES",
                     item: topOverall,
-                    icon: "⭐",
                     highlight: "Bester Gesamtwert aus Trend, Momentum & Einstieg"
                 },
                 {
-                    rankBadge: "KONSISTENZ & SICHERHEIT // DEFENSIF",
+                    rankBadge: "#2 KONSISTENZ & SICHERHEIT",
                     item: topConservative,
-                    icon: "🛡️",
                     highlight: "Niedrigste Volatilität & maximale Markttiefe"
                 },
                 {
-                    rankBadge: "CASHFLOW & STAKING // PASSIVES EINKOMMEN",
+                    rankBadge: "#3 CASHFLOW & STAKING",
                     item: topYield,
-                    icon: "💧",
                     highlight: "16.42% APR Liquid Staking im Hydro Protocol"
                 }
             ];
@@ -415,7 +412,7 @@
                         #${idx + 1}
                     </td>
                     <td>
-                        <strong style="color: #ffffff;">${coin.ticker}</strong>
+                        <strong style="color: #0f172a;">${coin.ticker}</strong>
                         <span style="font-size: 0.75rem; color: var(--text-faint); margin-left: 4px;">(${coin.name})</span>
                     </td>
                     <td>
@@ -558,21 +555,21 @@
             </div>
 
             <div class="checker-reasoning-card">
-                <div style="font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 0.88rem;">
+                <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 0.88rem;">
                     Begründung & Marktlage für ${item.name} (${item.ticker}):
                 </div>
-                <p style="margin: 0; color: var(--text-muted); font-size: 0.83rem; line-height: 1.6;">
+                <p style="margin: 0; color: #334155; font-size: 0.85rem; line-height: 1.6;">
                     ${justification}
                 </p>
                 <div class="checker-dca-tip">
-                    ✦ ${dcaAdvice}
+                    Taktik: ${dcaAdvice}
                 </div>
             </div>
 
             <div class="checker-metrics-grid">
                 <div class="checker-metric-box">
                     <div class="checker-metric-label">Erworbene Menge bei ${amountFormatted}</div>
-                    <div class="checker-metric-val" style="color: #fff;">${coinAmountStr} ${item.ticker}</div>
+                    <div class="checker-metric-val" style="color: #0f172a;">${coinAmountStr} ${item.ticker}</div>
                     <div style="font-size: 0.7rem; color: var(--text-faint); margin-top: 2px;">Basis: ${formatMoney(item.price)}</div>
                 </div>
                 <div class="checker-metric-box">

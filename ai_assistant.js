@@ -12,12 +12,12 @@
         messages: [
             {
                 sender: 'bot',
-                text: "👋 **Hallo! Ich bin Ihr persönlicher FibCrypto KI-Assistent.**\n\nIch helfe Ihnen dabei, die Signale zu verstehen, Ihr Kapital abzusichern und herauszufinden, **welche Kryptowährung Sie heute kaufen sollten**.\n\nWorüber möchten Sie mehr erfahren? Klicken Sie auf eine Frage oder tippen Sie unten Ihre Frage ein!",
+                text: "**Willkommen beim FibCrypto KI-Markt-Assistenten.**\n\nIch helfe Ihnen dabei, die Signale zu verstehen, Ihr Kapital mit Stop-Loss abzusichern und herauszufinden, **welche Kryptowährung Sie heute kaufen sollten**.\n\nWählen Sie eine Frage oder tippen Sie Ihre Frage direkt ein:",
                 actions: [
-                    { label: "🎯 Welchen Coin soll ich heute kaufen?", query: "Welchen Coin soll ich heute kaufen?" },
-                    { label: "📖 Wie funktioniert diese Webseite?", query: "Wie funktioniert diese Webseite?" },
-                    { label: "🛡️ Wie schützt mich der Stop-Loss?", query: "Wie schützt mich der Stop-Loss?" },
-                    { label: "💶 Ich habe 1.000 € – was tun?", query: "Ich habe 1.000 Euro, wie soll ich investieren?" }
+                    { label: "Welchen Coin soll ich heute kaufen?", query: "Welchen Coin soll ich heute kaufen?" },
+                    { label: "Wie funktioniert diese Webseite?", query: "Wie funktioniert diese Webseite?" },
+                    { label: "Wie schützt mich der Stop-Loss?", query: "Wie schützt mich der Stop-Loss?" },
+                    { label: "Ich habe 1.000 Euro – was tun?", query: "Ich habe 1.000 Euro, wie soll ich investieren?" }
                 ]
             }
         ]
@@ -47,10 +47,9 @@
         trigger.setAttribute('data-tooltip', 'Klicken für den interaktiven KI-Erklärer & Chatbot');
         trigger.innerHTML = `
             <div class="ai-trigger-pulse"></div>
-            <div class="ai-trigger-icon">🤖</div>
             <div class="ai-trigger-text">
-                <span class="ai-trigger-title">KI-Assistent & Erklärer</span>
-                <span class="ai-trigger-sub">Wie funktioniert die Seite?</span>
+                <span class="ai-trigger-title">KI-ASSISTENT</span>
+                <span class="ai-trigger-sub">Live-Marktberatung</span>
             </div>
             <span class="ai-trigger-badge">ONLINE</span>
         `;
@@ -64,10 +63,9 @@
         modal.innerHTML = `
             <div class="ai-modal-header">
                 <div class="ai-modal-title-wrap">
-                    <span class="ai-modal-icon">✦</span>
                     <div>
-                        <div class="ai-modal-title">FibCrypto KI-Assistent & Guide</div>
-                        <div class="ai-modal-sub">Echtzeit-Hilfe zu Signalen, Stop-Loss & Kaufentscheidungen</div>
+                        <div class="ai-modal-title">FibCrypto KI-Assistent &amp; Guide</div>
+                        <div class="ai-modal-sub">Echtzeit-Hilfe zu Signalen, Stop-Loss &amp; Kaufentscheidungen</div>
                     </div>
                 </div>
                 <div class="ai-modal-actions">
@@ -78,12 +76,12 @@
 
             <!-- Quick Action Chips -->
             <div class="ai-quick-chips-wrapper" id="aiQuickChips">
-                <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">🎯 Welcher Coin lohnt sich?</button>
-                <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">📖 Wie funktioniert die Seite?</button>
-                <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">🛡️ Was bringt der Stop-Loss?</button>
-                <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">💶 1.000 € investieren</button>
-                <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">📐 Golden Pocket (61.8%)</button>
-                <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">🔍 Sicherheits-Check</button>
+                <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">Welcher Coin lohnt sich?</button>
+                <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">Wie funktioniert die Seite?</button>
+                <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">Was bringt der Stop-Loss?</button>
+                <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">1.000 Euro investieren</button>
+                <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">Golden Pocket (61.8%)</button>
+                <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">Sicherheits-Check</button>
             </div>
 
             <!-- Messages Stream -->
@@ -357,7 +355,7 @@
 
             return `
                 <div class="ai-message-row ${isUser ? 'msg-user' : 'msg-bot'}">
-                    <div class="ai-avatar-bubble">${isUser ? '👤' : '🤖'}</div>
+                    <div class="ai-avatar-bubble">${isUser ? 'ICH' : 'KI'}</div>
                     <div class="ai-bubble-content">
                         <div class="ai-bubble-text">${formattedText}</div>
                         ${actionsHtml}
