@@ -622,10 +622,10 @@
                 dom.checkerCoinSelect.value = symbol;
                 runInvestmentCheck();
             }
-            showToast(`Helfer hat ${symbol.replace('USDT', '')} für die Trade-Berechnung geladen.`);
-            const chartPanel = document.getElementById('chartPanel') || document.getElementById('chartContainer');
-            if (chartPanel) {
-                chartPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast(`Setup für ${symbol.replace('USDT', '')} im Entscheidungs-Cockpit geladen.`);
+            const targetEl = document.getElementById('step2Entscheidung') || document.getElementById('sectionTradeSetup');
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             if (window.renderCharts) {
                 setTimeout(window.renderCharts, 120);
@@ -634,24 +634,13 @@
     }
 
     function applyInvestmentToCalculator(symbol, amount) {
-        if (dom.copilotContainer) {
-            dom.copilotContainer.style.display = 'none';
-        }
-        if (dom.toggleBtn) {
-            dom.toggleBtn.classList.remove('active');
-        }
         if (window.applyInvestmentToCalculator) {
             window.applyInvestmentToCalculator(symbol, amount);
-            showToast(`Setup für ${symbol.replace('USDT', '')} mit Investitionswert im Chart geladen.`);
+            showToast(`Setup für ${symbol.replace('USDT', '')} mit Investitionswert im Cockpit geladen.`);
         }
-        const chartPanel = document.getElementById('chartPanel') || document.getElementById('chartContainer');
-        if (chartPanel) {
-            chartPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            const container = document.getElementById('chartContainer');
-            if (container) {
-                container.style.boxShadow = '0 0 30px rgba(255, 184, 0, 0.6)';
-                setTimeout(() => { container.style.boxShadow = ''; }, 1600);
-            }
+        const targetEl = document.getElementById('step2Entscheidung') || document.getElementById('sectionTradeSetup');
+        if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         if (window.renderCharts) {
             setTimeout(window.renderCharts, 120);
@@ -673,20 +662,9 @@
     }
 
     function toggleCopilotPanel() {
-        if (!dom.copilotContainer) return;
-        const isHidden = dom.copilotContainer.style.display === 'none';
-        dom.copilotContainer.style.display = isHidden ? 'block' : 'none';
-        if (dom.toggleBtn) {
-            if (isHidden) {
-                dom.toggleBtn.classList.add('active');
-                dom.copilotContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                dom.toggleBtn.classList.remove('active');
-                const chartPanel = document.getElementById('chartPanel') || document.getElementById('chartContainer');
-                if (chartPanel) {
-                    chartPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }
+        const target = document.getElementById('step1KaufRadar') || document.getElementById('copilotPanel');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
