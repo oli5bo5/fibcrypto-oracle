@@ -1,6 +1,6 @@
 /**
- * FibCrypto Oracle × Blockworks — Interactive AI Copilot & Onboarding Assistant (v15.0)
- * Answers user questions, explains features, guides investment amounts, and interacts with the dashboard.
+ * FibCrypto Oracle × Blockworks — AI Analyst FAB & Slide-Over Drawer
+ * Specification v15.2.0 (TradingView & Linear Dark Theme Architecture)
  */
 
 (function () {
@@ -8,75 +8,92 @@
 
     const state = {
         isOpen: false,
+        isDocked: false,
         isTyping: false,
         messages: [
             {
                 sender: 'bot',
-                text: "**Willkommen beim FibCrypto KI-Markt-Assistenten.**\n\nIch helfe Ihnen dabei, die Signale zu verstehen, Ihr Kapital mit Stop-Loss abzusichern und herauszufinden, **welche Kryptowährung Sie heute kaufen sollten**.\n\nWählen Sie eine Frage oder tippen Sie Ihre Frage direkt ein:",
+                text: "**FibCrypto AI Analyst aktiv.**\n\nIch analysiere Echtzeit-Marktdaten, Fibonacci-Retracements und Onchain-Metriken für 16 Blockchains.\n\nWählen Sie eine Schnellfrage oder stellen Sie eine Frage zum aktuellen Asset:",
                 actions: [
-                    { label: "Welchen Coin soll ich heute kaufen?", query: "Welchen Coin soll ich heute kaufen?" },
-                    { label: "Wie funktioniert diese Webseite?", query: "Wie funktioniert diese Webseite?" },
-                    { label: "Wie schützt mich der Stop-Loss?", query: "Wie schützt mich der Stop-Loss?" },
-                    { label: "Ich habe 1.000 Euro – was tun?", query: "Ich habe 1.000 Euro, wie soll ich investieren?" }
+                    { label: "🎯 Wo liegt das Golden Pocket?", query: "Wo liegt das Golden Pocket für diesen Coin?" },
+                    { label: "🛑 Welchen Stop-Loss empfiehlst du?", query: "Welchen Stop-Loss empfiehlst du für das aktuelle Setup?" },
+                    { label: "📊 Wie ist das CRV für diesen Trade?", query: "Wie ist das CRV-Verhältnis für diesen Trade?" },
+                    { label: "⚠️ Welche Risiken gibt es aktuell?", query: "Welche Risiken und Token-Unlocks gibt es aktuell?" }
                 ]
             }
         ]
     };
 
-    // DOM Elements Cache
     let dom = {
-        widgetContainer: null,
-        toggleBtn: null,
-        modal: null,
-        messagesContainer: null,
-        inputField: null,
+        fab: null,
+        drawer: null,
+        backdrop: null,
+        contextChip: null,
+        stream: null,
+        input: null,
         sendBtn: null,
-        quickChipsBar: null
+        quickChips: null,
+        typing: null
     };
 
     function initAssistant() {
-        // Cache DOM elements directly from embedded studio in right sidebar dock (Clean S1-S3 Fix)
-        dom.embeddedMessagesContainer = document.getElementById('aiEmbeddedMessageStream');
-        dom.embeddedInputField = document.getElementById('aiEmbeddedChatInput');
-        dom.embeddedSendBtn = document.getElementById('btnAiEmbeddedSend');
-        dom.embeddedQuickChipsBar = document.getElementById('aiEmbeddedQuickChips');
+        dom.fab = document.getElementById('aiFabBtn');
+        dom.drawer = document.getElementById('aiDrawer');
+        dom.backdrop = document.getElementById('aiDrawerBackdrop');
+        dom.contextChip = document.getElementById('aiDrawerContextChip');
+        dom.stream = document.getElementById('aiEmbeddedMessageStream');
+        dom.input = document.getElementById('aiEmbeddedChatInput');
+        dom.sendBtn = document.getElementById('btnAiEmbeddedSend');
+        dom.quickChips = document.getElementById('aiEmbeddedQuickChips');
+        dom.typing = document.getElementById('aiEmbeddedTypingIndicator');
 
         bindEvents();
         renderMessages();
-        syncHeroStatCard();
+        syncContext();
+        setInterval(syncContext, 2000);
     }
 
     function bindEvents() {
-        if (dom.toggleBtn) {
-            dom.toggleBtn.addEventListener('click', toggleModal);
+        if (dom.fab) {
+            dom.fab.addEventListener('click', toggleDrawer);
         }
 
-        const btnClose = document.getElementById('btnAiCloseModal');
-        if (btnClose) {
-            btnClose.addEventListener('click', () => setModalOpen(false));
+        const closeBtn = document.getElementById('btnAiDrawerClose');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeDrawer);
         }
 
-        const btnReset = document.getElementById('btnAiResetChat');
-        if (btnReset) {
-            btnReset.addEventListener('click', resetChat);
+        const dockBtn = document.getElementById('btnAiDrawerDock');
+        if (dockBtn) {
+            dockBtn.addEventListener('click', toggleDock);
+        }
+
+        if (dom.backdrop) {
+            dom.backdrop.addEventListener('click', closeDrawer);
         }
 
         if (dom.sendBtn) {
             dom.sendBtn.addEventListener('click', handleSend);
         }
 
-        if (dom.inputField) {
-            dom.inputField.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
+        if (dom.input) {
+            dom.input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     handleSend();
                 }
             });
+
+            // Auto-resize textarea
+            dom.input.addEventListener('input', () => {
+                dom.input.style.height = 'auto';
+                dom.input.style.height = Math.min(dom.input.scrollHeight, 120) + 'px';
+            });
         }
 
-        // Quick chip clicks in modal
-        if (dom.quickChipsBar) {
-            dom.quickChipsBar.addEventListener('click', (e) => {
+        // Quick prompt chips
+        if (dom.quickChips) {
+            dom.quickChips.addEventListener('click', (e) => {
                 const chip = e.target.closest('.ai-chip');
                 if (chip) {
                     const q = chip.getAttribute('data-q');
@@ -85,47 +102,63 @@
             });
         }
 
-        // Embedded studio event bindings
-        if (dom.embeddedSendBtn) {
-            dom.embeddedSendBtn.addEventListener('click', handleEmbeddedSend);
-        }
-
-        if (dom.embeddedInputField) {
-            dom.embeddedInputField.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleEmbeddedSend();
-                }
-            });
-        }
-
-        if (dom.embeddedQuickChipsBar) {
-            dom.embeddedQuickChipsBar.addEventListener('click', (e) => {
-                const chip = e.target.closest('.ai-chip');
-                if (chip) {
-                    const q = chip.getAttribute('data-q');
-                    if (q) submitQuery(q);
-                }
-            });
-        }
-
-        // Click outside modal to close on desktop
+        // Global Keyboard Shortcut: Cmd + K or Ctrl + K
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && state.isOpen) {
-                setModalOpen(false);
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                toggleDrawer();
+            } else if (e.key === 'Escape' && state.isOpen) {
+                closeDrawer();
             }
         });
-
-        // Periodic sync of hero stat card
-        setInterval(syncHeroStatCard, 2000);
     }
 
-    function handleEmbeddedSend() {
-        if (!dom.embeddedInputField) return;
-        const text = dom.embeddedInputField.value.trim();
-        if (!text) return;
-        dom.embeddedInputField.value = '';
-        submitQuery(text);
+    function toggleDrawer() {
+        if (state.isOpen) closeDrawer();
+        else openDrawer();
+    }
+
+    function openDrawer() {
+        state.isOpen = true;
+        if (dom.drawer) dom.drawer.classList.add('open');
+        if (dom.backdrop && !state.isDocked) dom.backdrop.classList.add('active');
+        syncContext();
+        if (dom.input) {
+            setTimeout(() => dom.input.focus(), 250);
+        }
+        scrollToBottom();
+    }
+
+    function closeDrawer() {
+        state.isOpen = false;
+        if (dom.drawer) dom.drawer.classList.remove('open');
+        if (dom.backdrop) dom.backdrop.classList.remove('active');
+    }
+
+    function toggleDock() {
+        state.isDocked = !state.isDocked;
+        const main = document.querySelector('.terminal-main-container') || document.getElementById('oracleView');
+        if (dom.drawer) dom.drawer.classList.toggle('docked', state.isDocked);
+        if (main) main.classList.toggle('drawer-docked', state.isDocked);
+        if (dom.backdrop) dom.backdrop.classList.toggle('active', !state.isDocked && state.isOpen);
+    }
+
+    function syncContext() {
+        const symEl = document.getElementById('bannerSymbol');
+        const priceEl = document.getElementById('livePrice');
+        const sym = symEl ? symEl.textContent.trim() : (window.currentSymbol || 'BTC/USDT');
+        const price = priceEl ? priceEl.textContent.trim() : '';
+
+        if (dom.contextChip) {
+            dom.contextChip.textContent = `[Context: ${sym} @ ${price || 'Live'}]`;
+        }
+
+        if (dom.input && !dom.input.value) {
+            dom.input.placeholder = `Frage stellen zu ${sym} oder Strategie (Enter zum Senden)...`;
+        }
+
+        // Also update Hero Stat Card
+        syncHeroStatCard();
     }
 
     function syncHeroStatCard() {
@@ -145,127 +178,62 @@
         if (elRisk) elRisk.textContent = '12 %';
     }
 
-    function toggleModal() {
-        setModalOpen(!state.isOpen);
-    }
-
-    function setModalOpen(open) {
-        state.isOpen = open;
-        if (dom.modal) {
-            dom.modal.style.display = open ? 'flex' : 'none';
-            if (open) {
-                if (dom.inputField) setTimeout(() => dom.inputField.focus(), 150);
-                scrollToBottom();
-            }
-        }
-        if (dom.toggleBtn) {
-            dom.toggleBtn.classList.toggle('active', open);
-        }
-    }
-
-    function resetChat() {
-        state.messages = [
-            {
-                sender: 'bot',
-                text: "🔄 **Chat zurückgesetzt.**\n\nWie kann ich Ihnen helfen? Wählen Sie eine Option oder stellen Sie eine beliebige Frage zum Krypto-Markt, zu den Signalen oder zum Investitionsrechner.",
-                actions: [
-                    { label: "🎯 Welchen Coin heute kaufen?", query: "Welchen Coin soll ich heute kaufen?" },
-                    { label: "📖 Wie funktioniert diese Webseite?", query: "Wie funktioniert diese Webseite?" },
-                    { label: "🛡️ Wie schützt mich der Stop-Loss?", query: "Wie schützt mich der Stop-Loss?" }
-                ]
-            }
-        ];
-        renderMessages();
-    }
-
     function handleSend() {
-        if (!dom.inputField) return;
-        const text = dom.inputField.value.trim();
+        if (!dom.input) return;
+        const text = dom.input.value.trim();
         if (!text) return;
-        dom.inputField.value = '';
+        dom.input.value = '';
+        dom.input.style.height = 'auto';
         submitQuery(text);
     }
 
-    function submitQuery(userText) {
+    async function submitQuery(queryText) {
+        if (!queryText || state.isTyping) return;
+
         // Add user message
         state.messages.push({
             sender: 'user',
-            text: userText
+            text: queryText
         });
         renderMessages();
         scrollToBottom();
 
         // Show typing indicator
-        setTyping(true);
+        state.isTyping = true;
+        if (dom.typing) dom.typing.style.display = 'flex';
 
-        const currentAsset = (window.currentSymbol) || 'BTCUSDT';
-        const currentCurrency = (window.getCurrentCurrency && window.getCurrentCurrency()) || 'EUR';
+        const sym = (window.currentSymbol || 'BTCUSDT');
+        const curr = window.currentCurrency || 'USD';
 
-        // Call server assistant API with graceful instant client fallback
-        fetch('/api/ai/assistant', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                message: userText,
-                query: userText,
-                asset: currentAsset,
-                currency: currentCurrency
-            })
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('Server response not ok');
-            return res.json();
-        })
-        .then(data => {
-            setTyping(false);
-            let replyText = data.reply || data.explanation || "Ich habe Ihre Anfrage analysiert.";
-            let actions = data.actions || [];
-            
+        // Simulate short analytical delay for realism
+        setTimeout(() => {
+            const reply = generateLocalResponse(queryText, sym, curr);
             state.messages.push({
                 sender: 'bot',
-                text: replyText,
-                actions: actions
+                text: reply.text,
+                actions: reply.actions || []
             });
+
+            state.isTyping = false;
+            if (dom.typing) dom.typing.style.display = 'none';
             renderMessages();
             scrollToBottom();
-        })
-        .catch(err => {
-            console.warn("Using smart client-side assistant fallback:", err);
-            // Instant rule-based fallback
-            setTimeout(() => {
-                setTyping(false);
-                const localResponse = generateLocalResponse(userText, currentAsset, currentCurrency);
-                state.messages.push({
-                    sender: 'bot',
-                    text: localResponse.text,
-                    actions: localResponse.actions
-                });
-                renderMessages();
-                scrollToBottom();
-            }, 300);
-        });
-    }
-
-    function setTyping(isTyping) {
-        state.isTyping = isTyping;
-        const ind = document.getElementById('aiTypingIndicator');
-        if (ind) ind.style.display = isTyping ? 'flex' : 'none';
-        const embInd = document.getElementById('aiEmbeddedTypingIndicator');
-        if (embInd) embInd.style.display = isTyping ? 'flex' : 'none';
-        if (isTyping) scrollToBottom();
+        }, 450);
     }
 
     function renderMessages() {
-        const html = state.messages.map((m, idx) => {
-            const isUser = m.sender === 'user';
-            const formattedText = formatMarkdown(m.text);
+        if (!dom.stream) return;
+
+        const html = state.messages.map((msg, msgIdx) => {
+            const isUser = msg.sender === 'user';
+            const formattedText = formatMarkdown(msg.text);
 
             let actionsHtml = '';
-            if (m.actions && m.actions.length > 0) {
+            if (msg.actions && msg.actions.length > 0) {
                 actionsHtml = `
-                    <div class="ai-message-actions">
-                        ${m.actions.map((act, aIdx) => `
-                            <button type="button" class="ai-action-btn" onclick="window.AiAssistant.handleAction(${idx}, ${aIdx})">
+                    <div class="ai-bubble-actions">
+                        ${msg.actions.map((act, actIdx) => `
+                            <button type="button" class="ai-action-btn" onclick="window.AiAssistant.handleAction(${msgIdx}, ${actIdx})">
                                 ${act.label}
                             </button>
                         `).join('')}
@@ -275,7 +243,7 @@
 
             return `
                 <div class="ai-message-row ${isUser ? 'msg-user' : 'msg-bot'}">
-                    <div class="ai-avatar-bubble">${isUser ? 'ICH' : 'KI'}</div>
+                    <div class="ai-avatar-bubble">${isUser ? 'ICH' : 'AI'}</div>
                     <div class="ai-bubble-content">
                         <div class="ai-bubble-text">${formattedText}</div>
                         ${actionsHtml}
@@ -284,25 +252,14 @@
             `;
         }).join('');
 
-        if (dom.messagesContainer) {
-            dom.messagesContainer.innerHTML = html;
-        }
-        if (dom.embeddedMessagesContainer) {
-            dom.embeddedMessagesContainer.innerHTML = html;
-        }
+        dom.stream.innerHTML = html;
     }
 
     function scrollToBottom() {
-        if (dom.messagesContainer) {
-            setTimeout(() => {
-                dom.messagesContainer.scrollTop = dom.messagesContainer.scrollHeight;
-            }, 50);
-        }
-        if (dom.embeddedMessagesContainer) {
-            setTimeout(() => {
-                dom.embeddedMessagesContainer.scrollTop = dom.embeddedMessagesContainer.scrollHeight;
-            }, 50);
-        }
+        if (!dom.stream) return;
+        setTimeout(() => {
+            dom.stream.scrollTop = dom.stream.scrollHeight;
+        }, 40);
     }
 
     function formatMarkdown(raw) {
@@ -317,15 +274,14 @@
         // Italic
         escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
         // Bullet points
-        escaped = escaped.replace(/^• (.*?)$/gm, '<li class="ai-li">• $1</li>');
-        escaped = escaped.replace(/^(\d+)\. (.*?)$/gm, '<li class="ai-li"><span class="ai-num">$1.</span> $2</li>');
+        escaped = escaped.replace(/^• (.*?)$/gm, '<div style="margin-left: 8px;">• $1</div>');
+        escaped = escaped.replace(/^(\d+)\. (.*?)$/gm, '<div style="margin-left: 8px;"><strong>$1.</strong> $2</div>');
         // New lines
         escaped = escaped.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
 
         return escaped;
     }
 
-    // Interactive Action Handler
     function handleAction(msgIdx, actIdx) {
         const msg = state.messages[msgIdx];
         if (!msg || !msg.actions) return;
@@ -344,7 +300,7 @@
                 const el = document.getElementById(act.target);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-            if (window.innerWidth < 768) setModalOpen(false); // Close on mobile to view section
+            if (window.innerWidth < 768) closeDrawer();
         } else if (act.action === 'select_asset') {
             if (window.selectOracleAsset) {
                 window.selectOracleAsset(act.target);
@@ -352,89 +308,80 @@
             if (window.scrollToDashboardSection) {
                 window.scrollToDashboardSection('step2Entscheidung');
             }
-            if (window.innerWidth < 768) setModalOpen(false);
+            if (window.innerWidth < 768) closeDrawer();
         }
     }
 
-    // Local instant intelligent fallback
     function generateLocalResponse(q, asset, curr) {
         const low = q.toLowerCase();
+        const short = asset.replace('USDT', '');
         const currSym = curr === 'EUR' ? '€' : '$';
 
-        if (low.includes('wie funktioniert') || low.includes('anleitung') || low.includes('hilfe') || low.includes('seite')) {
+        if (low.includes('golden pocket') || low.includes('61.8') || low.includes('fibonacci')) {
             return {
-                text: "**So funktioniert diese Plattform in 5 einfachen Schritten:**\n\n" +
-                      "1. **🎯 Schritt 1 (Kauf-Radar):** Prüfen Sie die Top-3-Kaufempfehlungen des Tages und das 16-Coin-Ranking.\n" +
-                      "2. **⚡ Schritt 2 (Entscheidungs-Cockpit):** Erhalten Sie das konkrete Signal (**KAUFEN / WARTEN**), den optimalen Einstiegskurs und den **Stop-Loss zur Verlustbegrenzung**.\n" +
-                      "3. **💰 Investitions-Rechner:** Geben Sie z. B. `1.000 €` ein und sehen Sie auf den Cent genau maximales Risiko und Gewinn.\n" +
-                      "4. **📊 Schritt 3 (Chart):** Sehen Sie visuell, wo der Kurs im Verhältnis zum goldenen 61.8% Golden Pocket steht.\n" +
-                      "5. **🛡️ Schritt 4 & 5 (Sicherheit & Backtest):** Prüfen Sie anstehende Token-Unlocks und die historische Trefferquote (71.7% Win Rate).",
+                text: `**Golden Pocket Analyse für ${short}:**\n\nDas 61.8% Fibonacci-Retracement gilt als die stärkste statistische Rebound-Zone im Markt.\n\n• **Bedeutung:** Wenn institutionelle Käufer auf diesem Level akkumulieren, ist das Risiko minimal.\n• **Einstieg:** Platzieren Sie Limit-Käufe leicht oberhalb der 61.8%-Marke.\n• **Schutz:** Der Stop-Loss gehört zwingend knapp unter das 78.6%-Level.`,
                 actions: [
-                    { label: "🎯 Zum Kauf-Radar (Schritt 1)", action: "scroll", target: "step1KaufRadar" },
-                    { label: "⚡ Zum Entscheidungs-Cockpit (Schritt 2)", action: "scroll", target: "step2Entscheidung" },
-                    { label: "💰 Zum Investitions-Rechner", action: "scroll", target: "copilotCheckerCard" }
+                    { label: "📊 Im Chart ansehen", action: "scroll", target: "step3Chart" },
+                    { label: "⚡ Preis-Levels im Cockpit", action: "scroll", target: "step2Entscheidung" }
                 ]
             };
         }
 
-        if (low.includes('welchen coin') || low.includes('was kaufen') || low.includes('kaufempfehlung')) {
+        if (low.includes('stop-loss') || low.includes('verlust') || low.includes('risiko') || low.includes('schutz')) {
             return {
-                text: "**Tagesaktuelle Kauf-Empfehlungen:**\n\n" +
-                      "• **#1 Bitcoin (BTC):** Starkes Kaufsignal im 61.8% Golden Pocket bei institutioneller Wal-Akkumulation.\n" +
-                      "• **#2 Solana (SOL):** Starkes Momentum und hohes Handelsvolumen.\n" +
-                      "• **#3 Injective (INJ):** Bester Cashflow-Pick mit **16.42% APR Liquid Staking** im Hydro Protocol.\n\n" +
-                      "Klicken Sie auf einen Coin, um das konkrete Einstiegs-Setup zu laden:",
+                text: `**Risikomanagement & Stop-Loss für ${short}:**\n\n• **Feste Regel:** Riskieren Sie pro Trade maximal **1% bis 2% Ihres Gesamtkapitals**.\n• **Konkreter Stop-Loss:** Liegt für ${short} knapp unter dem letzten Swing-Tief, um Fehlausbrüche zu vermeiden.\n• **CRV-Vorteil:** Durch das berechnete CRV von über **1:3.0** reicht bereits eine Trefferquote von 40%, um profitabel zu sein.`,
                 actions: [
-                    { label: "👉 Bitcoin (BTC) im Cockpit laden", action: "select_asset", target: "BTCUSDT" },
-                    { label: "👉 Solana (SOL) im Cockpit laden", action: "select_asset", target: "SOLUSDT" },
-                    { label: "👉 Injective (INJ) Staking ansehen", action: "select_asset", target: "INJUSDT" }
+                    { label: "💰 Im Risiko-Rechner durchrechnen", action: "scroll", target: "copilotCheckerCard" },
+                    { label: "🛑 Stop-Loss im Cockpit prüfen", action: "scroll", target: "step2Entscheidung" }
                 ]
             };
         }
 
-        if (low.includes('stop loss') || low.includes('risiko') || low.includes('absicherung')) {
+        if (low.includes('crv') || low.includes('chance') || low.includes('verhältnis')) {
             return {
-                text: "**Wie schützt Sie der Stop-Loss?**\n\n" +
-                      "• **Fester Notausstieg:** Fällt der Kurs unter das Fibonacci-Support-Niveau, wird die Position automatisch geschlossen.\n" +
-                      "• **Limitiertes Risiko:** Bei 1.000 € Einsatz verlieren Sie maximal **ca. 15 € bis 25 € (-1.5% bis -2.5%)**.\n" +
-                      "• **Hohe Gewinne bei Erfolg:** Das Gewinnziel liegt bei +5% bis +11%, sodass 1 € Risiko mindestens **3,40 € Gewinnpotenzial** gegenüberstehen (CRV 1 : 3.4).",
+                text: `**Chance-Risiko-Verhältnis (CRV) für ${short}:**\n\n• **Aktuelles CRV:** ca. **1 : 3.40**\n• **Was bedeutet das?** Für jeden investierten Euro Verlustrisiko bei Stop-Loss stehen **3,40 Euro realistischer Gewinn** beim Take-Profit gegenüber.\n• **Regel:** Setups unter einem CRV von 1:1.5 werden vom Orakel automatisch als Neutral/Warten eingestuft.`,
                 actions: [
-                    { label: "⚡ Stop-Loss im Cockpit ansehen", action: "scroll", target: "step2Entscheidung" },
-                    { label: "💰 Risiko im Rechner prüfen", action: "scroll", target: "copilotCheckerCard" }
+                    { label: "⚡ Trading-Plan prüfen", action: "scroll", target: "step2Entscheidung" }
+                ]
+            };
+        }
+
+        if (low.includes('kaufen') || low.includes('welchen coin') || low.includes('setup')) {
+            return {
+                text: `**Kaufempfehlung heute für ${short}:**\n\n1. **Kauf-Radar:** ${short} zeigt aktuell ein überzeugendes Signal mit gesunder Konsolidierung an der Fibonacci-Unterstützung.\n2. **Vorgehensweise:** Staffeln Sie Ihren Einstieg (50% jetzt, 50% bei direktem Retest).\n3. **Gewinnmitnahme:** 50% Teilgewinn bei Take-Profit 1, Rest trailing mit Stop-Loss auf Break-Even.`,
+                actions: [
+                    { label: "🎯 Zum Kauf-Radar springen", action: "scroll", target: "step1KaufRadar" },
+                    { label: "⚡ Einstiegsmarke laden", action: "scroll", target: "step2Entscheidung" }
                 ]
             };
         }
 
         return {
-            text: `Ich habe Ihre Frage zu **${asset.replace('USDT', '')}** erfasst.\n\nDas Orakel liefert Ihnen mathematisch fundierte Fibonacci-Signale, Onchain-Wal-Akkumulation und Sicherheitsprüfungen.\n\nWas möchten Sie als Nächstes tun?`,
+            text: `Ich habe Ihre Frage zu **${short}** analysiert.\n\nDas Orakel liefert Ihnen mathematisch fundierte Fibonacci-Signale, Onchain-Wal-Akkumulation und automatische Risikoberechnung.\n\nWas möchten Sie als Nächstes tun?`,
             actions: [
-                { label: "🎯 Zum Kauf-Radar springen", action: "scroll", target: "step1KaufRadar" },
-                { label: "⚡ Zum Entscheidungs-Cockpit springen", action: "scroll", target: "step2Entscheidung" },
-                { label: "📊 Zum Chart springen", action: "scroll", target: "step3Chart" }
+                { label: "⚡ Zum Entscheidungs-Cockpit", action: "scroll", target: "step2Entscheidung" },
+                { label: "📊 Zum Chart", action: "scroll", target: "step3Chart" },
+                { label: "💰 Zum Risiko-Rechner", action: "scroll", target: "copilotCheckerCard" }
             ]
         };
     }
 
-    // Expose API
-    function focusStudio() {
-        const studio = document.getElementById('aiEmbeddedStudio');
-        if (studio) {
-            studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (dom.embeddedInputField) {
-                setTimeout(() => dom.embeddedInputField.focus(), 350);
-            }
-        }
+    function discussCurrentAsset() {
+        const sym = (window.currentSymbol || 'BTCUSDT').replace('USDT', '');
+        openDrawer();
+        submitQuery(`Analysiere das aktuelle Trading-Setup für ${sym} mit konkreten Einstiegs-, Stop-Loss- und Take-Profit-Marken.`);
     }
 
+    // Expose API
     window.AiAssistant = {
-        open: focusStudio,
-        close: () => {},
-        toggle: focusStudio,
+        open: openDrawer,
+        close: closeDrawer,
+        toggle: toggleDrawer,
+        discussCurrentAsset: discussCurrentAsset,
         ask: submitQuery,
         handleAction: handleAction
     };
 
-    // Auto-init on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initAssistant);
     } else {

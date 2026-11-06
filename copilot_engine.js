@@ -412,8 +412,8 @@
                         #${idx + 1}
                     </td>
                     <td>
-                        <strong style="color: #0f172a;">${coin.ticker}</strong>
-                        <span style="font-size: 0.75rem; color: #475569; margin-left: 4px;">(${coin.name})</span>
+                        <strong style="color: var(--text-primary);">${coin.ticker}</strong>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: 4px;">(${coin.name})</span>
                     </td>
                     <td>
                         <span class="score-badge ${coin.scores.total >= 72 ? 'score-high' : 'score-mid'}">
@@ -429,7 +429,7 @@
                     <td style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
                         ${coin.rsi}
                     </td>
-                    <td style="font-size: 0.78rem; color: #334155;">
+                    <td style="font-size: 0.78rem; color: var(--text-secondary);">
                         ${coin.verdict}
                     </td>
                     <td>
@@ -555,10 +555,10 @@
             </div>
 
             <div class="checker-reasoning-card">
-                <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 0.88rem;">
+                <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px; font-size: 0.88rem;">
                     Begründung & Marktlage für ${item.name} (${item.ticker}):
                 </div>
-                <p style="margin: 0; color: #334155; font-size: 0.85rem; line-height: 1.6;">
+                <p style="margin: 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
                     ${justification}
                 </p>
                 <div class="checker-dca-tip">
@@ -569,23 +569,23 @@
             <div class="checker-metrics-grid">
                 <div class="checker-metric-box">
                     <div class="checker-metric-label">Erworbene Menge bei ${amountFormatted}</div>
-                    <div class="checker-metric-val" style="color: #0f172a;">${coinAmountStr} ${item.ticker}</div>
-                    <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">Basis: ${formatMoney(item.price)}</div>
+                    <div class="checker-metric-val" style="color: var(--text-primary);">${coinAmountStr} ${item.ticker}</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">Basis: ${formatMoney(item.price)}</div>
                 </div>
                 <div class="checker-metric-box">
                     <div class="checker-metric-label">Max. Risiko bei Stop-Loss</div>
                     <div class="checker-metric-val text-red">-${riskFormatted} (-${slDistPct.toFixed(1)}%)</div>
-                    <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">SL-Marke: ${formatMoney(slPriceUSD)}</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">SL-Marke: ${formatMoney(slPriceUSD)}</div>
                 </div>
                 <div class="checker-metric-box">
                     <div class="checker-metric-label">Erstes Kursziel (Fib TP)</div>
                     <div class="checker-metric-val text-green">+${profitFormatted} (+${tpDistPct.toFixed(1)}%)</div>
-                    <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">TP-Marke: ${formatMoney(tpPriceUSD)}</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">TP-Marke: ${formatMoney(tpPriceUSD)}</div>
                 </div>
                 <div class="checker-metric-box">
                     <div class="checker-metric-label">Chance-Risiko-Verhältnis (CRV)</div>
                     <div class="checker-metric-val" style="color: ${parseFloat(crv) >= 2.0 ? 'var(--accent-green)' : 'var(--accent-amber)'};">1 : ${crv}</div>
-                    <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">${parseFloat(crv) >= 2.0 ? 'Ausgezeichnet' : 'Moderat'}</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">${parseFloat(crv) >= 2.0 ? 'Ausgezeichnet' : 'Moderat'}</div>
                 </div>
             </div>
 
