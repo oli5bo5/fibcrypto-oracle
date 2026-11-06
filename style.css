@@ -13,7 +13,7 @@
     --border-frame: rgba(0, 0, 0, 0.12);
     --border-glow: rgba(0, 109, 91, 0.25);
 
-    --text-main: #002d5a;
+    --text-main: #00388b;
     --text-body: #1e293b;
     --text-muted: #334155;
     --text-subtle: #475569;
@@ -7160,8 +7160,8 @@ footer.app-footer span {
 /* ========================================================================= */
 
 :root {
-    --vb-blue: #004b93;
-    --vb-navy: #002d5a;
+    --vb-blue: #0066b3;
+    --vb-navy: #00388b;
     --vb-dark: #0f172a;
     --vb-slate: #1e293b;
     --vb-muted: #334155;
@@ -7221,7 +7221,7 @@ html, body {
 }
 
 .brand-monogram {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     font-size: 1.05rem !important;
@@ -7236,7 +7236,7 @@ html, body {
     font-size: 1.35rem !important;
     font-weight: 900 !important;
     letter-spacing: 0.02em !important;
-    color: #002d5a !important;
+    color: #00388b !important;
     line-height: 1 !important;
 }
 
@@ -7260,7 +7260,7 @@ html, body {
 }
 
 .header-controls .currency-btn .active-curr {
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 900 !important;
 }
 
@@ -7275,16 +7275,16 @@ html, body {
 }
 
 .header-controls .tf-btn.active {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
     box-shadow: 0 2px 8px rgba(0, 75, 147, 0.25) !important;
 }
 
 .header-controls .status-pill {
     background: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 800 !important;
     border-radius: 9999px !important;
     padding: 7px 16px !important;
@@ -7322,20 +7322,20 @@ html, body {
 
 .header-nav-tier .nav-tab:hover {
     background: #f0f7ff !important;
-    border-color: #004b93 !important;
-    color: #004b93 !important;
+    border-color: #0066b3 !important;
+    color: #0066b3 !important;
 }
 
 .header-nav-tier .nav-tab.active {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
     box-shadow: 0 4px 14px rgba(0, 75, 147, 0.28) !important;
 }
 
 .header-nav-tier .nav-tab-num {
     background: #e2e8f0 !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     border-radius: 50% !important;
     width: 20px !important;
     height: 20px !important;
@@ -7361,7 +7361,7 @@ html, body {
 }
 
 .editorial-hero-eyebrow {
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-size: 0.82rem !important;
     font-weight: 900 !important;
     letter-spacing: 0.06em !important;
@@ -7369,7 +7369,7 @@ html, body {
 }
 
 .editorial-hero-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-size: 3.4rem !important;
     font-weight: 900 !important;
     line-height: 1.05 !important;
@@ -7383,7 +7383,7 @@ html, body {
 }
 
 .editorial-btn-emerald {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     font-size: 0.92rem !important;
@@ -7399,7 +7399,7 @@ html, body {
 .editorial-btn-outline {
     background: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 800 !important;
     font-size: 0.92rem !important;
     border-radius: 9999px !important;
@@ -7408,11 +7408,11 @@ html, body {
 
 .editorial-btn-outline:hover {
     background: #f0f7ff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
 }
 
 .editorial-stat-card-top {
-    background: #002d5a !important;
+    background: #00388b !important;
     color: #ffffff !important;
     padding: 32px !important;
     border-radius: 24px 24px 0 0 !important;
@@ -7446,7 +7446,7 @@ html, body {
 }
 
 .editorial-stat-card-bottom .stat-card-huge-val-dark {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-size: 3.6rem !important;
     font-weight: 900 !important;
 }
@@ -7467,7 +7467,7 @@ html, body {
 .flow-step-header {
     background: #ffffff !important;
     border: 1px solid #cbd5e1 !important;
-    border-left: 6px solid #004b93 !important;
+    border-left: 6px solid #0066b3 !important;
     border-radius: 16px !important;
     padding: 24px 28px !important;
     margin-bottom: 24px !important;
@@ -7475,7 +7475,7 @@ html, body {
 }
 
 .flow-step-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.45rem !important;
 }
@@ -7489,7 +7489,7 @@ html, body {
 
 .flow-step-pill {
     background: #f0f7ff !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 800 !important;
     font-size: 0.74rem !important;
     padding: 5px 12px !important;
@@ -7517,7 +7517,7 @@ html, body {
 }
 
 .pick-coin-ticker {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.55rem !important;
 }
@@ -7556,13 +7556,13 @@ html, body {
 }
 
 .psm-val {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1rem !important;
 }
 
 .btn-copilot-action {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     font-size: 0.88rem !important;
@@ -7610,14 +7610,14 @@ html, body {
 
 .copilot-filter-btn:hover {
     background: #f0f7ff !important;
-    border-color: #004b93 !important;
-    color: #004b93 !important;
+    border-color: #0066b3 !important;
+    color: #0066b3 !important;
 }
 
 .copilot-filter-btn.active {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
     box-shadow: 0 4px 14px rgba(0, 75, 147, 0.28) !important;
 }
 
@@ -7628,7 +7628,7 @@ html, body {
 }
 
 .asset-dropdown-box .dropdown-label {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 800 !important;
     font-size: 0.88rem !important;
 }
@@ -7644,7 +7644,7 @@ html, body {
 }
 
 .chips-label {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 800 !important;
     font-size: 0.88rem !important;
     margin-right: 12px !important;
@@ -7671,14 +7671,14 @@ html, body {
 
 .asset-chips-container .asset-btn:hover {
     background: #f0f7ff !important;
-    border-color: #004b93 !important;
-    color: #004b93 !important;
+    border-color: #0066b3 !important;
+    color: #0066b3 !important;
 }
 
 .asset-chips-container .asset-btn.active {
-    background: #002d5a !important;
+    background: #00388b !important;
     color: #ffffff !important;
-    border-color: #002d5a !important;
+    border-color: #00388b !important;
     box-shadow: 0 4px 14px rgba(0, 45, 90, 0.3) !important;
 }
 
@@ -7707,7 +7707,7 @@ html, body {
 }
 
 .banner-val {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.55rem !important;
 }
@@ -7739,7 +7739,7 @@ html, body {
 
 #sectionTradeSetup .section-eyebrow,
 .oracle-box-dunkellila .section-eyebrow {
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 900 !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.06em !important;
@@ -7759,7 +7759,7 @@ html, body {
 }
 
 #confidenceVal {
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-size: 1.55rem !important;
     font-weight: 900 !important;
 }
@@ -7786,14 +7786,14 @@ html, body {
 }
 
 .signal-progress-fill {
-    background: linear-gradient(90deg, #004b93, #059669) !important;
+    background: linear-gradient(90deg, #0066b3, #059669) !important;
     box-shadow: none !important;
 }
 
 .crv-badge-highlight {
     background: #f0f7ff !important;
     border: 1px solid #bae6fd !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 900 !important;
     font-size: 0.88rem !important;
     padding: 6px 14px !important;
@@ -7916,7 +7916,7 @@ html, body {
 }
 
 .bw-ai-eyebrow {
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 900 !important;
     font-size: 0.82rem !important;
     letter-spacing: 0.06em !important;
@@ -7924,7 +7924,7 @@ html, body {
 }
 
 .bw-ai-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.45rem !important;
     margin: 8px 0 18px 0 !important;
@@ -7933,7 +7933,7 @@ html, body {
 .bw-ai-refresh-btn {
     background: #f8fafc !important;
     border: 1px solid #cbd5e1 !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 800 !important;
     font-size: 0.82rem !important;
     border-radius: 9999px !important;
@@ -7944,20 +7944,20 @@ html, body {
 
 .bw-ai-refresh-btn:hover {
     background: #f0f7ff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
 }
 
 .bw-ai-point {
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
-    border-left: 5px solid #004b93 !important;
+    border-left: 5px solid #0066b3 !important;
     border-radius: 14px !important;
     padding: 18px 22px !important;
     margin-bottom: 14px !important;
 }
 
 .bw-ai-point-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 800 !important;
     font-size: 0.95rem !important;
     margin-bottom: 6px !important;
@@ -7972,7 +7972,7 @@ html, body {
 .bw-ai-src-pill {
     background: #e0f2fe !important;
     border: 1px solid #bae6fd !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-size: 0.76rem !important;
     font-weight: 800 !important;
     padding: 4px 12px !important;
@@ -7996,7 +7996,7 @@ html, body {
 
 .checker-badge-pill {
     background: #f0f7ff !important;
-    color: #004b93 !important;
+    color: #0066b3 !important;
     font-weight: 800 !important;
     border: 1px solid #bae6fd !important;
     border-radius: 9999px !important;
@@ -8005,7 +8005,7 @@ html, body {
 }
 
 .checker-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-size: 1.5rem !important;
     font-weight: 900 !important;
     margin: 10px 0 !important;
@@ -8019,8 +8019,8 @@ html, body {
 
 .checker-input-row .checker-input-field {
     background: #f8fafc !important;
-    border: 2px solid #004b93 !important;
-    color: #002d5a !important;
+    border: 2px solid #0066b3 !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.6rem !important;
     border-radius: 12px !important;
@@ -8040,13 +8040,13 @@ html, body {
 }
 
 .checker-btn-preset:hover {
-    border-color: #004b93 !important;
-    color: #004b93 !important;
+    border-color: #0066b3 !important;
+    color: #0066b3 !important;
     background: #f0f7ff !important;
 }
 
 .btn-checker-run {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     font-size: 0.92rem !important;
@@ -8072,7 +8072,7 @@ html, body {
 }
 
 .checker-metric-val {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.45rem !important;
 }
@@ -8080,14 +8080,14 @@ html, body {
 .checker-reasoning-card {
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
-    border-left: 5px solid #004b93 !important;
+    border-left: 5px solid #0066b3 !important;
     border-radius: 14px !important;
     padding: 22px !important;
     margin-bottom: 20px !important;
 }
 
 .btn-checker-transfer {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-weight: 800 !important;
     font-size: 0.90rem !important;
@@ -8114,7 +8114,7 @@ html, body {
 }
 
 .sidebar-sticky-dock .ai-studio-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-size: 1.2rem !important;
     font-weight: 900 !important;
 }
@@ -8127,16 +8127,16 @@ html, body {
 .sidebar-sticky-dock .ai-chip {
     background: #f8fafc !important;
     border: 1px solid #cbd5e1 !important;
-    color: #002d5a !important;
+    color: #00388b !important;
     font-size: 0.78rem !important;
     font-weight: 700 !important;
     padding: 8px 16px !important;
 }
 
 .sidebar-sticky-dock .ai-chip:hover {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
-    border-color: #004b93 !important;
+    border-color: #0066b3 !important;
 }
 
 .ai-embedded-bubble.ai {
@@ -8148,7 +8148,7 @@ html, body {
 }
 
 .ai-embedded-bubble.user {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
@@ -8164,7 +8164,7 @@ html, body {
 }
 
 .ai-embedded-send-btn {
-    background: #004b93 !important;
+    background: #0066b3 !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 12px !important;
@@ -8184,7 +8184,7 @@ html, body {
 }
 
 .panel-header .panel-title {
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 1.25rem !important;
 }
@@ -8197,7 +8197,7 @@ html, body {
 
 .fib-table th {
     background: #f8fafc !important;
-    color: #002d5a !important;
+    color: #00388b !important;
     font-weight: 900 !important;
     font-size: 0.82rem !important;
     padding: 14px 18px !important;
