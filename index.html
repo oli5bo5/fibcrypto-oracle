@@ -192,7 +192,7 @@
             <!-- AI Assistant Onboarding Helper Banner -->
             <div class="ai-assistant-banner" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <div class="ai-banner-avatar">🤖</div>
+                    <div class="ai-banner-avatar">KI</div>
                     <div>
                         <div style="font-weight: 800; color: var(--text-primary); font-size: 0.95rem;">
                             Neu auf der Plattform oder Fragen zum Kauf?
@@ -210,14 +210,15 @@
             <!-- Copilot Panel Wrapper (Kept for copilot_engine.js compatibility) -->
             <div id="copilotPanel" style="display: block;">
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="radar-scan-bar">
+                    <div class="radar-scan-left">
+                        <div class="radar-scan-title">Top-Empfehlungen heute</div>
                         <span class="copilot-live-pill" id="copilotScanStatus">LIVE MARKT-SCAN AKTIV</span>
-                        <span id="copilotLastUpdated" class="copilot-time-label" style="font-size: 0.75rem; color: var(--text-muted);">Lädt...</span>
                     </div>
-                    <button id="btnRefreshCopilotScan" class="copilot-btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">
-                        ↻ Marktdaten neu scannen
-                    </button>
+                    <div class="radar-scan-right">
+                        <span id="copilotLastUpdated" class="copilot-time-label">Lädt...</span>
+                        <button id="btnRefreshCopilotScan" class="copilot-btn-secondary">↻ Neu scannen</button>
+                    </div>
                 </div>
 
                 <!-- Top 3 Recommendations Cards for Today -->
@@ -230,7 +231,7 @@
 
                 <!-- Strategy Filter Bar & Asset-Class Toggles -->
                 <div class="radar-controls-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                    <div class="radar-filter-row">
                         <div class="copilot-filters-group">
                             <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); margin-right: 6px; text-transform: uppercase;">Filter:</span>
                             <button class="copilot-filter-btn active" data-filter="all">Alle Märkte (16)</button>
@@ -238,16 +239,6 @@
                             <button class="copilot-filter-btn" data-filter="momentum">Momentum & Trend</button>
                             <button class="copilot-filter-btn" data-filter="yield">Passives Einkommen (Staking)</button>
                             <button class="copilot-filter-btn" data-filter="dip">Dip-Kauf / Rebound</button>
-                        </div>
-
-                        <!-- Grid & Watchlist Expanders -->
-                        <div style="display: flex; gap: 8px;">
-                            <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwAssetGrid">
-                                <span>Multi-Asset Matrix (16)</span>
-                            </button>
-                            <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwWatchlist">
-                                <span>Meine Watchlist (<span id="bwWatchlistBtnCount">4</span>)</span>
-                            </button>
                         </div>
                     </div>
 
@@ -280,7 +271,14 @@
                                 </div>
                             </div>
 
-                            <div class="asset-divider"></div>
+                            <div class="radar-toggle-group">
+                            <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwAssetGrid">
+                                <span>Multi-Asset Matrix (16)</span>
+                            </button>
+                            <button type="button" class="bw-QuickToggle-btn" id="btnToggleBwWatchlist">
+                                <span>Meine Watchlist (<span id="bwWatchlistBtnCount">4</span>)</span>
+                            </button>
+                            </div>
 
                             <!-- Direct Quick-Select Chips -->
                             <div class="asset-chips-container" id="assetSelector">
@@ -434,61 +432,49 @@
                 </div>
             </div>
 
-            <!-- 3-Spalten Trading-Plan (TradingView / Bloomberg Style) -->
-            <div class="cockpit-plan-grid">
+            <!-- Trading-Plan: flach untereinander (Signal-Leiste, Preis-Leiter, Analyst) -->
+            <div class="cockpit-flat">
 
-                <!-- Spalte 1: Signal & Bias -->
-                <div class="panel-signal-column" id="sectionTradeSetup">
-                    <div>
-                        <div class="section-eyebrow">// 1. SIGNAL &amp; MARKT-BIAS</div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 12px;">
-                            <div>
-                                <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Handlungsempfehlung</span>
-                                <div class="oracle-signal-badge signal-BUY" id="oracleSignalBadge" style="margin-top: 4px;">
-                                    <span id="oracleSignalText">KAUFSIGNAL</span>
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">KI-Konfidenz</span>
-                                <div style="font-size: 1.35rem; font-family: var(--font-mono); font-weight: 800; color: var(--bullish-text);" id="confidenceVal">85%</div>
-                            </div>
-                        </div>
-
-                        <!-- Signal Strength Bar -->
-                        <div class="signal-strength-box" style="margin-bottom: 14px;">
-                            <div class="signal-strength-header" style="display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 4px;">
-                                <span style="color: var(--text-secondary);">Signal-Stärke &amp; Wahrscheinlichkeit:</span>
-                                <span id="signalStrengthPctVal" style="color: var(--bullish-text); font-weight: 700; font-family: var(--font-mono);">84%</span>
-                            </div>
-                            <div class="signal-progress-track" style="height: 6px; background: var(--bg-surface-2); border-radius: var(--radius-pill); overflow: hidden;">
-                                <div class="signal-progress-fill" id="signalStrengthBar" style="width: 84%; height: 100%; background: linear-gradient(90deg, #10B981, #34D399); transition: width 0.3s ease;"></div>
-                            </div>
-                            <div class="confidence-bar-wrap" style="display: none;">
-                                <div class="confidence-fill" id="confidenceBar" style="width: 85%;"></div>
-                            </div>
-                        </div>
-
-                        <!-- Warning Banner if any -->
-                        <div id="setupWarningBanner" class="setup-warning-box" style="display: none;"></div>
-                    </div>
-
-                    <!-- Sentiment & Due Diligence Mini Strip -->
-                    <div class="bw-oracle-meta-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto;">
-                        <div id="bwSentimentBadgeCard" class="bw-sentiment-badge-card" style="padding: 10px; background: var(--bg-surface-2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                            <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;">Social Sentiment</div>
-                            <div id="bwOracleSentLabel" style="font-weight: 700; font-size: 0.88rem; color: var(--bullish-text); margin-top: 2px;">Bullisch (78%)</div>
-                            <div id="bwOracleSentScore" style="display: none;"></div>
-                            <div class="bw-sent-split-track" style="display: none;"><div id="bwOracleSentBullBar"></div></div>
-                            <div id="bwOracleSentMentions" style="font-size: 0.70rem; color: var(--text-muted); margin-top: 2px;">64.200 Mentions</div>
-                        </div>
-                        <div id="bwDdScoreBadgeCard" class="bw-sentiment-badge-card" style="padding: 10px; background: var(--bg-surface-2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                            <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;">Due Diligence</div>
-                            <div id="bwOracleDdVal" class="metric-val-highlight" style="font-weight: 700; font-size: 0.88rem; color: var(--accent-cyan); margin-top: 2px;">88/100</div>
-                            <div id="bwOracleDdSub" style="font-size: 0.70rem; color: var(--text-muted); margin-top: 2px;">Vollständige Transparenz</div>
+                <!-- Zeile 1: Signal-Leiste -->
+                <div class="signal-strip" id="sectionTradeSetup">
+                    <div class="ss-cell ss-signal">
+                        <span class="ss-label">Handlungsempfehlung</span>
+                        <div class="oracle-signal-badge signal-BUY" id="oracleSignalBadge">
+                            <span id="oracleSignalText">KAUFSIGNAL</span>
                         </div>
                     </div>
+                    <div class="ss-cell">
+                        <span class="ss-label">KI-Konfidenz</span>
+                        <div class="ss-value ss-value-bull" id="confidenceVal">85%</div>
+                    </div>
+                    <div class="ss-cell ss-strength">
+                        <div class="ss-strength-head">
+                            <span class="ss-label">Signal-Stärke</span>
+                            <span class="ss-strength-val" id="signalStrengthPctVal">84%</span>
+                        </div>
+                        <div class="ss-track"><div class="ss-fill" id="signalStrengthBar" style="width: 84%;"></div></div>
+                        <div style="display: none;"><div id="confidenceBar" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="ss-cell" id="bwSentimentBadgeCard">
+                        <span class="ss-label">Social Sentiment</span>
+                        <div class="ss-value-sm" id="bwOracleSentLabel">Bullisch (78%)</div>
+                        <div id="bwOracleSentScore" style="display: none;"></div>
+                        <div style="display: none;"><div id="bwOracleSentBullBar"></div></div>
+                        <div class="ss-sub" id="bwOracleSentMentions">64.200 Mentions</div>
+                    </div>
+                    <div class="ss-cell" id="bwDdScoreBadgeCard">
+                        <span class="ss-label">Due Diligence</span>
+                        <div class="ss-value-sm ss-value-cyan" id="bwOracleDdVal">88/100</div>
+                        <div class="ss-sub" id="bwOracleDdSub">Vollständige Transparenz</div>
+                    </div>
+                    <div class="ss-cell ss-crv">
+                        <span class="ss-label">Chance / Risiko</span>
+                        <span class="ss-crv-badge" id="crvBadge">CRV 1:3.40</span>
+                    </div>
 
-                    <!-- Hidden inputs (required by JS logic) -->
+                    <div id="setupWarningBanner" class="setup-warning-box" style="display: none;"></div>
+
+                    <!-- Versteckte Felder (von app.js benötigt) -->
                     <div style="display: none;">
                         <label id="investInputLabel"></label>
                         <span id="coinSymbolLabel">BTC</span>
@@ -499,83 +485,76 @@
                     </div>
                 </div>
 
-                <!-- Spalte 2: Konkrete Preis-Levels (Execution) -->
-                <div class="panel-levels-column">
-                    <div class="section-eyebrow">// 2. PREIS-LEVELS (EXECUTION)</div>
-                    <div class="setup-grid-cards" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                        <!-- Entry -->
-                        <div class="setup-card card-entry" style="padding: 12px 14px; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-left: 4px solid var(--accent-cyan); border-radius: var(--radius-sm);">
-                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                                <span class="label" style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">1. Einstiegsbereich (Entry)</span>
-                                <span id="calcCoinsVal" style="font-size: 0.72rem; color: var(--text-secondary); font-family: var(--font-mono);">0.0150 BTC</span>
-                            </div>
-                            <div class="val" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: var(--text-primary); margin-top: 2px;" id="tradeEntryVal">$0.00</div>
+                <!-- Zeile 2: Preis-Leiter -->
+                <div class="price-ladder-card">
+                    <div class="pl-head">
+                        <div>
+                            <div class="section-eyebrow">// TRADING-PLAN · PREIS-LEVELS</div>
+                            <div class="pl-title">Vom Stop-Loss bis zum Hauptziel</div>
                         </div>
-
-                        <!-- Stop Loss -->
-                        <div class="setup-card card-stoploss" style="padding: 12px 14px; background: var(--bearish-bg); border: 1px solid var(--bearish-border); border-left: 4px solid var(--bearish-border); border-radius: var(--radius-sm);">
-                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                                <span class="label" style="font-size: 0.72rem; color: var(--bearish-text); text-transform: uppercase; font-weight: 700;">2. Stop-Loss (Kapitalschutz)</span>
-                                <span id="tradeRiskAmount" style="font-size: 0.72rem; color: var(--bearish-text); font-family: var(--font-mono);">-$15.00 (-1.5%)</span>
-                            </div>
-                            <div class="val" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: var(--bearish-text); margin-top: 2px;" id="tradeStopLossVal">$0.00</div>
+                        <div class="pl-position">
+                            <span class="ss-label">Positionsgröße</span>
+                            <span class="pl-position-val" id="calcCoinsVal">0.0150 BTC</span>
                         </div>
+                    </div>
 
-                        <!-- TP1 -->
-                        <div class="setup-card card-tp1" style="padding: 12px 14px; background: var(--bullish-bg); border: 1px solid var(--bullish-border); border-left: 4px solid var(--bullish-border); border-radius: var(--radius-sm);">
-                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                                <span class="label" style="font-size: 0.72rem; color: var(--bullish-text); text-transform: uppercase; font-weight: 700;">3. Kursziel 1 (Teilgewinn)</span>
-                                <span id="tradeProfit1Amount" style="font-size: 0.72rem; color: var(--bullish-text); font-family: var(--font-mono);">+$50.00 (+5.0%)</span>
-                            </div>
-                            <div class="val" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: var(--bullish-text); margin-top: 2px;" id="tradeTp1Val">$0.00</div>
+                    <div class="pl-track" id="priceLadderTrack">
+                        <div class="pl-seg pl-seg-risk" id="plSegRisk"></div>
+                        <div class="pl-seg pl-seg-reward" id="plSegReward"></div>
+                        <span class="pl-dot pl-dot-sl" id="plDotSl"></span>
+                        <span class="pl-dot pl-dot-entry" id="plDotEntry"></span>
+                        <span class="pl-dot pl-dot-tp1" id="plDotTp1"></span>
+                        <span class="pl-dot pl-dot-tp2" id="plDotTp2"></span>
+                    </div>
+
+                    <div class="pl-grid">
+                        <div class="pl-tile pl-tile-sl">
+                            <span class="pl-tile-label">Stop-Loss · Kapitalschutz</span>
+                            <span class="pl-tile-val" id="tradeStopLossVal">$0.00</span>
+                            <span class="pl-tile-sub" id="tradeRiskAmount">-$15.00 (-1.5%)</span>
                         </div>
-
-                        <!-- TP2 -->
-                        <div class="setup-card card-tp2" style="padding: 12px 14px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); border-left: 4px solid #38BDF8; border-radius: var(--radius-sm);">
-                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                                <span class="label" style="font-size: 0.72rem; color: #38BDF8; text-transform: uppercase; font-weight: 700;">4. Kursziel 2 (Hauptziel)</span>
-                                <span id="tradeProfit2Amount" style="font-size: 0.72rem; color: #38BDF8; font-family: var(--font-mono);">+$100.00 (+10.0%)</span>
-                            </div>
-                            <div class="val" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-mono); color: #38BDF8; margin-top: 2px;" id="tradeTp2Val">$0.00</div>
+                        <div class="pl-tile pl-tile-entry">
+                            <span class="pl-tile-label">Einstieg · Entry</span>
+                            <span class="pl-tile-val" id="tradeEntryVal">$0.00</span>
+                            <span class="pl-tile-sub">Kaufzone laut Fibonacci</span>
+                        </div>
+                        <div class="pl-tile pl-tile-tp1">
+                            <span class="pl-tile-label">Ziel 1 · Teilgewinn</span>
+                            <span class="pl-tile-val" id="tradeTp1Val">$0.00</span>
+                            <span class="pl-tile-sub" id="tradeProfit1Amount">+$50.00 (+5.0%)</span>
+                        </div>
+                        <div class="pl-tile pl-tile-tp2">
+                            <span class="pl-tile-label">Ziel 2 · Hauptziel</span>
+                            <span class="pl-tile-val" id="tradeTp2Val">$0.00</span>
+                            <span class="pl-tile-sub" id="tradeProfit2Amount">+$100.00 (+10.0%)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Spalte 3: Chance-Risiko & Analyst (Blockworks AI) -->
-                <div class="panel-analyst-column">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div class="section-eyebrow">// 3. CHANCE-RISIKO &amp; ANALYST</div>
-                            <span class="crv-badge" id="crvBadge" style="background: rgba(16, 185, 129, 0.15); color: var(--bullish-text); border: 1px solid var(--bullish-border); font-family: var(--font-mono); font-weight: 800; font-size: 0.82rem; padding: 3px 8px; border-radius: var(--radius-sm);">CRV 1:3.40</span>
+                <!-- Zeile 3: Analyst-Begründung -->
+                <div class="analyst-row" id="bwAiExplainerBox">
+                    <div class="analyst-head">
+                        <div>
+                            <div class="section-eyebrow">// BLOCKWORKS SENIOR ANALYST</div>
+                            <div class="pl-title">Warum dieses Signal?</div>
                         </div>
-
-                        <!-- Blockworks AI Senior Analyst Box -->
-                        <div class="bw-ai-explainer-card" id="bwAiExplainerBox" style="margin-top: 10px; background: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px;">
-                            <div class="bw-ai-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="font-size: 0.72rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase;">Blockworks Senior Analyst</span>
-                                <button id="btnRunAiExplain" class="btn-refresh-clean" title="Analyse neu laden" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem;">&#x21bb;</button>
-                            </div>
-
-                            <div class="bw-ai-content" id="bwAiExplanationContent">
-                                <div class="bw-ai-bullets-list" id="reasoningList" style="font-size: 0.82rem; line-height: 1.5; color: var(--text-secondary); display: flex; flex-direction: column; gap: 6px;">
-                                    <div>1. Kurs konsolidiert direkt am 61.8% Golden Pocket Fibonacci-Support.</div>
-                                    <div>2. RSI zeigt bullische Divergenz bei anziehendem On-Chain Netflow.</div>
-                                    <div>3. Starkes CRV mit engem Stop-Loss unter dem jüngsten Swing-Tief.</div>
-                                </div>
-                            </div>
-                            <span id="bwAiExplainStatus" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 6px; display: block;">Analyse aktiv aktualisiert</span>
+                        <div class="analyst-actions">
+                            <span class="ss-sub" id="bwAiExplainStatus">Analyse aktiv aktualisiert</span>
+                            <button id="btnRunAiExplain" class="copilot-btn-secondary" title="Analyse neu laden">↻ Neu laden</button>
+                            <button type="button" class="btn-discuss-ai" onclick="window.AiAssistant ? window.AiAssistant.discussCurrentAsset() : null">Mit KI-Assistent besprechen</button>
                         </div>
                     </div>
-
-                    <!-- Action Button: Mit KI-Assistent besprechen -->
-                    <button type="button" class="btn-discuss-ai" onclick="window.AiAssistant ? window.AiAssistant.discussCurrentAsset() : null" style="width: 100%; margin-top: 12px; background: #1E3A8A; color: #FFFFFF; border: 1px solid var(--border-focus); padding: 11px 16px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.86rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s ease;">
-                        <span style="font-size: 1rem;">✦</span>
-                        <span>Mit KI-Assistent besprechen</span>
-                    </button>
+                    <div id="bwAiExplanationContent">
+                        <div class="analyst-points" id="reasoningList">
+                            <div class="reasoning-item">Kurs konsolidiert direkt am 61.8% Golden Pocket Fibonacci-Support.</div>
+                            <div class="reasoning-item">RSI zeigt bullische Divergenz bei anziehendem On-Chain Netflow.</div>
+                            <div class="reasoning-item">Starkes CRV mit engem Stop-Loss unter dem jüngsten Swing-Tief.</div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
-            <!-- /cockpit-plan-grid -->
+            <!-- /cockpit-flat -->
 
             <!-- Investment Checker Card (Rechner: Wie viel investieren?) -->
             <div class="panel copilot-checker-card" id="copilotCheckerCard" style="margin-top: 0; background: var(--bg-surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px;">
@@ -861,7 +840,7 @@
                 <div class="panel bw-suite-card" id="bwMindshareCard">
                     <div class="section-eyebrow">// PHASE 2.2 • COMMUNITY MINDSHARE</div>
                     <div class="panel-header">
-                        <h3 class="panel-title">📈 MINDSHARE & SENTIMENT (7D)</h3>
+                        <h3 class="panel-title">MINDSHARE & SENTIMENT (7D)</h3>
                         <span id="bwMsDeltaBadge" style="font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 0.8rem; color: var(--accent-green);">↑ +1.8%</span>
                     </div>
 

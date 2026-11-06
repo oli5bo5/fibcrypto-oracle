@@ -301,7 +301,7 @@
             dom.lastUpdatedEl.textContent = `Stand: ${lastScanTime.toLocaleTimeString('de-DE')} Uhr (Live gescannt)`;
         }
         if (dom.scanStatusEl) {
-            dom.scanStatusEl.textContent = `● SCAN VOLLSTÄNDIG (${coinRatings.length} MÄRKTE)`;
+            dom.scanStatusEl.textContent = `Scan vollständig · ${coinRatings.length} Märkte`;
         }
 
         // 1. Render Top Picks Cards
@@ -362,27 +362,27 @@
 
                         <div class="pick-metrics-row">
                             <div class="pick-sub-metric">
-                                <span class="psm-label">RSI (14):</span>
+                                <span class="psm-label">RSI (14)</span>
                                 <span class="psm-val">${item.rsi}</span>
                             </div>
                             <div class="pick-sub-metric">
-                                <span class="psm-label">Trend-Score:</span>
+                                <span class="psm-label">Trend</span>
                                 <span class="psm-val text-green">${item.scores.trend}/20</span>
                             </div>
                             <div class="pick-sub-metric">
-                                <span class="psm-label">Einstiegs-Score:</span>
+                                <span class="psm-label">Einstieg</span>
                                 <span class="psm-val text-cyan">${item.scores.entry}/15</span>
                             </div>
                             ${item.stakingApr ? `
                                 <div class="pick-sub-metric">
-                                    <span class="psm-label">Staking APR:</span>
+                                    <span class="psm-label">APR</span>
                                     <span class="psm-val text-orange">${item.stakingApr}%</span>
                                 </div>
                             ` : ''}
                         </div>
 
                         <button class="btn-copilot-action" onclick="window.CopilotEngine.selectRecommended('${item.symbol}', '${item.actionType}')">
-                            ${isStake ? 'Im Hydro Protocol staken (16.42% APR) →' : `${item.ticker} Setup & Chart im Orakel laden →`}
+                            ${isStake ? 'Im Hydro Protocol staken (16.42% APR)' : `${item.ticker} Setup & Chart laden`}
                         </button>
                     </div>
                 `;

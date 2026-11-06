@@ -389,3 +389,22 @@
     }
 
 })();
+
+/* Preis-Leiter: positioniert Stop-Loss / Entry / Ziele auf einer horizontalen Skala */
+window.updatePriceLadder = function (sl, entry, tp1, tp2) {
+    const vals = [sl, entry, tp1, tp2].map(Number);
+    if (vals.some(v => !isFinite(v) || v <= 0)) return;
+    const min = Math.min(...vals), max = Math.max(...vals);
+    const span = max - min || 1;
+    const pos = v => 4 + ((v - min) / span) * 92; // 4% .. 96%
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.style.left = pos(v) + '%'; };
+    set('plDotSl', sl); set('plDotEntry', entry); set('plDotTp1', tp1); set('plDotTp2', tp2);
+    const seg = (id, a, b) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const l = Math.min(pos(a), pos(b)), r = Math.max(pos(a), pos(b));
+        el.style.left = l + '%'; el.style.width = (r - l) + '%';
+    };
+    seg('plSegRisk', sl, entry);
+    seg('plSegReward', entry, tp2);
+};

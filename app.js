@@ -1144,6 +1144,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (crvBadgeEl) {
             crvBadgeEl.textContent = `CRV: 1:${crvVal.toFixed(2)}`;
         }
+        if (typeof window.updatePriceLadder === 'function') {
+            window.updatePriceLadder(slNum, entryNum, tp1Num, tp2Num);
+        }
 
         // Reasoning list (NO EMOJIS)
         if (reasoningListEl) {

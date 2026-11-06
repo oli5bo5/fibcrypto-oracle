@@ -1950,3 +1950,273 @@ button {
     right: 18px;
   }
 }
+
+
+/* ==========================================================================
+   v15.3 — LAYOUT-FEINSCHLIFF: Kauf-Radar & flaches Entscheidungs-Cockpit
+   ========================================================================== */
+
+/* --- Scan-Leiste über den Top-Empfehlungen --- */
+.radar-scan-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-bottom: 16px;
+}
+.radar-scan-left, .radar-scan-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.radar-scan-title { color: var(--text-primary); font-weight: 800; font-size: 1rem; }
+.radar-scan-bar .copilot-live-pill {
+  background: var(--bullish-bg);
+  color: var(--bullish-text);
+  border: 1px solid var(--bullish-border);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.radar-scan-bar .copilot-time-label { color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-mono); }
+.copilot-btn-secondary {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.copilot-btn-secondary:hover { border-color: var(--border-focus); background: var(--bg-surface-hover); }
+
+/* --- Top-Empfehlungen: 3 gleich breite Karten --- */
+.copilot-top-picks-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 16px; }
+.pick-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pick-rank-tag { color: var(--accent-cyan); font-size: 0.72rem; font-weight: 800; font-family: var(--font-mono); letter-spacing: 0.03em; }
+.pick-score-pill {
+  background: var(--bg-surface-2); border: 1px solid var(--border-strong); color: var(--text-primary);
+  border-radius: var(--radius-pill); padding: 3px 10px; font-size: 0.72rem; font-weight: 800; font-family: var(--font-mono);
+}
+.pick-coin-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+.pick-coin-ident, .pick-price-box { display: flex; flex-direction: column; gap: 2px; }
+.pick-price-box { align-items: flex-end; }
+.pick-change { font-size: 0.78rem; font-weight: 700; font-family: var(--font-mono); }
+.pick-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 8px;
+  padding: 10px 12px;
+}
+.pick-sub-metric { display: flex; flex-direction: column; gap: 2px; }
+.psm-label { text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.03em; }
+
+/* --- Filterleiste: volle Breite, gleichmäßig verteilt --- */
+.radar-filter-row { margin-bottom: 4px; }
+.copilot-filters-group {
+  display: grid;
+  grid-template-columns: auto repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+.copilot-filter-btn { width: 100%; padding: 10px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+
+/* --- Auswahl-Zeile (Dropdown + Matrix/Watchlist) und Coin-Raster --- */
+.crypto-selection-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "dd toggles" "chips chips";
+  gap: 14px;
+  align-items: center;
+}
+.crypto-selection-controls .asset-dropdown-box { grid-area: dd; }
+.crypto-selection-controls .radar-toggle-group { grid-area: toggles; justify-self: end; display: flex; gap: 8px; flex-wrap: wrap; }
+.crypto-selection-controls .asset-chips-container {
+  grid-area: chips;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+.asset-chips-container .chips-label { display: none; }
+.asset-chips-container .asset-btn {
+  width: 100%;
+  padding: 10px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px;
+  cursor: pointer;
+}
+.asset-btn .chip-rank { color: var(--text-muted); font-size: 0.68rem; font-weight: 700; }
+.asset-btn.active .chip-rank { color: #BFDBFE; }
+
+/* --- Entscheidungs-Cockpit: flach untereinander --- */
+.cockpit-flat { display: flex; flex-direction: column; gap: 16px; }
+
+/* Zeile 1: Signal-Leiste */
+.signal-strip {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.6fr 1fr 1fr 0.9fr;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.ss-cell {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  border-right: 1px solid var(--border-subtle);
+  min-width: 0;
+}
+.ss-cell:last-of-type { border-right: none; }
+.ss-label { color: var(--text-muted); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.ss-value { color: var(--text-primary); font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono); line-height: 1.1; }
+.ss-value-bull { color: var(--bullish-text); }
+.ss-value-sm { color: var(--bullish-text); font-size: 1rem; font-weight: 800; }
+.ss-value-cyan { color: var(--accent-cyan); font-family: var(--font-mono); }
+.ss-sub { color: var(--text-muted); font-size: 0.74rem; }
+.ss-signal .oracle-signal-badge { align-self: flex-start; font-size: 0.95rem; padding: 6px 14px; }
+.ss-strength-head { display: flex; justify-content: space-between; align-items: baseline; }
+.ss-strength-val { color: var(--bullish-text); font-weight: 800; font-family: var(--font-mono); font-size: 1rem; }
+.ss-track { height: 8px; background: var(--bg-surface-2); border-radius: var(--radius-pill); overflow: hidden; }
+.ss-fill { height: 100%; background: linear-gradient(90deg, #059669, #34D399); border-radius: var(--radius-pill); transition: width 0.4s ease; }
+.ss-crv-badge {
+  align-self: flex-start;
+  background: var(--bullish-bg);
+  border: 1px solid var(--bullish-border);
+  color: var(--bullish-text);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+}
+.signal-strip .setup-warning-box { grid-column: 1 / -1; padding: 12px 20px; border-top: 1px solid var(--border-subtle); color: #FDE68A; background: rgba(245, 158, 11, 0.08); }
+
+/* Zeile 2: Preis-Leiter */
+.price-ladder-card {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.pl-head, .analyst-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.pl-title { color: var(--text-primary); font-size: 1.1rem; font-weight: 800; margin-top: 2px; }
+.pl-position { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.pl-position-val { color: var(--text-primary); font-family: var(--font-mono); font-weight: 800; font-size: 1rem; }
+
+.pl-track { position: relative; height: 10px; background: var(--bg-surface-2); border-radius: var(--radius-pill); margin: 6px 0; }
+.pl-seg { position: absolute; top: 0; height: 100%; border-radius: var(--radius-pill); transition: left 0.4s ease, width 0.4s ease; }
+.pl-seg-risk { left: 4%; width: 22%; background: linear-gradient(90deg, #E11D48, #FB7185); }
+.pl-seg-reward { left: 26%; width: 70%; background: linear-gradient(90deg, #059669, #38BDF8); opacity: 0.85; }
+.pl-dot {
+  position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%;
+  transform: translate(-50%, -50%); border: 3px solid var(--bg-surface-1); transition: left 0.4s ease;
+}
+.pl-dot-sl { left: 4%; background: #FB7185; }
+.pl-dot-entry { left: 26%; background: #FFFFFF; }
+.pl-dot-tp1 { left: 58%; background: #34D399; }
+.pl-dot-tp2 { left: 96%; background: #38BDF8; }
+
+.pl-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pl-tile {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.pl-tile-label { color: var(--text-muted); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.pl-tile-val { color: var(--text-primary); font-size: 1.35rem; font-weight: 800; font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-tile-sub { color: var(--text-secondary); font-size: 0.78rem; font-family: var(--font-mono); }
+.pl-tile-sl { border-top-color: #FB7185; }
+.pl-tile-sl .pl-tile-val, .pl-tile-sl .pl-tile-sub { color: var(--bearish-text); }
+.pl-tile-entry { border-top-color: #FFFFFF; }
+.pl-tile-entry .pl-tile-sub { font-family: inherit; color: var(--text-muted); }
+.pl-tile-tp1 { border-top-color: #34D399; }
+.pl-tile-tp1 .pl-tile-val, .pl-tile-tp1 .pl-tile-sub { color: var(--bullish-text); }
+.pl-tile-tp2 { border-top-color: #38BDF8; }
+.pl-tile-tp2 .pl-tile-val, .pl-tile-tp2 .pl-tile-sub { color: #7DD3FC; }
+
+/* Zeile 3: Analyst */
+.analyst-row {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.analyst-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.btn-discuss-ai {
+  background: #1E3A8A; color: #FFFFFF; border: 1px solid var(--border-focus);
+  border-radius: var(--radius-sm); padding: 8px 16px; font-weight: 700; font-size: 0.84rem; cursor: pointer;
+}
+.btn-discuss-ai:hover { background: #2563EB; }
+.analyst-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  counter-reset: pt;
+}
+.analyst-points .reasoning-item {
+  counter-increment: pt;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px 14px 48px;
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.analyst-points .reasoning-item::before {
+  content: counter(pt);
+  position: absolute; left: 14px; top: 13px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #1E3A8A; color: #FFFFFF;
+  font-size: 0.75rem; font-weight: 800; font-family: var(--font-mono);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .signal-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ss-cell { border-bottom: 1px solid var(--border-subtle); }
+  .ss-cell:nth-of-type(3n) { border-right: none; }
+  .copilot-filters-group { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .copilot-filters-group > span { grid-column: 1 / -1; }
+  .crypto-selection-controls .asset-chips-container { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .copilot-top-picks-grid { grid-template-columns: 1fr; }
+  .pl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .signal-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ss-cell:nth-of-type(3n) { border-right: 1px solid var(--border-subtle); }
+  .ss-cell:nth-of-type(2n) { border-right: none; }
+  .copilot-filters-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .crypto-selection-controls { grid-template-columns: 1fr; grid-template-areas: "dd" "toggles" "chips"; }
+  .crypto-selection-controls .radar-toggle-group { justify-self: start; }
+  .pl-grid { grid-template-columns: 1fr; }
+}
+.signal-strip .ss-crv { border-right: none; }
