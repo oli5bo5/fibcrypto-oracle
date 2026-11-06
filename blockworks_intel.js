@@ -593,8 +593,10 @@
 
         canvas.width = w * dpr;
         canvas.height = h * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
-        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
 
         const pts = state.mindshareSeries;
         const vals = pts.map(p => p.mindshare);
@@ -913,8 +915,10 @@
 
         canvas.width = w * dpr;
         canvas.height = h * dpr;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
-        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
 
         const minV = Math.min(...pts) * 0.98;
         const maxV = Math.max(...pts) * 1.02 || 1;

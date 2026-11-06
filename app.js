@@ -277,9 +277,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Return to Start Page (Logo click handler)
+    window.returnToHomeDashboard = function() {
+        if (window.HydroApp && typeof window.HydroApp.switchMainView === 'function') {
+            window.HydroApp.switchMainView('oracle');
+        } else {
+            const ov = document.getElementById('oracleView');
+            const hv = document.getElementById('hydroView');
+            if (ov) ov.style.display = '';
+            if (hv) hv.style.display = 'none';
+        }
+        document.querySelectorAll('.header-nav-tier .nav-tab').forEach(btn => {
+            btn.classList.toggle('active', btn.id === 'tabNavDecision');
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // Navigation and section highlighting helper
     window.scrollToDashboardSection = function(sectionId) {
-        if (window.HydroApp) window.HydroApp.switchMainView('oracle');
+        if (window.HydroApp && typeof window.HydroApp.switchMainView === 'function') {
+            window.HydroApp.switchMainView('oracle');
+        } else {
+            const ov = document.getElementById('oracleView');
+            const hv = document.getElementById('hydroView');
+            if (ov) ov.style.display = '';
+            if (hv) hv.style.display = 'none';
+        }
+        const tabMap = {
+            'step1KaufRadar': 'tabNavRadar',
+            'sectionHero': 'tabNavDecision',
+            'step2Entscheidung': 'tabNavDecision',
+            'step3Chart': 'tabNavChart',
+            'step4Fundamentals': 'tabNavSafety',
+            'step5Backtest': 'tabNavBacktest'
+        };
+        const targetTabId = tabMap[sectionId];
+        if (targetTabId) {
+            document.querySelectorAll('.header-nav-tier .nav-tab').forEach(btn => {
+                btn.classList.toggle('active', btn.id === targetTabId);
+            });
+        }
+        if (sectionId === 'sectionHero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
         const el = document.getElementById(sectionId);
         if (el) {
             el.scrollIntoView({ behavior: 'smooth', block: 'start' });

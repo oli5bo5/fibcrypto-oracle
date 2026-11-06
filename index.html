@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fibcrypto-oracle.vercel.app">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=17.1">
+    <link rel="stylesheet" href="style.css?v=17.2">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
     <header class="app-header-two-tier">
         <div class="header-top-wrap">
             <div class="header-top-tier container">
-                <div class="brand-container">
+                <div class="brand-container" id="brandHomeBtn" role="button" tabindex="0" onclick="window.returnToHomeDashboard ? window.returnToHomeDashboard() : window.scrollTo({top: 0, behavior: 'smooth'})" title="Zurück zur Startseite">
                     <span class="brand-monogram">FC</span>
                     <span class="brand-title">FIBCRYPTO ORACLE</span>
                 </div>
@@ -1282,7 +1282,7 @@
                     </div>
 
                     <div class="backtest-box">
-                        <div class="input-group" style="margin-bottom: 10px;">
+                        <div class="input-group">
                             <label>Strategie-Modus (Fibonacci × Blockworks):</label>
                             <select id="btStrategySelect" class="form-control">
                                 <option value="fib_full" selected>Hybrid Full (Fibonacci + Onchain + Sentiment + Unlocks)</option>
@@ -1295,7 +1295,7 @@
                         <div class="backtest-controls">
                             <div class="input-group">
                                 <label>Kauf-Level:</label>
-                                <select id="btBuyLevel">
+                                <select id="btBuyLevel" class="form-control">
                                     <option value="0.236">23.6% Retracement</option>
                                     <option value="0.382" selected>38.2% Retracement</option>
                                     <option value="0.500">50.0% Retracement</option>
@@ -1304,7 +1304,7 @@
                             </div>
                             <div class="input-group">
                                 <label>Verkauf-Ziel:</label>
-                                <select id="btSellLevel">
+                                <select id="btSellLevel" class="form-control">
                                     <option value="1.272">127.2% Extension</option>
                                     <option value="1.618" selected>161.8% Extension</option>
                                     <option value="1.000">100.0% Swing High</option>
@@ -1314,7 +1314,7 @@
 
                         <button class="btn-run-backtest" id="btnRunBacktest">BACKTEST & EQUITY-KURVE BERECHNEN</button>
 
-                        <div class="backtest-metrics" style="grid-template-columns: repeat(3, 1fr); margin-top: 10px;">
+                        <div class="backtest-metrics">
                             <div class="metric-item">
                                 <span class="m-label">Win Rate</span>
                                 <span class="m-val" style="color: var(--accent-green);" id="btWinRate">71.7%</span>
@@ -1360,14 +1360,14 @@
                         <table class="fib-table">
                             <thead>
                                 <tr>
-                                    <th style="min-width: 110px;">Datum / Kerze</th>
-                                    <th style="min-width: 110px;">Signal</th>
-                                    <th style="min-width: 90px;">KI-Konfidenz</th>
-                                    <th style="min-width: 95px;">Einstieg</th>
-                                    <th style="min-width: 105px;">Stop-Loss (Schutz)</th>
-                                    <th style="min-width: 105px;">Kursziel (TP)</th>
-                                    <th style="min-width: 85px;">Ertrag</th>
-                                    <th style="min-width: 120px;">Ergebnis / Status</th>
+                                    <th>Datum</th>
+                                    <th>Signal</th>
+                                    <th>Konfidenz</th>
+                                    <th>Einstieg</th>
+                                    <th>Stop-Loss</th>
+                                    <th>Kursziel</th>
+                                    <th>Ertrag</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody id="historyTableBody">
@@ -1899,11 +1899,11 @@
     <div id="toastContainer"></div>
 
     <!-- Scripts -->
-    <script src="fibonacci_engine.js?v=17.1"></script>
-    <script src="hydro_console.js?v=17.1"></script>
-    <script src="copilot_engine.js?v=17.1"></script>
-    <script src="blockworks_intel.js?v=17.1"></script>
-    <script src="app.js?v=17.1"></script>
-    <script src="ai_assistant.js?v=17.1"></script>
+    <script src="fibonacci_engine.js?v=17.2"></script>
+    <script src="hydro_console.js?v=17.2"></script>
+    <script src="copilot_engine.js?v=17.2"></script>
+    <script src="blockworks_intel.js?v=17.2"></script>
+    <script src="app.js?v=17.2"></script>
+    <script src="ai_assistant.js?v=17.2"></script>
 </body>
 </html>
