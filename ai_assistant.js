@@ -13,13 +13,21 @@
         messages: [
             {
                 sender: 'bot',
-                text: "**FibCrypto AI Analyst aktiv.**\n\nIch analysiere Echtzeit-Marktdaten, Fibonacci-Retracements und Onchain-Metriken für 16 Blockchains.\n\nWählen Sie eine Schnellfrage oder stellen Sie eine Frage zum aktuellen Asset:",
-                actions: [
-                    { label: "🎯 Wo liegt das Golden Pocket?", query: "Wo liegt das Golden Pocket für diesen Coin?" },
-                    { label: "🛑 Welchen Stop-Loss empfiehlst du?", query: "Welchen Stop-Loss empfiehlst du für das aktuelle Setup?" },
-                    { label: "📊 Wie ist das CRV für diesen Trade?", query: "Wie ist das CRV-Verhältnis für diesen Trade?" },
-                    { label: "⚠️ Welche Risiken gibt es aktuell?", query: "Welche Risiken und Token-Unlocks gibt es aktuell?" }
-                ]
+                time: '10:15',
+                text: "Hallo! Ich bin dein KI-Markt-Assistent.\nWie kann ich dich bei deiner Trading-Strategie unterstützen?",
+                actions: []
+            },
+            {
+                sender: 'user',
+                time: '10:15',
+                text: "Analysiere bitte den aktuellen Bitcoin-Markt und gib mir meine Einschätzung.",
+                actions: []
+            },
+            {
+                sender: 'bot',
+                time: '10:16',
+                text: "Gerne! Hier ist die aktuelle Analyse von **Bitcoin (BTC / USDT)**: Kurs notiert stabil oberhalb des 61.8% Golden-Pocket-Supports mit positivem Momentum und 12% Kapitalschutz.",
+                actions: []
             }
         ]
     };
@@ -224,9 +232,13 @@
     function renderMessages() {
         if (!dom.stream) return;
 
+        const botSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="3"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 15h.01M16 15h.01M9 19h6"/></svg>';
+        const userSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+
         const html = state.messages.map((msg, msgIdx) => {
             const isUser = msg.sender === 'user';
             const formattedText = formatMarkdown(msg.text);
+            const timeStr = msg.time || new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 
             let actionsHtml = '';
             if (msg.actions && msg.actions.length > 0) {
@@ -243,9 +255,10 @@
 
             return `
                 <div class="ai-message-row ${isUser ? 'msg-user' : 'msg-bot'}">
-                    <div class="ai-avatar-bubble">${isUser ? 'ICH' : 'AI'}</div>
+                    <div class="ai-avatar-bubble">${isUser ? userSvg : botSvg}</div>
                     <div class="ai-bubble-content">
                         <div class="ai-bubble-text">${formattedText}</div>
+                        <div class="ai-bubble-time">${isUser ? '•••' : timeStr}</div>
                         ${actionsHtml}
                     </div>
                 </div>

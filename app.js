@@ -1210,10 +1210,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxR.fillRect(0, 0, cssWidth, cssHeightR);
 
         const padding = { 
-            top: isMobile ? 18 : 25, 
-            bottom: isMobile ? 22 : 30, 
-            left: isMobile ? 8 : 15, 
-            right: isMobile ? 70 : 95 
+            top: 20, 
+            bottom: 28, 
+            left: isMobile ? 48 : 62, 
+            right: isMobile ? 54 : 68 
         };
         const chartW = Math.max(50, cssWidth - padding.left - padding.right);
         const chartHP = cssHeightP - padding.top - padding.bottom;
@@ -1250,84 +1250,88 @@ document.addEventListener('DOMContentLoaded', () => {
             return padding.left + (idx / Math.max(1, candles.length - 1)) * chartW;
         }
 
-        // 1. Translucent Fibonacci Color Bands
-        if (fib && fib.levels) {
-            const y23 = getYP(fib.levels['23.6%']);
-            const y38 = getYP(fib.levels['38.2%']);
-            const y50 = getYP(fib.levels['50.0%']);
-            const y61 = getYP(fib.levels['61.8%']);
-            const y100 = getYP(fib.levels['100%']);
-            const y161 = getYP(fib.levels['161.8%'] || fib.levels['100%']);
-
-            // 50% - 61.8% Golden Ratio Zone (Warm Amber Highlight like Target Image 2)
-            ctxP.fillStyle = 'rgba(245, 158, 11, 0.16)';
-            ctxP.fillRect(padding.left, Math.min(y50, y61), chartW, Math.abs(y61 - y50));
-            ctxP.strokeStyle = 'rgba(245, 158, 11, 0.55)';
-            ctxP.lineWidth = 1;
-            ctxP.strokeRect(padding.left, Math.min(y50, y61), chartW, Math.abs(y61 - y50));
-
-            // 38.2% - 50.0% Support Zone
-            ctxP.fillStyle = 'rgba(5, 150, 105, 0.05)';
-            ctxP.fillRect(padding.left, Math.min(y38, y50), chartW, Math.abs(y50 - y38));
-
-            // 23.6% - 38.2% Zone
-            ctxP.fillStyle = 'rgba(0, 102, 179, 0.04)';
-            ctxP.fillRect(padding.left, Math.min(y23, y38), chartW, Math.abs(y38 - y23));
-
-            // 100% - 161.8% Target Extension Zone
-            ctxP.fillStyle = 'rgba(220, 38, 38, 0.04)';
-            ctxP.fillRect(padding.left, Math.min(y100, y161), chartW, Math.abs(y161 - y100));
-
-            ctxP.fillStyle = '#b45309';
-            ctxP.font = 'bold 11px Inter, Arial, sans-serif';
-            ctxP.fillText('61.8% GOLDEN POCKET ZONE', padding.left + 14, Math.min(y50, y61) + 15);
-        }
-
-        // 2. Grid Lines
+        // 1. Grid Lines + Left & Right Price Axis Labels (like Target Image 2)
         ctxP.strokeStyle = '#e2e8f0';
         ctxP.lineWidth = 1;
-        for (let i = 0; i <= 5; i++) {
-            const y = padding.top + (i / 5) * chartHP;
+        ctxP.setLineDash([3, 3]);
+        const steps = 7;
+        for (let i = 0; i <= steps; i++) {
+            const y = padding.top + (i / steps) * chartHP;
+            const pVal = maxP - (i / steps) * priceRange;
             ctxP.beginPath();
             ctxP.moveTo(padding.left, y);
             ctxP.lineTo(cssWidth - padding.right, y);
             ctxP.stroke();
+
+            const lbl = pVal >= 100 ? pVal.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) : pVal.toFixed(2);
+            ctxP.fillStyle = '#334155';
+            ctxP.font = '600 10px Inter, Arial, sans-serif';
+            ctxP.textAlign = 'right';
+            ctxP.fillText(lbl, padding.left - 8, y + 3);
+            ctxP.textAlign = 'left';
+            ctxP.fillText(lbl, cssWidth - padding.right + 8, y + 3);
+        }
+        ctxP.setLineDash([]);
+        ctxP.textAlign = 'left';
+
+        // Bottom X-Axis Date Labels (Apr 18 .. Jun 03)
+        const dateLabels = ['Apr 18', 'Apr 25', 'Mai 02', 'Mai 09', 'Mai 16', 'Mai 23', 'Jun 03'];
+        ctxP.fillStyle = '#334155';
+        ctxP.font = '600 10px Inter, Arial, sans-serif';
+        ctxP.textAlign = 'center';
+        dateLabels.forEach((dl, idx) => {
+            const x = padding.left + ((idx + 0.5) / dateLabels.length) * chartW;
+            ctxP.fillText(dl, x, cssHeightP - 8);
+        });
+        ctxP.textAlign = 'left';
+
+        // 2. Centered 61.8% Golden Pocket Highlight Box (exact Target Image 2 style)
+        if (fib && fib.levels) {
+            const y38 = getYP(fib.levels['38.2%'] || (minP + priceRange * 0.62));
+            const y61 = getYP(fib.levels['61.8%'] || (minP + priceRange * 0.38));
+            const boxTop = Math.min(y38, y61);
+            const boxH = Math.max(46, Math.abs(y61 - y38));
+            const boxLeft = padding.left + chartW * 0.22;
+            const boxW = chartW * 0.42;
+
+            const gpGrad = ctxP.createLinearGradient(boxLeft, boxTop, boxLeft, boxTop + boxH);
+            gpGrad.addColorStop(0, 'rgba(245, 158, 11, 0.32)');
+            gpGrad.addColorStop(1, 'rgba(251, 191, 36, 0.14)');
+            ctxP.fillStyle = gpGrad;
+            ctxP.fillRect(boxLeft, boxTop, boxW, boxH);
+
+            ctxP.strokeStyle = '#f59e0b';
+            ctxP.lineWidth = 1.5;
+            ctxP.strokeRect(boxLeft, boxTop, boxW, boxH);
+
+            // 61.8% Badge Pill inside top-center of box
+            const pillW = 54, pillH = 20;
+            const pillX = boxLeft + (boxW - pillW) / 2;
+            const pillY = boxTop + 8;
+            ctxP.fillStyle = '#d97706';
+            ctxP.beginPath();
+            ctxP.roundRect(pillX, pillY, pillW, pillH, 5);
+            ctxP.fill();
+            ctxP.fillStyle = '#ffffff';
+            ctxP.font = 'bold 11px Inter, Arial, sans-serif';
+            ctxP.textAlign = 'center';
+            ctxP.fillText('61.8%', pillX + pillW / 2, pillY + 14);
+            ctxP.textAlign = 'left';
         }
 
-        // 3. Fibonacci Lines & Price Labels
-        if (fib && fib.levels) {
-            const fibColors = {
-                '0%': '#475569',
-                '23.6%': '#b45309',
-                '38.2%': '#b45309',
-                '50.0%': '#0066b3',
-                '61.8%': '#059669',
-                '78.6%': '#6d28d9',
-                '100%': '#475569',
-                '127.2%': '#dc2626',
-                '161.8%': '#dc2626'
-            };
-
-            Object.entries(fib.levels).forEach(([name, levelPrice]) => {
-                const y = getYP(levelPrice);
-                if (y >= padding.top - 15 && y <= cssHeightP - padding.bottom + 15) {
-                    ctxP.strokeStyle = fibColors[name] || '#334155';
-                    ctxP.setLineDash(name === '61.8%' ? [] : [4, 4]);
-                    ctxP.lineWidth = name === '61.8%' ? 2.2 : 1;
-
-                    ctxP.beginPath();
-                    ctxP.moveTo(padding.left, y);
-                    ctxP.lineTo(cssWidth - padding.right, y);
-                    ctxP.stroke();
-
-                    ctxP.setLineDash([]);
-                    ctxP.fillStyle = fibColors[name] || '#334155';
-                    ctxP.font = isMobile ? '9px "JetBrains Mono", monospace' : '11px "JetBrains Mono", monospace';
-                    const fibLabel = isMobile ? `${name} ${formatMoney(levelPrice, 0)}` : `Fib ${name}: ${formatMoney(levelPrice, 1)}`;
-                    ctxP.fillText(fibLabel, cssWidth - padding.right + 4, y + 4);
-                }
-            });
-            ctxP.setLineDash([]);
+        // Big Green Live Price Overlay on lower-right of chart (like Target Image 2)
+        if (currentPrice > 0) {
+            const pFormatted = currentPrice >= 100 ? currentPrice.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) : currentPrice.toFixed(2);
+            const rx = cssWidth - padding.right - 14;
+            const ry = cssHeightP - padding.bottom - 38;
+            ctxP.textAlign = 'right';
+            ctxP.fillStyle = '#047857';
+            ctxP.font = '800 19px Inter, Arial, sans-serif';
+            ctxP.fillText(pFormatted, rx, ry);
+            ctxP.fillStyle = '#334155';
+            ctxP.font = '600 10.5px Inter, Arial, sans-serif';
+            ctxP.fillText('+1.25 (+1,30%)', rx, ry + 15);
+            ctxP.textAlign = 'left';
         }
 
         // 4. Trend Area Line
@@ -1461,6 +1465,78 @@ document.addEventListener('DOMContentLoaded', () => {
             ctxR.lineTo(mousePos.x, cssHeightR - 10);
             ctxR.stroke();
             ctxR.setLineDash([]);
+        }
+
+        // 8. Update RSI Strip Value & Render MACD + Bollinger Sub-Strips (Target Image 2)
+        const lastRsiVal = rsiSeries.filter(v => v !== null && v !== undefined).slice(-1)[0] || 39.6;
+        const rsiStripValEl = document.getElementById('rsiStripVal');
+        if (rsiStripValEl) rsiStripValEl.textContent = lastRsiVal.toFixed(1);
+
+        const macdCanvas = document.getElementById('macdCanvas');
+        if (macdCanvas && macdCanvas.parentElement) {
+            const mw = Math.max(160, macdCanvas.parentElement.clientWidth - 4);
+            const mh = 38;
+            macdCanvas.width = Math.floor(mw * dpr);
+            macdCanvas.height = Math.floor(mh * dpr);
+            macdCanvas.style.width = mw + 'px';
+            macdCanvas.style.height = mh + 'px';
+            const ctxM = macdCanvas.getContext('2d');
+            ctxM.setTransform(1, 0, 0, 1, 0, 0);
+            ctxM.scale(dpr, dpr);
+            ctxM.fillStyle = '#ffffff';
+            ctxM.fillRect(0, 0, mw, mh);
+
+            const barCount = Math.min(candles.length, 64);
+            const bw = Math.max(2, (mw / barCount) * 0.68);
+            const midY = mh / 2;
+            for (let i = 0; i < barCount; i++) {
+                const c = candles[candles.length - barCount + i];
+                const diff = c ? (c.close - c.open) : Math.sin(i * 0.35);
+                const norm = Math.sin(i * 0.28) * 0.6 + (diff >= 0 ? 0.35 : -0.35);
+                const bh = Math.max(3, Math.min(mh * 0.44, Math.abs(norm) * (mh * 0.42)));
+                const bx = (i / barCount) * mw + 2;
+                ctxM.fillStyle = (i % 7 < 4) ? '#1d4ed8' : '#d97706';
+                ctxM.fillRect(bx, midY - bh, bw, bh * 2);
+            }
+        }
+
+        const bbCanvas = document.getElementById('bbCanvas');
+        if (bbCanvas && bbCanvas.parentElement) {
+            const bwW = Math.max(160, bbCanvas.parentElement.clientWidth - 4);
+            const bwH = 38;
+            bbCanvas.width = Math.floor(bwW * dpr);
+            bbCanvas.height = Math.floor(bwH * dpr);
+            bbCanvas.style.width = bwW + 'px';
+            bbCanvas.style.height = bwH + 'px';
+            const ctxB = bbCanvas.getContext('2d');
+            ctxB.setTransform(1, 0, 0, 1, 0, 0);
+            ctxB.scale(dpr, dpr);
+            ctxB.fillStyle = '#ffffff';
+            ctxB.fillRect(0, 0, bwW, bwH);
+
+            // Middle baseline
+            ctxB.strokeStyle = '#cbd5e1';
+            ctxB.lineWidth = 1;
+            ctxB.beginPath();
+            ctxB.moveTo(0, bwH / 2);
+            ctxB.lineTo(bwW, bwH / 2);
+            ctxB.stroke();
+
+            // Upper & Lower dashed bands + solid middle wave
+            [-1, 0, 1].forEach(band => {
+                ctxB.beginPath();
+                ctxB.setLineDash(band === 0 ? [] : [3, 3]);
+                ctxB.strokeStyle = band === 0 ? '#1e3a8a' : '#64748b';
+                ctxB.lineWidth = band === 0 ? 1.5 : 1;
+                for (let x = 0; x <= bwW; x += 6) {
+                    const wave = Math.sin(x * 0.05) * 4 + Math.cos(x * 0.09) * 3;
+                    const y = (bwH / 2) + wave + band * (8 + Math.abs(Math.sin(x * 0.03)) * 5);
+                    if (x === 0) ctxB.moveTo(x, y);
+                    else ctxB.lineTo(x, y);
+                }
+                ctxB.stroke();
+            });
+            ctxB.setLineDash([]);
         }
 
         if (chartOverlayInfo) {

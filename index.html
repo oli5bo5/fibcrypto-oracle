@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fibcrypto-oracle.vercel.app">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=17.0">
 </head>
 <body>
 
@@ -29,28 +29,36 @@
             <div class="header-top-tier container">
                 <div class="brand-container">
                     <span class="brand-monogram">FC</span>
-                    <div>
-                        <span class="brand-title">FIBCRYPTO ORACLE</span>
-                        <span class="brand-tag">BLOCKWORKS MULTI-ASSET INTELLIGENCE</span>
-                    </div>
+                    <span class="brand-title">FIBCRYPTO ORACLE</span>
                 </div>
 
                 <div class="header-controls">
                     <button class="currency-btn" id="currencyToggleBtn" data-tooltip="Währung wechseln: Fester Referenzkurs (1 EUR = 1.08 USD)">
-                        <span id="currUsdLabel" class="curr-pill active-curr">USD</span>
+                        <span id="currUsdLabel" class="curr-pill inactive-curr">USD ▾</span>
                         <span class="currency-divider">|</span>
-                        <span id="currEurLabel" class="curr-pill inactive-curr">EUR</span>
+                        <span id="currEurLabel" class="curr-pill active-curr">EUR</span>
                     </button>
 
                     <div class="timeframe-selector" id="timeframeSelector">
-                        <button class="tf-btn" data-tf="1h" data-tooltip="1-Stunden Kerzen">1h</button>
-                        <button class="tf-btn active" data-tf="4h" data-tooltip="4-Stunden Kerzen (Standard)">4h</button>
-                        <button class="tf-btn" data-tf="1d" data-tooltip="Tageskerzen">1d</button>
+                        <button class="tf-btn" data-tf="1h">1h</button>
+                        <button class="tf-btn active" data-tf="4h">4h</button>
+                        <button class="tf-btn" data-tf="1d">1d</button>
+                    </div>
+
+                    <button type="button" class="hdr-icon-btn" aria-label="Benachrichtigungen" onclick="window.scrollToDashboardSection('step6ProTools')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    </button>
+
+                    <div class="hdr-user-pill" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
+                        <span class="hdr-avatar-circle">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </span>
+                        <span class="hdr-caret">▾</span>
                     </div>
 
                     <div class="status-pill" data-tooltip="Binance Live-Chart · Simulierte Blockworks Onchain-Demo">
                         <span class="pulse-dot"></span>
-                        <span id="connectionStatus">Live-Status · Chart Live</span>
+                        <span id="connectionStatus">Live-Status</span>
                     </div>
                 </div>
             </div>
@@ -58,32 +66,36 @@
 
         <div class="header-nav-wrap">
             <nav class="header-nav-tier app-nav container">
-                <button type="button" class="nav-tab active" id="tabNavRadar" onclick="window.scrollToDashboardSection('step1KaufRadar')">
+                <button type="button" class="nav-tab" id="tabNavRadar" onclick="window.scrollToDashboardSection('step1KaufRadar')">
                     <span class="nav-tab-num">1</span>
                     <span class="nav-tab-label">Kauf-Radar</span>
+                    <span class="nav-dots"><i></i><i></i><i></i></span>
                 </button>
-                <button type="button" class="nav-tab" id="tabNavDecision" onclick="window.scrollToDashboardSection('step2Entscheidung')">
+                <button type="button" class="nav-tab active" id="tabNavDecision" onclick="window.scrollToDashboardSection('sectionHero')">
                     <span class="nav-tab-num">2</span>
                     <span class="nav-tab-label">Entscheidung</span>
+                    <span class="nav-dots"><i></i><i></i><i></i></span>
                 </button>
                 <button type="button" class="nav-tab" id="tabNavChart" onclick="window.scrollToDashboardSection('step3Chart')">
                     <span class="nav-tab-num">3</span>
                     <span class="nav-tab-label">Chart</span>
+                    <span class="nav-dots"><i></i><i></i><i></i></span>
                 </button>
                 <button type="button" class="nav-tab" id="tabNavSafety" onclick="window.scrollToDashboardSection('step4Fundamentals')">
                     <span class="nav-tab-num">4</span>
                     <span class="nav-tab-label">Sicherheit</span>
+                    <span class="nav-dots"><i></i><i></i><i></i></span>
                 </button>
                 <button type="button" class="nav-tab" id="tabNavBacktest" onclick="window.scrollToDashboardSection('step5Backtest')">
                     <span class="nav-tab-num">5</span>
                     <span class="nav-tab-label">Backtest</span>
+                    <span class="nav-dots"><i></i><i></i><i></i></span>
                 </button>
-                <button type="button" class="nav-tab" id="tabHydroBtn" data-tooltip="Injective Liquid Staking: INJ zu hINJ staken mit 16.42% APR">
+                <button type="button" class="nav-tab nav-tab-subtle" id="tabHydroBtn" data-tooltip="Injective Liquid Staking: INJ zu hINJ staken mit 16.42% APR">
                     <span class="nav-tab-num">H</span>
                     <span class="nav-tab-label">Hydro Staking</span>
-                    <span class="nav-badge">16.4% APR</span>
                 </button>
-                <button type="button" class="nav-tab nav-tab-ai-chat" id="btnHeaderAiAssistant" onclick="window.AiAssistant ? window.AiAssistant.open() : null">
+                <button type="button" class="nav-tab nav-tab-subtle" id="btnHeaderAiAssistant" onclick="window.AiAssistant ? window.AiAssistant.open() : null" style="display: none;">
                     <span class="nav-tab-num">KI</span>
                     <span class="nav-tab-label">KI-Assistent</span>
                 </button>
@@ -116,46 +128,520 @@
         <div class="dashboard-editorial-layout">
             <main class="dashboard-main-column">
 
-<section class="hero-bank-card" id="sectionHero">
+<!-- ============================================================= -->
+                <!-- ZIELBILD 1: HERO + 4 KPI-KARTEN + AKTIVE POSITIONEN & SCHUTZ  -->
+                <!-- ============================================================= -->
+                <section class="hero-bank-card" id="sectionHero">
                     <div class="hero-bank-left">
-                        <div class="editorial-hero-eyebrow">MULTI-ASSET BLOCKCHAIN INTELLIGENCE</div>
                         <h1 class="editorial-hero-title">FIBCRYPTO ORACLE</h1>
                         <p class="editorial-hero-desc">
                             KI-gestütztes Trading-Orakel für informierte Entscheidungen.
-                            Echtzeit-Analysen, Risikokontrolle und datengestützte Insights – alles auf einen Blick.
+                            Echtzeit-Analysen, Risikokontrolle und datengestützte Insights
+                            – alles auf einen Blick.
                         </p>
                         <div class="editorial-hero-actions">
-                            <button type="button" class="btn-primary-bank" onclick="window.scrollToDashboardSection('step1KaufRadar')">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            <button type="button" class="btn-primary-bank" onclick="window.scrollToDashboardSection('step3Chart')">
+                                <span class="play-circle-icon">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="#00388b"><path d="M8 5v14l11-7z"/></svg>
+                                </span>
                                 <span>ANALYSEN STARTEN</span>
                             </button>
-                            <button type="button" class="btn-outline-bank" onclick="window.scrollToDashboardSection('step2Entscheidung')">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                            <button type="button" class="btn-outline-bank" onclick="window.scrollToDashboardSection('step1KaufRadar')">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#0066b3" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
                                 <span>DASHBOARD</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="hero-bank-right" onclick="window.scrollToDashboardSection('step2Entscheidung')">
-                        <div class="hero-shield-badge">
-                            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#00388b" stroke-width="2.2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M9 12l2 2 4-4"/>
-                            </svg>
+                        <div class="hero-shield-outer">
+                            <div class="hero-shield-badge">
+                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#002b66" stroke-width="2.2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <path d="M9 12l2 2 4-4"/>
+                                </svg>
+                            </div>
                         </div>
                         <div class="hero-navy-content">
                             <div class="hero-navy-val" id="heroTopPickRisk">12%</div>
                             <div class="hero-navy-title">Maximaler Kapitalschutz</div>
                             <div class="hero-navy-sub">bei optimalem Trade-Setup</div>
-                            <div class="hero-navy-signal-row">
-                                <span class="hero-signal-tag" id="heroTopPickAction">KAUFEN</span>
-                                <span class="hero-signal-meta" id="heroTopPickSub">BTCUSDT · CRV 1:3.40</span>
+                            <div style="display: none;">
+                                <span id="heroTopPickAction">KAUFEN</span>
+                                <span id="heroTopPickSub">BTCUSDT</span>
                             </div>
+                        </div>
+                        <svg class="hero-curve-svg" viewBox="0 0 180 120" fill="none">
+                            <path d="M10 110 C 70 105, 125 75, 160 22" stroke="rgba(96, 165, 250, 0.45)" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M150 26 L162 18 L166 32" stroke="rgba(147, 197, 253, 0.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M140 42 L143 35 L146 42 L153 45 L146 48 L143 55 L140 48 L133 45 Z" fill="rgba(191, 219, 254, 0.85)"/>
+                            <circle cx="168" cy="48" r="2.5" fill="rgba(191, 219, 254, 0.7)"/>
+                        </svg>
+                    </div>
+                </section>
+
+                <!-- 4 KPI-Karten direkt unter dem Hero (wie in Bild 1) -->
+                <section class="kpi-four-grid" aria-label="Portfolio Kennzahlen">
+                    <div class="kpi-stat-card">
+                        <div class="kpi-circle-icon kpi-circle-green">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg>
+                        </div>
+                        <div class="kpi-stat-text">
+                            <span class="kpi-stat-label">Portefeuille-Wert</span>
+                            <strong class="kpi-stat-val">24.750,86 €</strong>
+                            <span class="kpi-stat-delta text-green">+3,42 % <small>heute</small></span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-stat-card">
+                        <div class="kpi-circle-icon kpi-circle-emerald">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L9 7h6l-3-5z"/><path d="M6 11a6 6 0 0 1 12 0v6a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4v-6z"/><path d="M12 11v6M9.5 14h5"/></svg>
+                        </div>
+                        <div class="kpi-stat-text">
+                            <span class="kpi-stat-label">Gewinn / Verlust</span>
+                            <strong class="kpi-stat-val">+815,27 €</strong>
+                            <span class="kpi-stat-delta text-green">+3,42 % <small>heute</small></span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-stat-card">
+                        <div class="kpi-circle-icon kpi-circle-orange">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        </div>
+                        <div class="kpi-stat-text">
+                            <span class="kpi-stat-label">Risikograd</span>
+                            <strong class="kpi-stat-val">2.1 / 10</strong>
+                            <span class="kpi-stat-sub">Geringes Risiko</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-stat-card">
+                        <div class="kpi-circle-icon kpi-circle-indigo">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                        </div>
+                        <div class="kpi-stat-text">
+                            <span class="kpi-stat-label">Sharpe Ratio</span>
+                            <strong class="kpi-stat-val">1,78</strong>
+                            <span class="kpi-stat-delta text-green">+0,24 <small>monatlich</small></span>
                         </div>
                     </div>
                 </section>
 
-        <!-- ============================================================= -->
+                <!-- Aktive Positionen (Links) & Kapitalschutz-Chart (Rechts) wie in Bild 1 -->
+                <section class="positions-protection-grid">
+                    <!-- Linke Karte: Aktive Positionen -->
+                    <div class="panel positions-card">
+                        <div class="positions-card-header">
+                            <div class="positions-title-wrap">
+                                <h3 class="panel-title">Aktive Positionen</h3>
+                                <span class="online-green-dot"></span>
+                            </div>
+                            <button type="button" class="dots-menu-btn" aria-label="Optionen" onclick="window.scrollToDashboardSection('step1KaufRadar')">⋮</button>
+                        </div>
+
+                        <div class="fib-table-wrapper positions-table-wrap">
+                            <table class="fib-table positions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Asset</th>
+                                        <th>Position</th>
+                                        <th>Korr. Preis (€)</th>
+                                        <th>Wert (€)</th>
+                                        <th>Gewinn / Verlust (%)</th>
+                                        <th>Gesamt (€)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr onclick="window.CopilotEngine ? window.CopilotEngine.selectRecommended('BTCUSDT', 'buy') : null">
+                                        <td>
+                                            <div class="coin-cell">
+                                                <span class="coin-badge coin-btc">₿</span>
+                                                <div>
+                                                    <div class="coin-sym">BTC / USDT</div>
+                                                    <div class="coin-sub">Bitcoin</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="pos-arrow pos-up">↑</span></td>
+                                        <td class="mono-cell">0,4521 BTC</td>
+                                        <td class="mono-cell">63.245,10</td>
+                                        <td class="mono-cell">28.592,81 &nbsp;<span class="text-green">+2,35 %</span></td>
+                                        <td class="mono-cell"><strong>63.245,10</strong></td>
+                                    </tr>
+                                    <tr onclick="window.CopilotEngine ? window.CopilotEngine.selectRecommended('ETHUSDT', 'buy') : null">
+                                        <td>
+                                            <div class="coin-cell">
+                                                <span class="coin-badge coin-eth">◆</span>
+                                                <div>
+                                                    <div class="coin-sym">ETH / USDT</div>
+                                                    <div class="coin-sub">Ethereum</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="pos-arrow pos-up">↑</span></td>
+                                        <td class="mono-cell">3,21 ETH</td>
+                                        <td class="mono-cell">3.215,42</td>
+                                        <td class="mono-cell">10.320,51 &nbsp;<span class="text-green">+4,12 %</span></td>
+                                        <td class="mono-cell"><strong>10.320,51</strong></td>
+                                    </tr>
+                                    <tr onclick="window.CopilotEngine ? window.CopilotEngine.selectRecommended('SOLUSDT', 'buy') : null">
+                                        <td>
+                                            <div class="coin-cell">
+                                                <span class="coin-badge coin-sol">◎</span>
+                                                <div>
+                                                    <div class="coin-sym">SOL / USDT</div>
+                                                    <div class="coin-sub">Solana</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="pos-arrow pos-up">↑</span></td>
+                                        <td class="mono-cell">15,8 SOL</td>
+                                        <td class="mono-cell">186,37</td>
+                                        <td class="mono-cell">2.945,65 &nbsp;<span class="text-green">+1,87 %</span></td>
+                                        <td class="mono-cell"><strong>2.945,65</strong></td>
+                                    </tr>
+                                    <tr onclick="window.CopilotEngine ? window.CopilotEngine.selectRecommended('LINKUSDT', 'buy') : null">
+                                        <td>
+                                            <div class="coin-cell">
+                                                <span class="coin-badge coin-link">⬡</span>
+                                                <div>
+                                                    <div class="coin-sym">LINK / USDT</div>
+                                                    <div class="coin-sub">Chainlink</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="pos-arrow pos-down">▼</span></td>
+                                        <td class="mono-cell">25,6 LINK</td>
+                                        <td class="mono-cell">17,82</td>
+                                        <td class="mono-cell">455,99 &nbsp;<span class="text-red">-0,32 %</span></td>
+                                        <td class="mono-cell"><strong>455,99</strong></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="positions-total-row">
+                                        <td colspan="2"><strong>TOTAL</strong></td>
+                                        <td colspan="2" class="mono-cell"><strong>24.750,86 €</strong></td>
+                                        <td colspan="2" class="mono-cell text-right"><strong class="text-green">+3,42 %</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Rechte Karte: Kapitalschutz Area Chart mit Callout-Box (wie in Bild 1) -->
+                    <div class="panel protection-chart-card">
+                        <div class="protection-header">
+                            <h3 class="panel-title">Kapitalschutz</h3>
+                            <span class="protection-sub">optimales Setup</span>
+                        </div>
+
+                        <div class="protection-svg-wrap">
+                            <!-- Dunkelblaue Callout-Box (wie in Bild 1) -->
+                            <div class="protection-callout">
+                                <div class="pc-date">12 Sep</div>
+                                <div class="pc-label">Portfolio-Wert</div>
+                                <div class="pc-val">24.750,86 €</div>
+                                <div class="pc-label">Mindestwert</div>
+                                <div class="pc-val">21.685,00 €</div>
+                                <div class="pc-label">Schutz erreicht</div>
+                                <div class="pc-green">12%</div>
+                            </div>
+
+                            <svg class="protection-svg" viewBox="0 0 380 210" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="protGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.38"/>
+                                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.03"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Horizontale Hilfslinien -->
+                                <line x1="42" y1="25" x2="368" y2="25" stroke="#f1f5f9" stroke-width="1"/>
+                                <line x1="42" y1="56" x2="368" y2="56" stroke="#f1f5f9" stroke-width="1"/>
+                                <line x1="42" y1="87" x2="368" y2="87" stroke="#f1f5f9" stroke-width="1"/>
+                                <line x1="42" y1="118" x2="368" y2="118" stroke="#f1f5f9" stroke-width="1"/>
+                                <line x1="42" y1="149" x2="368" y2="149" stroke="#f1f5f9" stroke-width="1"/>
+                                <line x1="42" y1="180" x2="368" y2="180" stroke="#e2e8f0" stroke-width="1"/>
+
+                                <!-- Y-Achsen-Beschriftung -->
+                                <text x="34" y="29" text-anchor="end" fill="#475569" font-size="10">30k</text>
+                                <text x="34" y="60" text-anchor="end" fill="#475569" font-size="10">24,75k</text>
+                                <text x="34" y="91" text-anchor="end" fill="#475569" font-size="10">18k</text>
+                                <text x="34" y="122" text-anchor="end" fill="#475569" font-size="10">12k</text>
+                                <text x="34" y="153" text-anchor="end" fill="#475569" font-size="10">6k</text>
+                                <text x="34" y="184" text-anchor="end" fill="#475569" font-size="10">0</text>
+
+                                <!-- Area & Linie -->
+                                <path d="M42,166 C65,160 82,154 102,156 C122,158 135,140 156,142 C175,144 192,130 212,132 C232,134 252,124 275,128 C295,131 312,110 332,92 C348,78 358,72 368,68 L368,180 L42,180 Z" fill="url(#protGrad)"/>
+                                <path d="M42,166 C65,160 82,154 102,156 C122,158 135,140 156,142 C175,144 192,130 212,132 C232,134 252,124 275,128 C295,131 312,110 332,92 C348,78 358,72 368,68" fill="none" stroke="#1d4ed8" stroke-width="2.2"/>
+
+                                <!-- Punkt-Marker bei Sep -->
+                                <circle cx="292" cy="122" r="8" fill="#0f2942" stroke="#ffffff" stroke-width="2.5"/>
+                                <circle cx="292" cy="122" r="3.2" fill="#ffffff"/>
+
+                                <!-- X-Achsen-Beschriftung -->
+                                <text x="48" y="198" text-anchor="middle" fill="#475569" font-size="10">Mär</text>
+                                <text x="92" y="198" text-anchor="middle" fill="#475569" font-size="10">Apr</text>
+                                <text x="136" y="198" text-anchor="middle" fill="#475569" font-size="10">Mai</text>
+                                <text x="180" y="198" text-anchor="middle" fill="#475569" font-size="10">Jun</text>
+                                <text x="224" y="198" text-anchor="middle" fill="#475569" font-size="10">Jul</text>
+                                <text x="268" y="198" text-anchor="middle" fill="#475569" font-size="10">Aug</text>
+                                <text x="312" y="198" text-anchor="middle" fill="#475569" font-size="10">Sep</text>
+                                <text x="356" y="198" text-anchor="middle" fill="#475569" font-size="10">Okt</text>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================= -->
+                <!-- ZIELBILD 2: INTERAKTIVER FIBONACCI CHART & MARKTÜBERSICHT     -->
+                <!-- ============================================================= -->
+                <section class="flow-step-section" id="step3Chart">
+                    <div class="chart-indicators-grid">
+                        
+                        <!-- Linke Karte: Interaktiver Fibonacci Chart + 3 Sub-Charts + 3 Kreis-Indikatoren (wie in Bild 2) -->
+                        <div class="panel chart-left-card" id="chartPanel">
+                            <div class="panel-header chart-panel-head">
+                                <div class="chart-title-group">
+                                    <h3 class="panel-title">Interaktiver Fibonacci Chart</h3>
+                                    <span class="chart-active-pill" id="chartActiveTag">BTC/USDT</span>
+                                </div>
+                            </div>
+
+                            <div class="chart-container" id="chartContainer">
+                                <div class="chart-overlay-info" id="chartOverlayInfo" style="display: none;"></div>
+                                <div class="canvas-tooltip" id="canvasTooltip"></div>
+                                <canvas id="priceCanvas"></canvas>
+
+                                <!-- Sub-Strip 1: RSI (14) -->
+                                <div class="subchart-strip-row">
+                                    <div class="subchart-label-col">
+                                        <span class="subchart-title">RSI (14) <strong class="text-purple" id="rsiStripVal">39.6</strong></span>
+                                    </div>
+                                    <div class="subchart-canvas-col">
+                                        <canvas id="rsiCanvas"></canvas>
+                                    </div>
+                                    <div class="subchart-scale-col">
+                                        <span>56</span>
+                                        <span>40</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sub-Strip 2: MACD (12,26,9) -->
+                                <div class="subchart-strip-row">
+                                    <div class="subchart-label-col">
+                                        <span class="subchart-title">MACD (12,26,9)</span>
+                                        <strong class="subchart-val-blue" id="macdStripVal">-0.321</strong>
+                                    </div>
+                                    <div class="subchart-canvas-col">
+                                        <canvas id="macdCanvas"></canvas>
+                                    </div>
+                                    <div class="subchart-scale-col"></div>
+                                </div>
+
+                                <!-- Sub-Strip 3: Bollinger Bänder -->
+                                <div class="subchart-strip-row">
+                                    <div class="subchart-label-col">
+                                        <span class="subchart-title">Bollinger Bänder</span>
+                                    </div>
+                                    <div class="subchart-canvas-col">
+                                        <canvas id="bbCanvas"></canvas>
+                                    </div>
+                                    <div class="subchart-scale-col"></div>
+                                </div>
+                            </div>
+
+                            <!-- 3 Indikator-Karten unten im Chart-Panel (wie in Bild 2 unten links) -->
+                            <div class="indicator-trio-grid" id="sectionIndicators">
+                                <div class="indicator-card">
+                                    <div class="ind-circle-icon ind-icon-purple">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 16l6-6 4 4 5-5"/><path d="M15 9h5v5"/></svg>
+                                    </div>
+                                    <div class="ind-card-main">
+                                        <div class="ind-name">RSI</div>
+                                        <div class="ind-big-val" id="indRsi">39.6</div>
+                                        <span class="ind-status-text" id="rsiStatusBadge">Neutral</span>
+                                        <div class="meter-track" style="display: none;">
+                                            <div class="meter-fill" id="rsiMeterFill" style="width: 50%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="indicator-card">
+                                    <div class="ind-circle-icon ind-icon-teal">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 14l4-6 4 8 4-10 6 8"/></svg>
+                                    </div>
+                                    <div class="ind-card-main">
+                                        <div class="ind-name">MACD</div>
+                                        <div class="ind-word-val" id="macdStatusBadge">Bearisch</div>
+                                        <div style="display: none;">
+                                            <span id="indMacdHist">0.00</span>
+                                            <span id="indMacdLine">0.00</span>
+                                            <span id="indMacdSignal">0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="indicator-card">
+                                    <div class="ind-circle-icon ind-icon-amber">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 15l4-5 4 6 4-8 6 7"/></svg>
+                                    </div>
+                                    <div class="ind-card-main">
+                                        <div class="ind-name">Bollinger</div>
+                                        <div class="ind-word-val" id="bbStatusBadge">Hohe Volatilität</div>
+                                        <div style="display: none;">
+                                            <span id="indBbUpper">$0</span>
+                                            <span id="indBbMiddle">$0</span>
+                                            <span id="indBbLower">$0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rechte Karte: MARKTÜBERSICHT · BTC/USDT (wie in Bild 2 rechts) -->
+                        <div class="panel chart-right-card">
+                            <div class="panel-header">
+                                <div class="market-ov-title">MARKTÜBERSICHT &nbsp;·&nbsp; <span class="bw-active-asset-label">BTC</span>/USDT</div>
+                            </div>
+
+                            <div class="fib-table-wrapper market-ov-table-wrap">
+                                <table class="fib-table market-ov-table">
+                                    <thead>
+                                        <tr>
+                                            <th>PAAR</th>
+                                            <th>ZEITRAUM</th>
+                                            <th>O</th>
+                                            <th>H</th>
+                                            <th>L</th>
+                                            <th>C</th>
+                                            <th>ÄNDERUNG</th>
+                                            <th>% SUPPORT / WIDERSTAND</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="marketOverviewBody">
+                                        <tr>
+                                            <td><strong class="pair-cell"><span class="bw-active-asset-label">BTC</span>/USDT</strong></td>
+                                            <td class="tf-cell">1h</td>
+                                            <td class="mono-cell">97.102</td>
+                                            <td class="mono-cell">97.342</td>
+                                            <td class="mono-cell">96.871</td>
+                                            <td class="mono-cell"><strong>97.215</strong></td>
+                                            <td class="ov-sup-cell">
+                                                <div class="ov-delta-green">▲ +1.25</div>
+                                                <span class="status-badge badge-support">SUPPORT</span>
+                                                <div class="ov-level-num">95.840</div>
+                                            </td>
+                                            <td class="ov-res-cell">
+                                                <div class="ov-delta-green">▲ +1.25</div>
+                                                <div class="ov-pct-num">1,30%</div>
+                                                <span class="status-badge badge-resistance">WIDERSTAND</span>
+                                                <div class="ov-level-num">98.742</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="pair-cell"><span class="bw-active-asset-label">BTC</span>/USDT</strong></td>
+                                            <td class="tf-cell">4h</td>
+                                            <td class="mono-cell">96.810</td>
+                                            <td class="mono-cell">97.428</td>
+                                            <td class="mono-cell">96.432</td>
+                                            <td class="mono-cell"><strong>97.102</strong></td>
+                                            <td class="ov-sup-cell">
+                                                <div class="ov-delta-green">▲ +1.520</div>
+                                                <span class="status-badge badge-support">SUPPORT</span>
+                                                <div class="ov-level-num">95.521</div>
+                                            </td>
+                                            <td class="ov-res-cell">
+                                                <div class="ov-delta-green">▲ +0.520</div>
+                                                <div class="ov-pct-num">0,54%</div>
+                                                <span class="status-badge badge-resistance">WIDERSTAND</span>
+                                                <div class="ov-level-num">98.760</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="pair-cell"><span class="bw-active-asset-label">BTC</span>/USDT</strong></td>
+                                            <td class="tf-cell">1d</td>
+                                            <td class="mono-cell">95.210</td>
+                                            <td class="mono-cell">97.428</td>
+                                            <td class="mono-cell">94.821</td>
+                                            <td class="mono-cell"><strong>96.810</strong></td>
+                                            <td class="ov-sup-cell">
+                                                <div class="ov-delta-green">▲ +1.521</div>
+                                                <span class="status-badge badge-support">SUPPORT</span>
+                                                <div class="ov-level-num">94.120</div>
+                                            </td>
+                                            <td class="ov-res-cell">
+                                                <div class="ov-delta-green">▲ +1.521</div>
+                                                <div class="ov-pct-num">1,60%</div>
+                                                <span class="status-badge badge-resistance">WIDERSTAND</span>
+                                                <div class="ov-level-num">99.100</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="pair-cell"><span class="bw-active-asset-label">BTC</span>/USDT</strong></td>
+                                            <td class="tf-cell">1w</td>
+                                            <td class="mono-cell">91.230</td>
+                                            <td class="mono-cell">96.810</td>
+                                            <td class="mono-cell">90.871</td>
+                                            <td class="mono-cell"><strong>95.210</strong></td>
+                                            <td class="ov-sup-cell">
+                                                <div class="ov-delta-green">▲ +3.421</div>
+                                                <span class="status-badge badge-support">SUPPORT</span>
+                                                <div class="ov-level-num">90.000</div>
+                                            </td>
+                                            <td class="ov-res-cell">
+                                                <div class="ov-delta-green">▲ +3.421</div>
+                                                <div class="ov-pct-num">3,70%</div>
+                                                <span class="status-badge badge-resistance">WIDERSTAND</span>
+                                                <div class="ov-level-num">100.230</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="pair-cell"><span class="bw-active-asset-label">BTC</span>/USDT</strong></td>
+                                            <td class="tf-cell">1M</td>
+                                            <td class="mono-cell">82.410</td>
+                                            <td class="mono-cell">95.210</td>
+                                            <td class="mono-cell">82.120</td>
+                                            <td class="mono-cell"><strong>91.230</strong></td>
+                                            <td class="ov-sup-cell">
+                                                <div class="ov-delta-green">▲ +8.721</div>
+                                                <span class="status-badge badge-support">SUPPORT</span>
+                                                <div class="ov-level-num">80.000</div>
+                                            </td>
+                                            <td class="ov-res-cell">
+                                                <div class="ov-delta-green">▲ +8.721</div>
+                                                <div class="ov-pct-num">10,54%</div>
+                                                <span class="status-badge badge-resistance">WIDERSTAND</span>
+                                                <div class="ov-level-num">98.750</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Ausklappbare Detail-Fibonacci-Matrix (#fibTableBody für JS-Kompatibilität) -->
+                            <details class="fib-detail-accordion">
+                                <summary>Alle Fibonacci-Retracements &amp; Extensions anzeigen</summary>
+                                <div class="fib-table-wrapper">
+                                    <table class="fib-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Level</th>
+                                                <th>Preis</th>
+                                                <th>Abstand</th>
+                                                <th>Status</th>
+                                                <th>Typ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fibTableBody"></tbody>
+                                    </table>
+                                </div>
+                            </details>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ============================================================= -->
         <!-- SCHRITT 1: KAUF-RADAR // WELCHE KRYPTO JETZT KAUFEN?        -->
         <!-- ============================================================= -->
         
@@ -621,114 +1107,7 @@
             </div>
         </section>
 
-<section class="flow-step-section" id="step3Chart">
-            
-            <div class="flow-step-header" style="border-left-color: var(--accent-green);">
-                <div class="flow-step-badge-wrap">
-                    <span class="flow-step-pill pill-green">SCHRITT 3 VON 5</span>
-                    <h2 class="flow-step-title">VISUELLE CHART-BESTÄTIGUNG & TECHNISCHE INDIKATOREN-AMPEL</h2>
-                </div>
-                <div class="flow-step-desc">
-                    <strong>Sehen, wo der Kurs steht:</strong> Erkennen Sie im interaktiven Candlestick-Chart visuell, ob der Kurs das goldene 61.8% Retracement (Golden Pocket) testet. Die 3 technischen Indikatoren bestätigen das Momentum. Fahren Sie mit der Maus über die Kerzen für Fadenkreuz und Kursdetails.
-                </div>
-            </div>
 
-            <!-- Chart + Marktübersicht 2-Spalten-Grid (wie im Zielbild) -->
-            <div class="chart-indicators-grid">
-                
-                <!-- Linke Spalte: Interaktiver Fibonacci Chart + 3 Indikator-Kacheln -->
-                <div class="panel chart-left-card" id="chartPanel">
-                    <div class="panel-header">
-                        <div class="chart-title-group">
-                            <h3 class="panel-title">Interaktiver Fibonacci Chart</h3>
-                            <span class="chart-active-pill" id="chartActiveTag">BTC/USDT</span>
-                        </div>
-                        <span class="chart-gp-hint">Golden Pocket (61.8%) hervorgehoben</span>
-                    </div>
-
-                    <div class="chart-container" id="chartContainer">
-                        <div class="chart-overlay-info" id="chartOverlayInfo">Fahre mit der Maus über den Chart für Fadenkreuz &amp; Details</div>
-                        <div class="canvas-tooltip" id="canvasTooltip"></div>
-                        <canvas id="priceCanvas"></canvas>
-                        <canvas id="rsiCanvas"></canvas>
-                    </div>
-
-                    <!-- 3 Indikator-Karten unten im Chart-Panel (RSI, MACD, Bollinger mit Kreis-Icons) -->
-                    <div class="indicator-trio-grid" id="sectionIndicators">
-                        <div class="indicator-card">
-                            <div class="ind-circle-icon ind-icon-purple">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                            </div>
-                            <div class="ind-card-main">
-                                <div class="ind-name">RSI (14)</div>
-                                <div class="ind-big-val" id="indRsi">50.0</div>
-                                <span class="status-badge" id="rsiStatusBadge">Neutral</span>
-                                <div class="meter-track">
-                                    <div class="meter-fill" id="rsiMeterFill" style="width: 50%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="indicator-card">
-                            <div class="ind-circle-icon ind-icon-teal">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg>
-                            </div>
-                            <div class="ind-card-main">
-                                <div class="ind-name">MACD (12,26,9)</div>
-                                <div class="ind-big-val" id="indMacdHist">0.00</div>
-                                <span class="status-badge" id="macdStatusBadge">Neutral</span>
-                                <div class="ind-sub-inline">
-                                    <span>L: <strong id="indMacdLine">0.00</strong></span>
-                                    <span>S: <strong id="indMacdSignal">0.00</strong></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="indicator-card">
-                            <div class="ind-circle-icon ind-icon-amber">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
-                            </div>
-                            <div class="ind-card-main">
-                                <div class="ind-name">Bollinger</div>
-                                <span class="status-badge" id="bbStatusBadge">Normale Volatilität</span>
-                                <div class="ind-sub-inline">
-                                    <span>O: <strong id="indBbUpper">$0</strong></span>
-                                    <span>M: <strong id="indBbMiddle">$0</strong></span>
-                                    <span>U: <strong id="indBbLower">$0</strong></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rechte Spalte: Marktübersicht & Support/Widerstand-Matrix -->
-                <div class="panel chart-right-card">
-                    <div class="panel-header">
-                        <div>
-                            <div class="section-eyebrow">MARKTÜBERSICHT · <span class="bw-active-asset-label">BTC</span>/USDT</div>
-                            <h3 class="panel-title">Fibonacci Support &amp; Widerstand</h3>
-                        </div>
-                    </div>
-                    <div class="fib-table-wrapper">
-                        <table class="fib-table">
-                            <thead>
-                                <tr>
-                                    <th>Level</th>
-                                    <th>Preis</th>
-                                    <th>Änderung / Abstand</th>
-                                    <th>Support / Widerstand</th>
-                                    <th>Typ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="fibTableBody">
-                                <!-- Populated dynamically by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </section>
 
         <!-- ============================================================= -->
         <!-- SCHRITT 4: FUNDAMENTALER SICHERHEITS-CHECK                  -->
@@ -1520,11 +1899,11 @@
     <div id="toastContainer"></div>
 
     <!-- Scripts -->
-    <script src="fibonacci_engine.js"></script>
-    <script src="hydro_console.js"></script>
-    <script src="copilot_engine.js"></script>
-    <script src="blockworks_intel.js"></script>
-    <script src="app.js"></script>
-    <script src="ai_assistant.js"></script>
+    <script src="fibonacci_engine.js?v=17.0"></script>
+    <script src="hydro_console.js?v=17.0"></script>
+    <script src="copilot_engine.js?v=17.0"></script>
+    <script src="blockworks_intel.js?v=17.0"></script>
+    <script src="app.js?v=17.0"></script>
+    <script src="ai_assistant.js?v=17.0"></script>
 </body>
 </html>
