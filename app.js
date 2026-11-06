@@ -1032,20 +1032,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 signalStrengthPctValEl.textContent = `${pct}% Kaufsignal / Bullish`;
                 signalStrengthPctValEl.style.color = 'var(--accent-green)';
                 signalStrengthBarEl.style.width = `${pct}%`;
-                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #7af09e, #ff6e3a)';
-                signalStrengthBarEl.style.color = '#7af09e';
+                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #059669, #10b981)';
+                signalStrengthBarEl.style.color = '#059669';
             } else if (oracleSignal.signal === 'SELL') {
                 signalStrengthPctValEl.textContent = `${pct}% Verkaufsignal / Bearish`;
                 signalStrengthPctValEl.style.color = 'var(--accent-red)';
                 signalStrengthBarEl.style.width = `${pct}%`;
-                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #ff4d4d, #ff6e3a)';
-                signalStrengthBarEl.style.color = '#ff4d4d';
+                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #dc2626, #ef4444)';
+                signalStrengthBarEl.style.color = '#dc2626';
             } else {
                 signalStrengthPctValEl.textContent = `${pct}% Neutral / Konsolidierung`;
                 signalStrengthPctValEl.style.color = 'var(--accent-amber)';
                 signalStrengthBarEl.style.width = `${pct}%`;
-                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #ffb800, #8e95a5)';
-                signalStrengthBarEl.style.color = '#ffb800';
+                signalStrengthBarEl.style.background = 'linear-gradient(90deg, #0066b3, #3b82f6)';
+                signalStrengthBarEl.style.color = '#0066b3';
             }
         }
 
@@ -1202,11 +1202,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear and solid background
         ctxP.clearRect(0, 0, cssWidth, cssHeightP);
-        ctxP.fillStyle = '#0E1217';
+        ctxP.fillStyle = '#ffffff';
         ctxP.fillRect(0, 0, cssWidth, cssHeightP);
 
         ctxR.clearRect(0, 0, cssWidth, cssHeightR);
-        ctxR.fillStyle = '#0E1217';
+        ctxR.fillStyle = '#ffffff';
         ctxR.fillRect(0, 0, cssWidth, cssHeightR);
 
         const padding = { 
@@ -1259,29 +1259,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const y100 = getYP(fib.levels['100%']);
             const y161 = getYP(fib.levels['161.8%'] || fib.levels['100%']);
 
-            // 50% - 61.8% Golden Ratio Zone
-            ctxP.fillStyle = 'rgba(122, 240, 158, 0.12)';
+            // 50% - 61.8% Golden Ratio Zone (Warm Amber Highlight like Target Image 2)
+            ctxP.fillStyle = 'rgba(245, 158, 11, 0.16)';
             ctxP.fillRect(padding.left, Math.min(y50, y61), chartW, Math.abs(y61 - y50));
+            ctxP.strokeStyle = 'rgba(245, 158, 11, 0.55)';
+            ctxP.lineWidth = 1;
+            ctxP.strokeRect(padding.left, Math.min(y50, y61), chartW, Math.abs(y61 - y50));
 
             // 38.2% - 50.0% Support Zone
-            ctxP.fillStyle = 'rgba(255, 184, 0, 0.08)';
+            ctxP.fillStyle = 'rgba(5, 150, 105, 0.05)';
             ctxP.fillRect(padding.left, Math.min(y38, y50), chartW, Math.abs(y50 - y38));
 
             // 23.6% - 38.2% Zone
-            ctxP.fillStyle = 'rgba(255, 110, 58, 0.06)';
+            ctxP.fillStyle = 'rgba(0, 102, 179, 0.04)';
             ctxP.fillRect(padding.left, Math.min(y23, y38), chartW, Math.abs(y38 - y23));
 
             // 100% - 161.8% Target Extension Zone
-            ctxP.fillStyle = 'rgba(255, 77, 77, 0.08)';
+            ctxP.fillStyle = 'rgba(220, 38, 38, 0.04)';
             ctxP.fillRect(padding.left, Math.min(y100, y161), chartW, Math.abs(y161 - y100));
 
-            ctxP.fillStyle = '#34D399';
-            ctxP.font = 'bold 11px Arial, sans-serif';
-            ctxP.fillText('* GOLDEN RATIO ZONE (61.8%)', padding.left + 15, Math.min(y50, y61) + 14);
+            ctxP.fillStyle = '#b45309';
+            ctxP.font = 'bold 11px Inter, Arial, sans-serif';
+            ctxP.fillText('61.8% GOLDEN POCKET ZONE', padding.left + 14, Math.min(y50, y61) + 15);
         }
 
         // 2. Grid Lines
-        ctxP.strokeStyle = '#202735';
+        ctxP.strokeStyle = '#e2e8f0';
         ctxP.lineWidth = 1;
         for (let i = 0; i <= 5; i++) {
             const y = padding.top + (i / 5) * chartHP;
@@ -1294,21 +1297,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Fibonacci Lines & Price Labels
         if (fib && fib.levels) {
             const fibColors = {
-                '0%': '#94A3B8',
-                '23.6%': '#F59E0B',
-                '38.2%': '#F59E0B',
-                '50.0%': '#38BDF8',
-                '61.8%': '#34D399',
-                '78.6%': '#C084FC',
-                '100%': '#94A3B8',
-                '127.2%': '#FDA4AF',
-                '161.8%': '#FDA4AF'
+                '0%': '#475569',
+                '23.6%': '#b45309',
+                '38.2%': '#b45309',
+                '50.0%': '#0066b3',
+                '61.8%': '#059669',
+                '78.6%': '#6d28d9',
+                '100%': '#475569',
+                '127.2%': '#dc2626',
+                '161.8%': '#dc2626'
             };
 
             Object.entries(fib.levels).forEach(([name, levelPrice]) => {
                 const y = getYP(levelPrice);
                 if (y >= padding.top - 15 && y <= cssHeightP - padding.bottom + 15) {
-                    ctxP.strokeStyle = fibColors[name] || '#ffffff';
+                    ctxP.strokeStyle = fibColors[name] || '#334155';
                     ctxP.setLineDash(name === '61.8%' ? [] : [4, 4]);
                     ctxP.lineWidth = name === '61.8%' ? 2.2 : 1;
 
@@ -1318,7 +1321,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctxP.stroke();
 
                     ctxP.setLineDash([]);
-                    ctxP.fillStyle = fibColors[name] || '#ffffff';
+                    ctxP.fillStyle = fibColors[name] || '#334155';
                     ctxP.font = isMobile ? '9px "JetBrains Mono", monospace' : '11px "JetBrains Mono", monospace';
                     const fibLabel = isMobile ? `${name} ${formatMoney(levelPrice, 0)}` : `Fib ${name}: ${formatMoney(levelPrice, 1)}`;
                     ctxP.fillText(fibLabel, cssWidth - padding.right + 4, y + 4);
@@ -1336,7 +1339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else ctxP.lineTo(x, y);
         });
         
-        ctxP.strokeStyle = 'rgba(255, 110, 58, 0.4)';
+        ctxP.strokeStyle = 'rgba(0, 102, 179, 0.22)';
         ctxP.lineWidth = 1.5;
         ctxP.stroke();
 
@@ -1352,10 +1355,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const isUp = c.close >= c.open;
             const isHovered = (hoveredCandleIndex === i);
-            let color = isUp ? '#34D399' : '#F43F5E';
+            let color = isUp ? '#059669' : '#dc2626';
 
             if (isHovered) {
-                color = '#38BDF8';
+                color = '#0066b3';
             }
 
             ctxP.strokeStyle = color;
@@ -1376,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const crossX = mousePos.x;
             const crossY = mousePos.y;
 
-            ctxP.strokeStyle = '#38BDF8';
+            ctxP.strokeStyle = '#0066b3';
             ctxP.setLineDash([3, 3]);
             ctxP.lineWidth = 1;
             ctxP.beginPath();
@@ -1394,7 +1397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctxP.setLineDash([]);
                 ctxP.fillStyle = '#1E3A8A';
                 ctxP.fillRect(cssWidth - padding.right + 2, crossY - 10, isMobile ? 66 : 88, 20);
-                ctxP.fillStyle = '#0E1217';
+                ctxP.fillStyle = '#ffffff';
                 ctxP.font = isMobile ? 'bold 9px "JetBrains Mono", monospace' : 'bold 11px "JetBrains Mono", monospace';
                 ctxP.fillText(`${formatMoney(hoverPrice, isMobile ? 0 : 1)}`, cssWidth - padding.right + (isMobile ? 3 : 6), crossY + 4);
             }
@@ -1407,26 +1410,30 @@ document.addEventListener('DOMContentLoaded', () => {
             return 15 + chartHR - (val / 100) * chartHR;
         }
 
-        ctxR.strokeStyle = 'rgba(255, 77, 77, 0.4)';
+        // Subtle shaded RSI 30-70 band (like Target Image 2)
+        ctxR.fillStyle = 'rgba(109, 40, 217, 0.05)';
+        ctxR.fillRect(padding.left, getYR(70), chartW, getYR(30) - getYR(70));
+
+        ctxR.strokeStyle = 'rgba(220, 38, 38, 0.45)';
         ctxR.setLineDash([3, 3]);
         ctxR.beginPath();
         ctxR.moveTo(padding.left, getYR(70));
         ctxR.lineTo(cssWidth - padding.right, getYR(70));
         ctxR.stroke();
 
-        ctxR.strokeStyle = 'rgba(122, 240, 158, 0.4)';
+        ctxR.strokeStyle = 'rgba(5, 150, 105, 0.45)';
         ctxR.beginPath();
         ctxR.moveTo(padding.left, getYR(30));
         ctxR.lineTo(cssWidth - padding.right, getYR(30));
         ctxR.stroke();
         ctxR.setLineDash([]);
 
-        ctxR.fillStyle = '#94A3B8';
+        ctxR.fillStyle = '#475569';
         ctxR.font = isMobile ? '8px "JetBrains Mono", monospace' : '10px "JetBrains Mono", monospace';
         ctxR.fillText('RSI 70', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(70) + 3);
         ctxR.fillText('RSI 30', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(30) + 3);
 
-        ctxR.strokeStyle = '#38BDF8';
+        ctxR.strokeStyle = '#6d28d9';
         ctxR.lineWidth = 1.8;
         ctxR.beginPath();
 
@@ -1446,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxR.stroke();
 
         if (mousePos.x > 0) {
-            ctxR.strokeStyle = '#38BDF8';
+            ctxR.strokeStyle = '#0066b3';
             ctxR.setLineDash([3, 3]);
             ctxR.lineWidth = 1;
             ctxR.beginPath();

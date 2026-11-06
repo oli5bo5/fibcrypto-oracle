@@ -607,7 +607,7 @@
         const plotH = h - padT - padB;
 
         // Subtle grid lines
-        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        ctx.strokeStyle = '#e2e8f0';
         ctx.lineWidth = 1;
         for (let g = 0; g <= 2; g++) {
             const y = padT + (plotH / 2) * g;
@@ -619,8 +619,8 @@
 
         // Gradient area under curve
         const grad = ctx.createLinearGradient(0, padT, 0, padT + plotH);
-        grad.addColorStop(0, 'rgba(234, 179, 8, 0.38)');
-        grad.addColorStop(1, 'rgba(234, 179, 8, 0.01)');
+        grad.addColorStop(0, 'rgba(0, 102, 179, 0.22)');
+        grad.addColorStop(1, 'rgba(0, 102, 179, 0.01)');
 
         ctx.beginPath();
         pts.forEach((p, idx) => {
@@ -629,7 +629,7 @@
             if (idx === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         });
-        ctx.strokeStyle = '#eab308';
+        ctx.strokeStyle = '#0066b3';
         ctx.lineWidth = 2.2;
         ctx.stroke();
 
@@ -641,7 +641,7 @@
         ctx.fill();
 
         // Labels
-        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.fillStyle = '#475569';
         ctx.font = '10px "JetBrains Mono", monospace';
         ctx.fillText(pts[0].date.split(' ')[0], padL + 2, h - 6);
         ctx.fillText(pts[Math.floor(pts.length / 2)].date.split(' ')[0], w / 2 - 16, h - 6);
@@ -734,21 +734,21 @@
                 <div class="bw-ai-point point-why">
                     <div class="bw-ai-point-num">01</div>
                     <div class="bw-ai-point-content">
-                        <div class="bw-ai-point-title" style="color: #4ade80;">Warum dieses Signal Sinn macht (Fibonacci & Einstieg)</div>
+                        <div class="bw-ai-point-title" style="color: var(--success);">Warum dieses Signal Sinn macht (Fibonacci & Einstieg)</div>
                         <div class="bw-ai-point-body">${s.why}</div>
                     </div>
                 </div>
                 <div class="bw-ai-point point-risk">
                     <div class="bw-ai-point-num">02</div>
                     <div class="bw-ai-point-content">
-                        <div class="bw-ai-point-title" style="color: #fbbf24;">Größtes Risiko (Token Unlocks & Onchain-Flow)</div>
+                        <div class="bw-ai-point-title" style="color: var(--warning);">Größtes Risiko (Token Unlocks & Onchain-Flow)</div>
                         <div class="bw-ai-point-body">${s.risk}</div>
                     </div>
                 </div>
                 <div class="bw-ai-point point-confirm">
                     <div class="bw-ai-point-num">03</div>
                     <div class="bw-ai-point-content">
-                        <div class="bw-ai-point-title" style="color: #38bdf8;">Erforderliche Bestätigung (Kursziel & Indikatoren)</div>
+                        <div class="bw-ai-point-title" style="color: var(--primary);">Erforderliche Bestätigung (Kursziel & Indikatoren)</div>
                         <div class="bw-ai-point-body">${s.confirmation}</div>
                     </div>
                 </div>
@@ -924,10 +924,10 @@
         const plotH = h - pad * 2;
 
         const isProfit = pts[pts.length - 1] >= pts[0];
-        const strokeCol = isProfit ? '#7af09e' : '#ff5555';
+        const strokeCol = isProfit ? '#059669' : '#dc2626';
 
         const grad = ctx.createLinearGradient(0, pad, 0, pad + plotH);
-        grad.addColorStop(0, isProfit ? 'rgba(122, 240, 158, 0.32)' : 'rgba(255, 85, 85, 0.32)');
+        grad.addColorStop(0, isProfit ? 'rgba(5, 150, 105, 0.22)' : 'rgba(220, 38, 38, 0.22)');
         grad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
 
         ctx.beginPath();
