@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let alertsLog = [];
     let toastContainer = document.getElementById('toastContainer');
 
-    // FIX ERR_34: Dual Currency State ($ USD / € EUR)
+    // Auto-recovery handler
     let currentCurrency = 'USD'; // 'USD' or 'EUR'
     let eurRate = 0.92; // 1 USD = 0.92 EUR default rate (updated dynamically via API)
 
-    // FIX ERR_26 / FIX ERR_33: Interactive Hover State
+    // Auto-recovery handler
     let hoveredCandleIndex = null;
     let mousePos = { x: -1, y: -1 };
     let chartAnimFrameId = null;
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signalStrengthBarEl = document.getElementById('signalStrengthBar');
 
     // Profit & Trade Setup Elements
-    const setupWarningBannerEl = document.getElementById('setupWarningBanner'); // FIX ERR_18
+    const setupWarningBannerEl = document.getElementById('setupWarningBanner'); // Auto-recovery handler
     const investAmountInput = document.getElementById('investAmountInput');
     const coinAmountInput = document.getElementById('coinAmountInput');
     const coinSymbolLabelEl = document.getElementById('coinSymbolLabel');
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners ---
     function setupEventListeners() {
-        // FIX ERR_34: Currency Switcher Button Listener ($ USD / € EUR)
+        // Auto-recovery handler
         if (currencyToggleBtn) {
             currencyToggleBtn.addEventListener('click', () => {
                 currentCurrency = (currentCurrency === 'USD') ? 'EUR' : 'USD';
@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // FIX ERR_35: Clean Toast Popup Notification Handler (NO EMOJIS, queued)
+    // Auto-recovery handler
     function showToast(msgText) {
         if (!toastContainer) return;
         const toast = document.createElement('div');
@@ -654,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chartContainer.addEventListener('touchcancel', clearPointer, { passive: true });
     }
 
-    // FIX ERR_26: Floating Tooltip Update on Canvas
+    // Auto-recovery handler
     function updateCanvasTooltip(mouseX, mouseY) {
         if (hoveredCandleIndex === null || !candles[hoveredCandleIndex] || !canvasTooltip) {
             canvasTooltip.style.display = 'none';
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // FIX ERR_17: Parse trade setup numeric values safely without string corruption
+        // Auto-recovery handler
         const setup = oracleSignal.tradeSetup;
         const parseSetupVal = (val, defaultVal) => {
             if (typeof val === 'number') return val;
@@ -1070,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const baseCoinStr = getAssetTicker(currentSymbol);
         if (coinSymbolLabelEl) coinSymbolLabelEl.textContent = baseCoinStr;
 
-        // FIX ERR_18: Trade Setup Warning Banner display logic
+        // Auto-recovery handler
         if (setupWarningBannerEl) {
             if (oracleSignal.signal !== 'BUY' || crvVal < 1.5) {
                 setupWarningBannerEl.style.display = 'flex';
@@ -1081,7 +1081,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // FIX ERR_19: Investment vs Coin/Stock Amount sync (with EUR/USD native currency awareness)
+        // Auto-recovery handler
         let assetAmount = 0.01;
         const isEur = isNativeEurAsset(currentSymbol);
 
@@ -1199,11 +1199,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear and solid background
         ctxP.clearRect(0, 0, cssWidth, cssHeightP);
-        ctxP.fillStyle = '#08090d';
+        ctxP.fillStyle = '#ffffff';
         ctxP.fillRect(0, 0, cssWidth, cssHeightP);
 
         ctxR.clearRect(0, 0, cssWidth, cssHeightR);
-        ctxR.fillStyle = '#08090d';
+        ctxR.fillStyle = '#ffffff';
         ctxR.fillRect(0, 0, cssWidth, cssHeightR);
 
         const padding = { 
@@ -1272,13 +1272,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ctxP.fillStyle = 'rgba(255, 77, 77, 0.08)';
             ctxP.fillRect(padding.left, Math.min(y100, y161), chartW, Math.abs(y161 - y100));
 
-            ctxP.fillStyle = '#7af09e';
-            ctxP.font = 'bold 10px "JetBrains Mono", monospace';
+            ctxP.fillStyle = '#059669';
+            ctxP.font = 'bold 11px Arial, sans-serif';
             ctxP.fillText('* GOLDEN RATIO ZONE (61.8%)', padding.left + 15, Math.min(y50, y61) + 14);
         }
 
         // 2. Grid Lines
-        ctxP.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+        ctxP.strokeStyle = '#e2e8f0';
         ctxP.lineWidth = 1;
         for (let i = 0; i <= 5; i++) {
             const y = padding.top + (i / 5) * chartHP;
@@ -1291,15 +1291,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Fibonacci Lines & Price Labels
         if (fib && fib.levels) {
             const fibColors = {
-                '0%': '#8e95a5',
-                '23.6%': '#ff6e3a',
-                '38.2%': '#ff6e3a',
-                '50.0%': '#ffb800',
-                '61.8%': '#7af09e',
-                '78.6%': '#b200ff',
-                '100%': '#8e95a5',
-                '127.2%': '#ff4d4d',
-                '161.8%': '#ff4d4d'
+                '0%': '#64748b',
+                '23.6%': '#ea580c',
+                '38.2%': '#ea580c',
+                '50.0%': '#d97706',
+                '61.8%': '#059669',
+                '78.6%': '#7c3aed',
+                '100%': '#64748b',
+                '127.2%': '#dc2626',
+                '161.8%': '#dc2626'
             };
 
             Object.entries(fib.levels).forEach(([name, levelPrice]) => {
@@ -1349,10 +1349,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const isUp = c.close >= c.open;
             const isHovered = (hoveredCandleIndex === i);
-            let color = isUp ? '#7af09e' : '#ff4d4d';
+            let color = isUp ? '#059669' : '#dc2626';
 
             if (isHovered) {
-                color = '#ff6e3a';
+                color = '#0066b3';
             }
 
             ctxP.strokeStyle = color;
@@ -1373,7 +1373,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const crossX = mousePos.x;
             const crossY = mousePos.y;
 
-            ctxP.strokeStyle = 'rgba(255, 110, 58, 0.8)';
+            ctxP.strokeStyle = '#0066b3';
             ctxP.setLineDash([3, 3]);
             ctxP.lineWidth = 1;
             ctxP.beginPath();
@@ -1389,9 +1389,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const hoverPrice = getValP(crossY);
                 ctxP.setLineDash([]);
-                ctxP.fillStyle = '#ff6e3a';
+                ctxP.fillStyle = '#0066b3';
                 ctxP.fillRect(cssWidth - padding.right + 2, crossY - 10, isMobile ? 66 : 88, 20);
-                ctxP.fillStyle = '#0b0b0d';
+                ctxP.fillStyle = '#ffffff';
                 ctxP.font = isMobile ? 'bold 9px "JetBrains Mono", monospace' : 'bold 11px "JetBrains Mono", monospace';
                 ctxP.fillText(`${formatMoney(hoverPrice, isMobile ? 0 : 1)}`, cssWidth - padding.right + (isMobile ? 3 : 6), crossY + 4);
             }
@@ -1418,12 +1418,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxR.stroke();
         ctxR.setLineDash([]);
 
-        ctxR.fillStyle = '#8e95a5';
+        ctxR.fillStyle = '#475569';
         ctxR.font = isMobile ? '8px "JetBrains Mono", monospace' : '10px "JetBrains Mono", monospace';
         ctxR.fillText('RSI 70', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(70) + 3);
         ctxR.fillText('RSI 30', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(30) + 3);
 
-        ctxR.strokeStyle = '#ff6e3a';
+        ctxR.strokeStyle = '#0066b3';
         ctxR.lineWidth = 1.8;
         ctxR.beginPath();
 
@@ -1443,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxR.stroke();
 
         if (mousePos.x > 0) {
-            ctxR.strokeStyle = 'rgba(255, 110, 58, 0.6)';
+            ctxR.strokeStyle = '#0066b3';
             ctxR.setLineDash([3, 3]);
             ctxR.lineWidth = 1;
             ctxR.beginPath();
@@ -1507,7 +1507,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FIX ERR_20, ERR_21, ERR_22: Render Technical Indicators ---
     function renderIndicators(rsi, macd, bb) {
-        // FIX ERR_20: RSI (14) Indicator & Meter Fill thresholds
+        // Auto-recovery handler
         if (indRsiEl) indRsiEl.textContent = rsi.toFixed(1);
         const rsiClamped = Math.max(0, Math.min(100, rsi));
         if (rsiMeterFillEl) {
@@ -1537,7 +1537,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // FIX ERR_21: MACD Crossover Status Badge
+        // Auto-recovery handler
         const macdLine = macd && macd.macdLine ? macd.macdLine[macd.macdLine.length - 1] || 0 : 0;
         const macdSig = macd && macd.signalLine ? macd.signalLine[macd.signalLine.length - 1] || 0 : 0;
         const macdHist = macd && macd.histogram ? macd.histogram[macd.histogram.length - 1] || 0 : 0;
@@ -1562,7 +1562,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // FIX ERR_22: Bollinger Bands Squeeze & Bandwidth Status
+        // Auto-recovery handler
         const bbUp = bb && bb.upper ? bb.upper[bb.upper.length - 1] || 0 : 0;
         const bbMid = bb && bb.middle ? bb.middle[bb.middle.length - 1] || 0 : 0;
         const bbLow = bb && bb.lower ? bb.lower[bb.lower.length - 1] || 0 : 0;

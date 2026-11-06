@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FibCrypto Oracle × Blockworks — Krypto-Kauf-Radar & Entscheidungs-Cockpit</title>
     
-    <!-- Fonts & Meta -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Clean Arial & System Sans Fonts -->
+    <!-- Meta & SEO -->
+    <meta name="description" content="FibCrypto Oracle — Autonomes Krypto-Marktorakel, Fibonacci-Zonen, KI-Kaufsignale und Risikomanagement für 16 führende Blockchains.">
+    <meta property="og:title" content="FibCrypto Oracle × Blockworks — Krypto-Kauf-Radar & Entscheidungs-Cockpit">
+    <meta property="og:description" content="Autonomes Krypto-Marktorakel, Fibonacci-Zonen, KI-Kaufsignale und Risikomanagement.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fibcrypto-oracle.vercel.app">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,7 +32,7 @@
 
             <div class="header-controls">
                 <!-- Currency Switcher Toggle ($ USD / € EUR) -->
-                <button class="currency-btn" id="currencyToggleBtn" data-tooltip="Währung wechseln: Umschalten zwischen Dollar ($) und Euro (€)">
+                <button class="currency-btn" id="currencyToggleBtn" data-tooltip="Währung wechseln: Fester Referenzkurs (1 EUR = 1.08 USD)">
                     <span class="currency-label-text">WÄHRUNG:</span>
                     <span id="currUsdLabel" class="active-curr">$ USD</span>
                     <span class="currency-divider">|</span>
@@ -44,9 +47,9 @@
                 </div>
 
                 <!-- Status Indicator -->
-                <div class="status-pill" data-tooltip="Live-Verbindung zum Markt-Datenstream (OKX / Binance)">
+                <div class="status-pill" data-tooltip="Binance Live-Chart · Simulierte Blockworks Onchain-Demo">
                     <span class="pulse-dot"></span>
-                    <span id="connectionStatus">MÄRKTE LIVE</span>
+                    <span id="connectionStatus">CHART LIVE · INTEL DEMO</span>
                 </div>
             </div>
         </div>
@@ -500,7 +503,7 @@
                         </div>
                         <div id="bwDdScoreBadgeCard" class="bw-sentiment-badge-card" style="padding: 8px 10px;">
                             <div style="font-size: 0.65rem; color: #475569; text-transform: uppercase;">Due-Diligence Score</div>
-                            <div id="bwOracleDdVal" style="font-weight: 700; font-size: 0.85rem; color: #eab308;">88/100</div>
+                            <div id="bwOracleDdVal" class="metric-val-highlight">88/100</div>
                             <div id="bwOracleDdSub" style="font-size: 0.68rem; color: #475569;">Vollständige Transparenz</div>
                         </div>
                     </div>
@@ -605,50 +608,6 @@
                 <!-- Dynamic Assessment Result Output -->
                 <div id="checkerResultBox" class="copilot-checker-result">
                     <!-- Populated dynamically by copilot_engine.js -->
-                </div>
-            </div>
-
-            <!-- ========================================================= -->
-            <!-- DEDICATED PROMINENT KI-ASSISTENT STUDIO (LIVE BERATER)  -->
-            <!-- ========================================================= -->
-            
-                    </div>
-                    <div class="ai-studio-status-pill">
-                        <span class="ai-studio-status-dot"></span>
-                        <span>BERATUNG ONLINE</span>
-                    </div>
-                </div>
-
-                <!-- Quick Prompt Chips -->
-                <div class="ai-quick-chips-wrapper" id="aiEmbeddedQuickChips">
-                    <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">Welchen Coin heute kaufen?</button>
-                    <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">Wie nutze ich diese Seite?</button>
-                    <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">Wie schützt der Stop-Loss?</button>
-                    <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">1.000 € investieren</button>
-                    <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">Golden Pocket (61.8%)</button>
-                    <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">Sicherheits-Check</button>
-                </div>
-
-                <!-- Embedded Message Stream -->
-                <div class="ai-embedded-stream" id="aiEmbeddedMessageStream"></div>
-
-                <!-- Typing indicator -->
-                <div id="aiEmbeddedTypingIndicator" class="ai-typing-box" style="display: none;">
-                    <span class="ai-typing-dot"></span>
-                    <span class="ai-typing-dot"></span>
-                    <span class="ai-typing-dot"></span>
-                    <span style="font-size: 0.78rem; color: #57534e; margin-left: 6px;">KI analysiert Marktdaten...</span>
-                </div>
-
-                <!-- Input bar -->
-                <div class="ai-embedded-footer">
-                    <input type="text" id="aiEmbeddedChatInput" class="ai-chat-input" placeholder="Frage an den KI-Assistenten stellen (z.B. Welchen Coin jetzt kaufen?)...">
-                    <button type="button" id="btnAiEmbeddedSend" class="ai-send-btn">
-                        <span>Fragen</span>
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
                 </div>
             </div>
 
@@ -1170,14 +1129,59 @@
             <!-- Permanent Right Sidebar Column: KI-Assistent Guide -->
             <aside class="dashboard-sidebar-column">
                 <div class="sidebar-sticky-dock">
-<div class="ai-embedded-studio-card" id="aiEmbeddedStudio">
-                <div class="ai-studio-header">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <div class="ai-studio-avatar"></div>
-                        <div>
-                            <div class="ai-studio-title">KI-MARKT-ASSISTENT & GUIDE (LIVE BERATUNG)</div>
-                            <div class="ai-studio-subtitle">Fragen Sie nach Kaufempfehlungen, Signalbegründungen oder Stop-Loss-Erklärungen</div>
+                    <div class="ai-embedded-studio-card" id="aiEmbeddedStudio">
+                        <div class="ai-studio-header">
+                            <div class="ai-studio-header-main">
+                                <div class="ai-studio-avatar">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="10" rx="3"/>
+                                        <circle cx="12" cy="5" r="2"/>
+                                        <path d="M12 7v4M8 15h.01M16 15h.01M9 19h6"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="ai-studio-title">KI-MARKT-ASSISTENT</div>
+                                    <div class="ai-studio-subtitle">Signale, Stop-Loss &amp; Kaufberatung</div>
+                                </div>
+                            </div>
+                            <div class="ai-studio-status-pill">
+                                <span class="ai-studio-status-dot"></span>
+                                <span>BERATUNG ONLINE</span>
+                            </div>
                         </div>
+
+                        <!-- Quick Prompt Chips -->
+                        <div class="ai-quick-chips-wrapper" id="aiEmbeddedQuickChips">
+                            <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">Welchen Coin heute kaufen?</button>
+                            <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">Wie nutze ich diese Seite?</button>
+                            <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">Wie schützt der Stop-Loss?</button>
+                            <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">1.000 € investieren</button>
+                            <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">Golden Pocket (61.8%)</button>
+                            <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">Sicherheits-Check</button>
+                        </div>
+
+                        <!-- Embedded Message Stream -->
+                        <div class="ai-embedded-stream" id="aiEmbeddedMessageStream"></div>
+
+                        <!-- Typing indicator -->
+                        <div id="aiEmbeddedTypingIndicator" class="ai-typing-box" style="display: none;">
+                            <span class="ai-typing-dot"></span>
+                            <span class="ai-typing-dot"></span>
+                            <span class="ai-typing-dot"></span>
+                            <span class="ai-typing-text">KI analysiert Marktdaten...</span>
+                        </div>
+
+                        <!-- Input bar -->
+                        <div class="ai-embedded-footer">
+                            <input type="text" id="aiEmbeddedChatInput" class="ai-chat-input" placeholder="Frage an den KI-Assistenten stellen...">
+                            <button type="button" id="btnAiEmbeddedSend" class="ai-send-btn">
+                                <span>Fragen</span>
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </aside>
         </div>

@@ -35,93 +35,13 @@
     };
 
     function initAssistant() {
-        createWidgetHTML();
-        bindEvents();
-    }
-
-    function createWidgetHTML() {
-        // Floating Trigger Button
-        const trigger = document.createElement('div');
-        trigger.id = 'aiAssistantTrigger';
-        trigger.className = 'ai-assistant-trigger';
-        trigger.setAttribute('data-tooltip', 'Klicken für den interaktiven KI-Erklärer & Chatbot');
-        trigger.innerHTML = `
-            <div class="ai-trigger-pulse"></div>
-            <div class="ai-trigger-text">
-                <span class="ai-trigger-title">KI-ASSISTENT</span>
-                <span class="ai-trigger-sub">Live-Marktberatung</span>
-            </div>
-            <span class="ai-trigger-badge">ONLINE</span>
-        `;
-        document.body.appendChild(trigger);
-
-        // Chat Modal Window
-        const modal = document.createElement('div');
-        modal.id = 'aiAssistantModal';
-        modal.className = 'ai-assistant-modal';
-        modal.style.display = 'none';
-        modal.innerHTML = `
-            <div class="ai-modal-header">
-                <div class="ai-modal-title-wrap">
-                    <div>
-                        <div class="ai-modal-title">FibCrypto KI-Assistent &amp; Guide</div>
-                        <div class="ai-modal-sub">Echtzeit-Hilfe zu Signalen, Stop-Loss &amp; Kaufentscheidungen</div>
-                    </div>
-                </div>
-                <div class="ai-modal-actions">
-                    <button type="button" id="btnAiResetChat" class="ai-modal-btn" title="Chat zurücksetzen">↻</button>
-                    <button type="button" id="btnAiCloseModal" class="ai-modal-btn ai-btn-close" title="Schließen">✕</button>
-                </div>
-            </div>
-
-            <!-- Quick Action Chips -->
-            <div class="ai-quick-chips-wrapper" id="aiQuickChips">
-                <button type="button" class="ai-chip" data-q="Welchen Coin soll ich heute kaufen?">Welcher Coin lohnt sich?</button>
-                <button type="button" class="ai-chip" data-q="Wie funktioniert diese Webseite?">Wie funktioniert die Seite?</button>
-                <button type="button" class="ai-chip" data-q="Wie schützt mich der Stop-Loss?">Was bringt der Stop-Loss?</button>
-                <button type="button" class="ai-chip" data-q="Ich habe 1.000 Euro, wie anlegen?">1.000 Euro investieren</button>
-                <button type="button" class="ai-chip" data-q="Was bedeutet das 61.8% Golden Pocket?">Golden Pocket (61.8%)</button>
-                <button type="button" class="ai-chip" data-q="Was ist der Due Diligence Score?">Sicherheits-Check</button>
-            </div>
-
-            <!-- Messages Stream -->
-            <div class="ai-modal-body" id="aiMessageStream"></div>
-
-            <!-- Typing Indicator -->
-            <div id="aiTypingIndicator" class="ai-typing-box" style="display: none;">
-                <span class="ai-typing-dot"></span>
-                <span class="ai-typing-dot"></span>
-                <span class="ai-typing-dot"></span>
-                <span style="font-size: 0.72rem; color: var(--text-faint); margin-left: 6px;">KI analysiert Marktdaten...</span>
-            </div>
-
-            <!-- Input Bar -->
-            <div class="ai-modal-footer">
-                <input type="text" id="aiChatInput" class="ai-chat-input" placeholder="Frage stellen (z.B. Welchen Coin jetzt kaufen?)..." autocomplete="off">
-                <button type="button" id="btnAiSendMessage" class="ai-send-btn">
-                    <span>Senden</span>
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        // Cache DOM elements
-        dom.toggleBtn = trigger;
-        dom.modal = modal;
-        dom.messagesContainer = document.getElementById('aiMessageStream');
-        dom.inputField = document.getElementById('aiChatInput');
-        dom.sendBtn = document.getElementById('btnAiSendMessage');
-        dom.quickChipsBar = document.getElementById('aiQuickChips');
-
-        // Embedded studio elements
+        // Cache DOM elements directly from embedded studio in right sidebar dock (Clean S1-S3 Fix)
         dom.embeddedMessagesContainer = document.getElementById('aiEmbeddedMessageStream');
         dom.embeddedInputField = document.getElementById('aiEmbeddedChatInput');
         dom.embeddedSendBtn = document.getElementById('btnAiEmbeddedSend');
         dom.embeddedQuickChipsBar = document.getElementById('aiEmbeddedQuickChips');
 
+        bindEvents();
         renderMessages();
         syncHeroStatCard();
     }
@@ -496,10 +416,20 @@
     }
 
     // Expose API
+    function focusStudio() {
+        const studio = document.getElementById('aiEmbeddedStudio');
+        if (studio) {
+            studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (dom.embeddedInputField) {
+                setTimeout(() => dom.embeddedInputField.focus(), 350);
+            }
+        }
+    }
+
     window.AiAssistant = {
-        open: () => setModalOpen(true),
-        close: () => setModalOpen(false),
-        toggle: toggleModal,
+        open: focusStudio,
+        close: () => {},
+        toggle: focusStudio,
         ask: submitQuery,
         handleAction: handleAction
     };
