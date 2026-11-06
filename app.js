@@ -1172,22 +1172,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!rsiSeries) rsiSeries = FibEngine.calculateRSI(candles.map(c => c.close), 14);
 
         const dpr = window.devicePixelRatio || 1;
-        const containerWidth = (chartContainer && chartContainer.clientWidth > 50) ? chartContainer.clientWidth : 800;
+        const rawW = (chartContainer && chartContainer.clientWidth > 50) ? (chartContainer.clientWidth - 14) : 480;
         const isMobile = window.innerWidth <= 768;
         
-        const cssWidth = Math.max(260, Math.floor(containerWidth));
-        const cssHeightP = isMobile ? 320 : 520;
-        const cssHeightR = isMobile ? 100 : 120;
+        const cssWidth = Math.max(220, Math.floor(rawW));
+        const cssHeightP = isMobile ? 220 : 285;
+        const rsiWrapW = (rsiCanvas.parentElement && rsiCanvas.parentElement.clientWidth > 40)
+            ? Math.max(120, Math.floor(rsiCanvas.parentElement.clientWidth - 4))
+            : Math.max(140, cssWidth - 130);
+        const cssHeightR = 36;
 
-        // Set internal buffer dimensions matching High-DPI resolution
+        // Set internal buffer dimensions matching High-DPI resolution without forcing parent overflow
         priceCanvas.width = Math.floor(cssWidth * dpr);
         priceCanvas.height = Math.floor(cssHeightP * dpr);
-        priceCanvas.style.width = `${cssWidth}px`;
+        priceCanvas.style.width = '100%';
         priceCanvas.style.height = `${cssHeightP}px`;
 
-        rsiCanvas.width = Math.floor(cssWidth * dpr);
+        rsiCanvas.width = Math.floor(rsiWrapW * dpr);
         rsiCanvas.height = Math.floor(cssHeightR * dpr);
-        rsiCanvas.style.width = `${cssWidth}px`;
+        rsiCanvas.style.width = '100%';
         rsiCanvas.style.height = `${cssHeightR}px`;
 
         const ctxP = priceCanvas.getContext('2d');
@@ -1205,15 +1208,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ctxP.fillStyle = '#ffffff';
         ctxP.fillRect(0, 0, cssWidth, cssHeightP);
 
-        ctxR.clearRect(0, 0, cssWidth, cssHeightR);
+        ctxR.clearRect(0, 0, rsiWrapW, cssHeightR);
         ctxR.fillStyle = '#ffffff';
-        ctxR.fillRect(0, 0, cssWidth, cssHeightR);
+        ctxR.fillRect(0, 0, rsiWrapW, cssHeightR);
 
         const padding = { 
-            top: 20, 
-            bottom: 28, 
-            left: isMobile ? 48 : 62, 
-            right: isMobile ? 54 : 68 
+            top: 14, 
+            bottom: 22, 
+            left: isMobile ? 44 : 50, 
+            right: isMobile ? 44 : 50 
         };
         const chartW = Math.max(50, cssWidth - padding.left - padding.right);
         const chartHP = cssHeightP - padding.top - padding.bottom;
@@ -1408,43 +1411,24 @@ document.addEventListener('DOMContentLoaded', () => {
             ctxP.setLineDash([]);
         }
 
-        // 7. RSI Sub-Chart Rendering
-        const chartHR = cssHeightR - 30;
+        // 7. RSI Sub-Chart Strip Rendering (fitted inside .subchart-canvas-col)
+        const chartHR = cssHeightR - 8;
         function getYR(val) {
-            return 15 + chartHR - (val / 100) * chartHR;
+            return 4 + chartHR - (val / 100) * chartHR;
         }
 
-        // Subtle shaded RSI 30-70 band (like Target Image 2)
-        ctxR.fillStyle = 'rgba(109, 40, 217, 0.05)';
-        ctxR.fillRect(padding.left, getYR(70), chartW, getYR(30) - getYR(70));
+        // Subtle pink/purple shaded band (like Target Image 2)
+        ctxR.fillStyle = 'rgba(139, 92, 246, 0.08)';
+        ctxR.fillRect(2, 3, rsiWrapW - 4, cssHeightR - 6);
 
-        ctxR.strokeStyle = 'rgba(220, 38, 38, 0.45)';
-        ctxR.setLineDash([3, 3]);
-        ctxR.beginPath();
-        ctxR.moveTo(padding.left, getYR(70));
-        ctxR.lineTo(cssWidth - padding.right, getYR(70));
-        ctxR.stroke();
-
-        ctxR.strokeStyle = 'rgba(5, 150, 105, 0.45)';
-        ctxR.beginPath();
-        ctxR.moveTo(padding.left, getYR(30));
-        ctxR.lineTo(cssWidth - padding.right, getYR(30));
-        ctxR.stroke();
-        ctxR.setLineDash([]);
-
-        ctxR.fillStyle = '#475569';
-        ctxR.font = isMobile ? '8px "JetBrains Mono", monospace' : '10px "JetBrains Mono", monospace';
-        ctxR.fillText('RSI 70', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(70) + 3);
-        ctxR.fillText('RSI 30', cssWidth - padding.right + (isMobile ? 3 : 6), getYR(30) + 3);
-
-        ctxR.strokeStyle = '#6d28d9';
-        ctxR.lineWidth = 1.8;
+        ctxR.strokeStyle = '#7c3aed';
+        ctxR.lineWidth = 1.6;
         ctxR.beginPath();
 
         let firstPoint = true;
         rsiSeries.forEach((val, i) => {
             if (val !== null && val !== undefined) {
-                const x = getX(i);
+                const x = 3 + (i / Math.max(1, candles.length - 1)) * (rsiWrapW - 6);
                 const y = getYR(val);
                 if (firstPoint) {
                     ctxR.moveTo(x, y);
@@ -1475,10 +1459,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const macdCanvas = document.getElementById('macdCanvas');
         if (macdCanvas && macdCanvas.parentElement) {
             const mw = Math.max(160, macdCanvas.parentElement.clientWidth - 4);
-            const mh = 38;
+            const mh = 36;
             macdCanvas.width = Math.floor(mw * dpr);
             macdCanvas.height = Math.floor(mh * dpr);
-            macdCanvas.style.width = mw + 'px';
+            macdCanvas.style.width = '100%';
             macdCanvas.style.height = mh + 'px';
             const ctxM = macdCanvas.getContext('2d');
             ctxM.setTransform(1, 0, 0, 1, 0, 0);
@@ -1503,10 +1487,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const bbCanvas = document.getElementById('bbCanvas');
         if (bbCanvas && bbCanvas.parentElement) {
             const bwW = Math.max(160, bbCanvas.parentElement.clientWidth - 4);
-            const bwH = 38;
+            const bwH = 36;
             bbCanvas.width = Math.floor(bwW * dpr);
             bbCanvas.height = Math.floor(bwH * dpr);
-            bbCanvas.style.width = bwW + 'px';
+            bbCanvas.style.width = '100%';
             bbCanvas.style.height = bwH + 'px';
             const ctxB = bbCanvas.getContext('2d');
             ctxB.setTransform(1, 0, 0, 1, 0, 0);

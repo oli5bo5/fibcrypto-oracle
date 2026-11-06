@@ -1038,9 +1038,9 @@ button { cursor: pointer; }
 /* --------------------------------------------------------------------------
    9. STEP 3: WHITE CHART + INDICATOR TRIO + FIBONACCI TABLE (Image 2 Style)
    -------------------------------------------------------------------------- */
-.chart-indicators-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: stretch; }
+.chart-indicators-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 16px; align-items: stretch; width: 100%; max-width: 100%; }
 
-.chart-left-card, .chart-right-card { display: flex; flex-direction: column; justify-content: space-between; }
+.chart-left-card, .chart-right-card { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; max-width: 100%; overflow: hidden; padding: 18px 20px; }
 
 .chart-title-group { display: flex; align-items: center; gap: 10px; }
 
@@ -1071,8 +1071,12 @@ button { cursor: pointer; }
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  padding: 8px;
+  padding: 6px;
+  width: 100%;
+  max-width: 100%;
 }
+
+#priceCanvas, #rsiCanvas, #macdCanvas, #bbCanvas { display: block; width: 100%; max-width: 100%; }
 
 .chart-overlay-info {
   background: rgba(255, 255, 255, 0.92);
@@ -1101,22 +1105,22 @@ button { cursor: pointer; }
 }
 
 /* 3 Indicator Cards Bottom-Left (Image 2 Style) */
-.indicator-trio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.indicator-trio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
 
 .indicator-card {
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 9px 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
 .ind-circle-icon {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--bg-card);
   display: flex;
@@ -1479,49 +1483,51 @@ button { cursor: pointer; }
 /* Image 2 Sub-chart Strips & Market Overview Table */
 .subchart-strip-row {
   display: grid;
-  grid-template-columns: 112px 1fr 28px;
+  grid-template-columns: 96px minmax(0, 1fr) 24px;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
+  gap: 6px;
+  padding: 4px 8px;
   border-top: 1px solid var(--border);
   background: var(--bg-card);
 }
 
-.subchart-label-col { display: flex; flex-direction: column; gap: 2px; }
+.subchart-label-col { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 
-.subchart-title { font-size: 0.76rem; font-weight: 800; color: var(--text); }
+.subchart-title { font-size: 0.72rem; font-weight: 800; color: var(--text); white-space: nowrap; }
 
-.subchart-val-blue { font-size: 0.78rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono); }
+.subchart-val-blue { font-size: 0.74rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono); }
 
 .subchart-canvas-col { min-width: 0; overflow: hidden; }
 
-.subchart-scale-col { display: flex; flex-direction: column; justify-content: space-between; height: 42px; font-size: 0.68rem; font-weight: 700; color: var(--text-faint); font-family: var(--font-mono); text-align: right; }
+.subchart-scale-col { display: flex; flex-direction: column; justify-content: space-between; height: 34px; font-size: 0.65rem; font-weight: 700; color: var(--text-faint); font-family: var(--font-mono); text-align: right; }
 
-.ind-word-val { font-size: 0.92rem; font-family: var(--font-sans); }
+.ind-word-val { font-size: 0.84rem; font-weight: 800; color: var(--text); font-family: var(--font-sans); line-height: 1.15; }
 
-.ind-status-text { font-size: 0.75rem; font-weight: 600; color: var(--text-soft); }
+.ind-status-text { font-size: 0.72rem; font-weight: 600; color: var(--text-soft); }
 
-.market-ov-wrap { border: none; }
+.market-ov-wrap, .market-ov-table-wrap { border: none; overflow-x: auto; width: 100%; max-width: 100%; }
 
-.market-ov-table th { background: transparent; font-size: 0.7rem; font-weight: 800; color: var(--text-soft); padding: 10px 8px; border-bottom: 1px solid var(--border); }
+.market-ov-table th { background: transparent; font-size: 0.65rem; font-weight: 800; color: var(--text-soft); padding: 7px 4px; border-bottom: 1px solid var(--border); white-space: nowrap; }
 
-.market-ov-table td { padding: 14px 8px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; }
+.market-ov-table td { padding: 8px 4px; font-size: 0.73rem; font-family: var(--font-mono); color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; white-space: nowrap; }
 
-.ov-pair-cell { font-family: var(--font-sans); font-weight: 800; color: var(--text); }
+.market-ov-table .status-badge { padding: 2px 6px; font-size: 0.64rem; }
 
-.ov-tf-cell { font-weight: 700; color: var(--text-soft); }
+.ov-pair-cell, .pair-cell { font-family: var(--font-sans); font-weight: 800; color: var(--text); font-size: 0.74rem; }
 
-.ov-sup-cell, .ov-res-cell { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
+.ov-tf-cell, .tf-cell { font-weight: 700; color: var(--text-soft); }
 
-.ov-delta-green { color: var(--success-text); font-weight: 800; font-size: 0.75rem; }
+.ov-sup-cell, .ov-res-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
 
-.ov-pct-num { color: var(--text); font-weight: 800; font-size: 0.8rem; }
+.ov-delta-green { color: var(--success-text); font-weight: 800; font-size: 0.68rem; }
 
-.ov-level-num { color: var(--text); font-weight: 800; font-size: 0.78rem; border: 1px solid var(--border); border-radius: 5px; padding: 1px 8px; background: var(--bg-soft); }
+.ov-pct-num { color: var(--text); font-weight: 800; font-size: 0.72rem; }
 
-.fib-detail-accordion { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
+.ov-level-num { color: var(--text); font-weight: 800; font-size: 0.7rem; border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; background: var(--bg-soft); }
 
-.fib-detail-summary { cursor: pointer; font-size: 0.78rem; font-weight: 700; color: var(--primary); padding: 4px 0; }
+.fib-detail-accordion { margin-top: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
+
+.fib-detail-summary { cursor: pointer; font-size: 0.75rem; font-weight: 700; color: var(--primary); padding: 2px 0; }
 
 .ai-typing-box { padding: 8px 16px; font-size: 0.76rem; color: var(--text-faint); }
 
